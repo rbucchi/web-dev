@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1">
+    <link rel="stylesheet"
+          href="styles.css">
+    <title>Web dev</title>
+</head>
+
+<body>
+
+    <h1>1. Web dev - Beginner day</h1>
+    <img src="assets/biscuits.PNG"
+         alt="Biscuits vs Cookies"
+         style="max-width: 80vw;">
+    <h2>TOC</h2>
+    <ol>
+        <li><a href="#intro">intro</a></li>
+        <li><a href="#dev_path">dev path</a></li>
+        <li><a href="#how_web_works">how web works</a></li>
+        <li><a href="#sw_di_base">sw di base</a></li>
+        <li><a href="#hands_on">mini Hands on</a></li>
+        <li><a href="#rfc7231">rfc7231</a></li>
+        <li><a href="#risorse_principali">risorse principali</a></li>
+    </ol>
+
+    <article id="intro">
+        <h2>Intro</h2>
+        <div class="presentation-card">
+            <img id="img_me"
+                 src="assets/me.jpeg"
+                 alt="Riccardo"
+                 style="float: right; object-fit: contain;">
+            <p>Riccardo</p>
+            <p>riccardo_bucchi@iprel.it</p>
+            <p>Full stack Developer</p>
+        </div>
+    </article>
+
+    <article id="dev_path">
+        <h2>Dev path</h2>
+
+        <p>Source: <a href="https://github.com/kamranahmedse/developer-roadmap">developer-roadmap github</a></p>
+        <!-- <img src="assets/dev_path.png"
+             alt="Developer path"> -->
+        <img src="assets/frontend_path.png"
+             alt="Frontend Developer path"
+             style="max-width: 100vw;">
+
+    </article>
+
+    <article>
+        <h2 id="how_web_works">How web works</h2>
+
+        <p>Source: <a href="https://academind.com/tutorials/how-the-web-works/#how-websites-work">più o meno come
+                funziona</a></p>
+
+        <ol>
+            <li>URL viene risolto</li>
+            <li>la Request viene mandata al server</li>
+            <li>la Response viene interpretata dal browser</li>
+            <li>La pagina viene renderizzata</li>
+        </ol>
+
+        <img src="assets/how-the-web-works-big-picture.webp"
+             alt="Big picture"
+             style="max-width: 100vw;">
+
+        <p><b>1. URL risolto </b></p>
+
+        <p>
+            Il browser traduce l'indirizzo in una Request
+        <pre>
+                Request URL: http://127.0.0.1:8080/
+                Request Method: GET
+                Status Code: 200 OK
+                Remote Address: 127.0.0.1:8080
+            </pre>
+        </p>
+
+        <p><b> 2. Request mandata al server </b></p>
+
+        <p>Via <a href="https://developer.mozilla.org/it/docs/Web/HTTP">Hypertext Transfer Protocl</a> che è un
+            protocollo livello 7, stateless.</p>
+        <p>Anatomia del protocollo è definita da <a href="https://tools.ietf.org/html/rfc7231">RFC7231</a></p>
+
+        Richiesta + Headers
+        <pre>
+            Request URL: http://127.0.0.1:8080/
+            Request Method: GET
+            Status Code: 200 OK
+            Remote Address: 127.0.0.1:8080
+
+            Accept:
+            text/html,...
+            Accept-Encoding: gzip, deflate, br
+            Accept-Language: en-US,en;q=0.9,it;q=0.8
+            Cache-Control: no-cache
+            Connection: keep-alive
+            Host: 127.0.0.1:8080
+            ...
+        </pre>
+
+        <p><b> 3. Browser riceve la Response </b></p>
+
+        <p>La response è composta da contenuto + headers
+
+            Response + Headers
+        <pre>
+            &lt;!doctype html\&gt;
+            &lt;html lang="en"\&gt;
+            
+            &lt;head&gt;
+                &lt;title&lt;Web dev&lt;/title&gt;
+            &lt;/head&gt;
+            &lt;body&gt;
+            ...
+            &lt;\body&gt;
+
+            HTTP/1.1 200 OK
+            cache-control: max-age=3600
+            last-modified: Tue, 20 Apr 2021 11:05:19 GMT
+            content-length: 3340
+            content-type: text/html; charset=UTF-8
+            Date: Tue, 20 Apr 2021 12:03:54 GMT
+            Connection: keep-alive
+            ...
+        </pre>
+
+        <p><b> 4. Browser interpreta e renderizza </b></p>
+
+        <p>Di fatto qui c'è il nostro "Run Time" che è implementato all'interno del browser e ha vari componenti che
+            "disegnano" componenti ed eseguono codice (tutto in fila!).</p>
+
+        <h3> Componenti principali </h3>
+        <ul>
+            <li> HTML (Hyper Text Markup Language) <b>WHAT</b>, non è un reale linguaggio di programmazione, è un
+                linguaggio che "descrive la struttura del sito" (come anche Latex)</li>
+            <li> CSS (Cascading Style Sheets) <b>HOW</b>, è il "come" i vari componenti dell'HTML devono essere mostrati
+            </li>
+            <li> JS <b>HELL</b>, è il linguaggio di programmazione</li>
+        </ul>
+    </article>
+
+    <article>
+        <h2 id="sw_di_base">SW di base</h2>
+
+        <ul>
+            <li>Editor (<a href="https://code.visualstudio.com/">VSCODE</a>)</li>
+            <li>Browser
+                <ul>
+                    <li>Chrome (best overall)</li>
+                    <li>Firefox (nice to have Edit and resend feature)</li>
+                </ul>
+            <li>(versioning system) <a href="https://git-scm.com/">Git</a></li>
+            <li>(image editor) Ovviamente sempre e solo Paint</li>
+            <li>(web server)</li>
+            <ul>
+                <li>
+                    La maggior parte del tempo utilizzeremo l'accesso via fs, anche se sviluppiamo potrebbero esserci
+                    dei problemi, ad
+                    esempio:
+                    <ul>
+                        <li>Restrizioni di sicurezza del browser (tipo fetch data)</li>
+                        <li>Abbiamo bisogno di server-side code</li>
+                    </ul>
+                </li>
+                <li>uno qualisasi<ul>
+                        <li><code>python3 -m http.server</code></li>
+                    </ul>
+                    <ul>
+                        <li>node <code>http-server [path] [options]</code></li>
+                    </ul>
+                </li>
+            </ul>
+            </li>
+        </ul>
+
+        <p><b> TODO: Navigare nel developer tool di chrome </b></p>
+    </article>
+
+    <article>
+        <h2 id="hands_on">Hands on</h2>
+        <p><b> TODO: Utilizzo CSS cosa comporta: esempio numbered headers e card di presentazione </b></p>
+        <p><b> TODO: Edit delle Request/Response: per vedere come debuggare cambiare l'invocazione dei metodi </b></p>
+    </article>
+    
+    <article>
+        <h2 id="risorse_principali">Risorse principali</h2>
+        <ul>
+            <li> https://www.w3schools.com/ </li>
+            <li> https://developer.mozilla.org/en-US/docs </li>
+            <li> https://caniuse.com/ </li>
+        </ul>
+    </article>
+
+    <article>
+        <h2 id="rfc7231">RFC7231</h2>
+<p><b> TODO: Scegliere e argomentare: </b></p>
+protocollo HTTP, metodi/verbi, status code, Request&Response, storage (cookie, local, session), header, URI e
+querystring
+    </article>
+
+    <article>
+        <h2 id="risorse_principali">Risorse principali</h2>
+        <ul>
+            <li> https://www.w3schools.com/ </li>
+            <li> https://developer.mozilla.org/en-US/docs </li>
+            <li> https://caniuse.com/ </li>
+        </ul>
+    </article>
+
+
+</body>
+<!-- <script src="main.js"></script> -->
+
+</html>
