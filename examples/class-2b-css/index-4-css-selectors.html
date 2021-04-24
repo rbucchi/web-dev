@@ -17,18 +17,18 @@
     }
 
 
-    /* Stile per tag  */
-    h3 {
-      color: red;
+    @media only screen and (max-width: 600px) {
+      h3 {
+        color: red;
+      }
     }
 
 
-    /* Stile per id  */
-    #testogrande {
-      font-size: 44px;
-      color: orange;
+    @media only screen and (orientation: landscape) {
+      h3 {
+        color: green;
+      }
     }
-
 
   </style>
 
@@ -45,11 +45,11 @@
       <td>Colonna 2</td>
     </tr>
     <tr>
-      <td>Dato 1,1</td>
+      <td class="testosottolineato">Dato 1,1</td>
       <td>Dato 1,2</td>
     </tr>
     <tr>
-      <td>Dato 2,1</td>
+      <td class="testosottolineato">Dato 2,1</td>
       <td>Dato 2,2</td>
     </tr>
     <tr>

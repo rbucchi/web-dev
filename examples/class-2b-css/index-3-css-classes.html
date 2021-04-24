@@ -7,35 +7,41 @@
   <!-- Stile -->
   <style>
 
-    table {
-      border-collapse: collapse;
-    }
-
-    td, th {
-      border: 1px solid #ddd;
-      padding: 8px;
-    }
+  /* Selettore di discendenti */
+  /* antenato discendente {dichiarazioni;} */
+  li div {
+    color: red;
+  }
 
 
-    /* Stile per tag  */
-    h3 {
-      color: red;
-    }
+  /* Selettore di figli */
+  /* padre > figlio {dichiarazioni;} */
+  li > div {
+    background-color: cyan;
+  }
 
 
-    /* Stile per id  */
-    #testogrande {
-      font-size: 44px;
-      color: orange;
-    }
+  /* Selettore di fratelli adiacenti */
+  /* fratello + fratello adiacente {dichiarazioni;} */
+  h3 + h4 {color: green;}
+  h4 + p {color: red;}
 
 
-    /* Stile per classe  */
-    .testosottolineato {
-      font-style: italic;
-      color: blue;
-    }
+  /* Selettore di generale fratelli */
+  /* fratello ~ fratello {dichiarazioni;} */
+  h5 ~ h6 {border: 1px solid green;}
+  h6 ~ p {border: 1px solid red;}
 
+
+  /* Selettore per attributo */
+  /* elemento[attributo] {dichiarazioni;} */
+  li[type] {text-decoration: underline;}
+
+
+  /* Selettore per pseudo classi */
+  /* elemento:first-child {dichiarazioni;} */
+  tr:first-child {font-weight: bold;}
+  tr:last-child {text-decoration: underline;}
 
   </style>
 
@@ -43,7 +49,67 @@
 <body>
 
 
-  <!-- Tabella base -->
+  <ul>
+    <li>
+      VALUE 1 
+
+      <ul>
+        <li><div> VALUE 1 </div></li>
+        <li><span> VALUE 2 </span></li>
+      </ul>
+
+    </li>
+    <li>
+     VALUE 2 
+
+      <ol>
+        <li type="a"> VALUE 1 </li>
+        <li type="a">
+         VALUE 2 
+          <ul>
+            <li> VALUE 1 </li>
+            <li><span><div> VALUE 2 </div></span></li>
+          </ul>
+        </li>
+      </ol> 
+
+    </li>
+  </ul>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+  <div>
+    <h3>1. Titolo principale h3.</h3>
+    <h4>1.1 Primo sottotitolo h4.</h4>
+    <p>.xxxx.</p>
+    <h4>1.2 Secondo sottotitolo h4.</h4>
+    <p>.xxxx.</p>
+  </div>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+  <div>
+    <h5>1. Titolo principale h5.</h3>
+    <h6>1.1 Primo sottotitolo h6.</h4>
+    <p>.xxxx.</p>
+    <h6>1.2 Secondo sottotitolo h6.</h4>
+    <h1>1.2 Secondo sottotitolo h6.</h1>
+    <p>.xxxx.</p>
+  </div>
+
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
+
+
   <h3> Tabella base </h3>
 
   <table>
@@ -52,21 +118,18 @@
       <td>Colonna 2</td>
     </tr>
     <tr>
-      <td class="testosottolineato">Dato 1,1</td>
+      <td>Dato 1,1</td>
       <td>Dato 1,2</td>
     </tr>
     <tr>
-      <td class="testosottolineato">Dato 2,1</td>
+      <td>Dato 2,1</td>
       <td>Dato 2,2</td>
     </tr>
     <tr>
-      <td id="testogrande">Dato 3,1</td>
+      <td>Dato 3,1</td>
       <td>Dato 3,2</td>
     </tr>
   </table>
-
-  
-  <h3 class="testosottolineato"> Tabella base </h3>
 
 </body>
 </html>
