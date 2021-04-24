@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>HTML Tutorial</title>
+
+  <!-- Spiegazione a seguire -->
+  <style>
+
+    table {
+      border-collapse:collapse
+    }
+
+    td, th {
+      border:1px solid #ddd;
+      padding:8px;
+    }
+    
+  </style>
+
+</head>
+<body>
+
+
+  <!-- Tabella base -->
+  <h3> Tabella base </h3>
+
+  <table>
+    <tr>
+      <td>Colonna 1</td>
+      <td>Colonna 2</td>
+    </tr>
+    <tr>
+      <td>Dato 1,1</td>
+      <td>Dato 1,2</td>
+    </tr>
+    <tr>
+      <td>Dato 2,1</td>
+      <td>Dato 2,2</td>
+    </tr>
+    <tr>
+      <td>Dato 3,1</td>
+      <td>Dato 3,2</td>
+    </tr>
+  </table>
+
+
+
+  <!-- Tabella azanzata -->
+  <h3> Tabella azanzata </h3>
+
+  <table>
+    <caption>
+      <p>I miei dati</p>
+    </caption>
+    <thead>
+    <tr>
+      <th>Colonna 1</th>
+      <th>Colonna 2</th>
+    </tr>
+    </thead>
+    <tfoot>
+    <tr>
+      <td>Totale 1</td>
+      <td>Totale 2</td>
+    </tr>
+    </tfoot>
+    <tbody>
+    <tr>
+      <td>Dato 1,1</td>
+      <td>Dato 1,2</td>
+    </tr>
+    <tr>
+      <td>Dato 2,1</td>
+      <td>Dato 2,2</td>
+    </tr>
+    <tr>
+      <td>Dato 3,1</td>
+      <td>Dato 3,2</td>
+    </tr>
+    </tbody>
+    </table>
+
+
+    <!-- Raggruppamento colonne -->
+    <h3> Raggruppamento colonne </h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Lunedì</th>
+          <th>Mercoledì</th>
+          <th>Venerdì</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td colspan="3">Cyclette</td>
+        </tr>
+        <tr>
+          <td>Esercizi spalle</td>
+          <td>Pettorali</td>
+          <td>Tricipiti</td>
+        </tr>
+        <tr>
+          <td>Squat</td>
+          <td>Estensioni gambe</td>
+          <td>Polpacci</td>
+        </tr>		
+      </tbody>
+    </table>
+
+
+    <!-- Raggruppamento righe -->
+    <h3> Raggruppamento righe </h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th>head</th>
+          <th>head</th>
+          <th>head</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td rowspan="2">double row cell</td>
+          <td>cell</td>
+          <td>cell</td>
+        </tr>
+        <tr>
+          <td>cell</td>
+          <td>cell</td>
+        </tr>
+        <tr>
+          <td>cell</td>
+          <td>cell</td>
+          <td>cell</td>
+        </tr>		
+      </tbody>
+    </table>
+
+  <!-- Tabelle annidate -->
+  <h3> Tabelle annidate </h3>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Campo</th>
+      <th>Tabella</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Campo1</td>
+      <td>
+
+        <table>
+        <thead>
+          <tr>
+            <th>Campo</th>
+            <th>Descrizione</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Campo1</td>
+            <td>Descrizione1</td>
+          </tr>
+        </tbody>
+        </table>
+
+      </td>
+    </tr>
+    </tbody>
+    </table>
+
+</body>
+</html>

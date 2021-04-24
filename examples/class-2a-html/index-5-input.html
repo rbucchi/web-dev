@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>HTML Tutorial</title>
+
+</head>
+<body>
+
+
+  <!-- Elementi di input -->
+  <h3> Elementi di input </h3>
+
+  <input type=”text” value="valore">
+
+
+  <!-- Input con etichetta implicita -->
+  <h3> Input con etichetta implicita </h3>
+
+  <label> 
+    Name:
+    <input type="text" name="name" />
+  </label>
+
+
+  <!-- Input con etichetta esplicita -->
+  <h3> Input con etichetta esplicita </h3>
+
+  <label for="explicit-label-name">Name: </label>
+  <input type="text" id="explicit-label-name" name="name" />
+
+
+  <!-- Input testo con lunghezza massima -->
+  <h3> Input testo con lunghezza massima </h3>
+
+  <input type=”text” maxlength="10">
+
+
+  <!-- Input testo multiriga -->
+  <h3> Input testo multiriga </h3>
+
+  <textarea name="testo" rows="5" cols="40">
+    qui puoi scrivere il tuo testo
+  </textarea>
+
+
+  <!-- Input password -->
+  <h3> Input password </h3>
+
+  <input type="password" value="valore">
+
+
+  <!-- Input email -->
+  <h3> Input number </h3>
+
+  <input type="number" value="valore@sito.it">
+
+
+  <!-- Input data -->
+  <h3> Input data </h3>
+
+  <input type="date">
+  <input type="datetime">
+  <input type="datetime-local">
+  <input type="time">
+
+  <input type="week">
+  <input type="month">
+
+  
+  <!-- Input range -->
+  <h3> Input range </h3>
+
+  <input type="range">
+
+
+  <!-- Input password -->
+  <h3> Input password </h3>
+
+  <input type="password" value="valore">
+
+  
+  <!-- Input selezione multipla (checkbox) -->
+  <h3> Input selezione multipla </h3>
+
+  <input type="checkbox" name="html" value="html"/> html<br />
+  <input type="checkbox" name="css" value="css" checked="checked"/> css<br />
+  <input type="checkbox" name="javascript" value="javascript"/> javascript>
+
+  
+  <!-- Input selezione singola (radio) -->
+  <h3> Input selezione singola </h3>
+
+  <input type="radio" name="linguaggio" value="html"/> html<br />
+  <input type="radio" name="linguaggio" value="css"/> css<br />
+  <input type="radio" name="linguaggio" value="javascript" checked="checked"/> javascript>
+
+  
+  <!-- Input selezione (lista selezionabile) -->
+  <h3> Input selezione </h3>
+
+  <label>Quale siti visiti?<br>
+    <select name="siti">
+      <option value="htmlt">html </option>
+      <option value="css">css </option>
+      <option value="javascript">javascript </option>
+    </select>
+  </label>
+
+  <br />
+  <br />
+
+  <label>Quale siti visiti?<br>
+    <select name="siti" multiple="multiple">
+      <option value="htmlt">html </option>
+      <option value="css">css </option>
+      <option value="javascript">javascript </option>
+    </select>
+  </label>
+
+
+  <!-- Input di tipo pulsante -->
+  <h3> Input di tipo pulsante </h3>
+  
+  <input type="button" value="Click me!"/>
+  
+  <button value="Click me!"> Click me! </button>
+
+
+  <!-- Input di file -->
+  <h3> Input di file </h3>
+  
+  <input type="file" value="Click me!"/>
+  
+  <input type="file" value="Click me!" multiple/>
+
+</body>
+</html>
