@@ -1,0 +1,18 @@
+body {
+    margin: 0 10vw 0 10vw;
+}
+
+section {
+   min-height: 100vh;
+}
+
+img.link-icon {
+    width: 16px;
+    height: 16px;
+}
+
+h2.link-icon:before {
+    content: url('../images/link-solid.svg');
+    width: 16px;
+    height: 16px;
+}

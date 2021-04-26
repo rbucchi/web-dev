@@ -1,8 +1,10 @@
+/* CSS (e JS) sono incrementali, quindi posso includere più di uno */
+
 body {
     counter-reset: h2counter 0 h3counter 1 h4counter 1
 }
 
-article {
+section {
   counter-increment: h2counter;  
 }
 
