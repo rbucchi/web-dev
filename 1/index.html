@@ -38,6 +38,9 @@
                     <ul>
                         <li><a href="#cookies">Cookies</a></li>
                     </ul>
+                    <ul>
+                        <li><a href="#http-methods">HTTP methods</a></li>
+                    </ul>
                 </li>
                 <li><a href="#risorse_principali">Risorse principali</a></li>
             </ol>
@@ -324,19 +327,204 @@
             </p>
             <h4> Parameters </h4>
             <p>
-                <code>https://www.google.com/search?q=google</code> serve per dare indicazioni al web server
-                aggiuntive
+                <code>https://www.google.com/search?q=google</code> serve per dare indicazioni al web server aggiuntive
                 oltre alla Risorsa richiesta, normalmente per comporre query, paginazioni o per qualsiasi logica
                 back.
-                Più
-                che una specifica web, il parametro è una caratteristica del web server, quindi possono esserci
-                delle
-                differenze nella gestione dipendentemente dalle tecnologie utilizzate.
+                Più che una specifica web, il parametro è una caratteristica del web server, quindi possono esserci
+                delle differenze nella gestione dipendentemente dalle tecnologie utilizzate.
+            </p>
+            <p>
+                La sintassi è <code>?[key1]=[value1]&[key2]=[value2]</code>, ecco alcuni esempi:
+            <ul>
+                <li><b>Tracking:</b> <code>?sessionid=123</code> </li>
+                <li><b>Order, filter, paging:</b> <code>?page=1&sort=asc&price-range=10-100</code></li>
+                <li><b>Search:</b> <code>?q=allowed+character+query+parameters</code></li>
+                <li>...</li>
+            </ul>
+            <a href="http://tools.ietf.org/html/rfc3986">RFC 3986 - Uniform Resource Identifier (URI): Generic
+                Syntax</a>
+            <ul>
+                <li>Unreserved: ALPHA / DIGIT / "-" / "." / "_" / "~" / </li>
+                <li>PERCENT-ENCODED (aka %20 come spazio o %22 come doublequotes)</li>
+                <li>Sub-delimeters: "!" / "$" / "&" / "'" / "(" / ")" / "*" / "+" / "," / ";" / "="</li>
+                <li>":" / "@" / "/" / "?"</li>
+            </ul>
+            <p>Esempio: https://reqres.in/ e <code>js/queryparams.js</code>. Apri la console e verifica
+                i due comportamenti</p>
+            1) <div>
+                <input type="number"
+                       step="1"
+                       value="0"
+                       id="counter1">
+                <button onclick="getReqResByInput()">Call Id by input</button>
+            </div>
+            2) <div>Scrivi il parameto <code>id</code> e verifica l'output <button
+                        onclick="getReqResByQueryParams()">Call Id by input</button></div>
+
             </p>
             <h4> Anchor </h4>
             <p>Corrisponde ad una parte del documento individuato. <i>Non è mai mandato al server nella request</i>,
-                ma
-                viene spesso utilizzato per gli indici.</p>
+                viene utilizzato per la navigazione in pagina.</p>
+            <p>Non ricarica la pagina, ma partecipa alla navigation history</p>
+           <h3 id="http-methods">HTTP request methods (verbs)</h3>
+            <p>HTTP definisce una serie di metodi di richiesta per indicare l'azione desiderata da eseguire per una data
+                risorsa.</p>
+            <p>Ognuno di loro implementa una semantica diversa, ma alcune caratteristiche comuni sono condivise da un
+                gruppo di loro: ad es. un metodo di richiesta può essere sicuro, idempotente o memorizzabile nella
+                cache.</p>
+            <ul>
+                <li>GET</li>
+                <li>HEAD</li>
+                <li>POST</li>
+                <li>PUT</li>
+                <li>DELETE</li>
+                <li>CONNECT (per autenticazioni, handshake su SSL)</li>
+                <li>OPTIONS (tipicamente per verificare le capacità del server o analizzare CORS)</li>
+                <li>TRACE</li>
+                <li>PATCH (una sorta di PUT in cui non viene messo tutto il corpo)</li>
+            </ul>
+            <div>
+                <p><b>SICURO:</b> un metodo è considerato sicuro vuol dire che non può modificare lo stato del server
+                    (read-only). I metodi safe
+                    sono tipicamente GET, HEAD e OPTIONS. Tutti i metodi safe sono anche idempotenti, ma non vice versa.
+                </p>
+                <p><b>IDEMPOTENTE:</b> ad una richiesta identica corrisponde la stessa risposta anche se effettuata più
+                    di
+                    una volta, non avendo side-effect. Anche qui può dipendere dall'implementazione, ma generalmente
+                    sono
+                    considerate idempotenti le operazioni Sicure, inoltre la DELETE e la PUT, mentre la POST è il
+                    classico
+                    esempio di operazione non idempotente.</p>
+                <p>Per 'risposta identica' fa eccezione il codice ritorno del server, ad esempio una DELETE sulla stessa
+                    risorsa ha lo stesso risultato, ma non lo stesso codice stato (prima 200, poi 404 tipicamente)</p>
+                <p><b>CACHEABLE:</b> alcuni metodi possono essere cacheable come la GET, HEAD o POST, altri non possono
+                    mai*
+                    esserlo, ad esempio PUT e DELETE.</p>
+                <p>Tuttavia esistono degli header HTTP che permettono di cambiare questo comportamento, tipicamente
+                    quando
+                    non si vuole che una chiamata sia cacheable si specifica <code>Cache-Control: no-cache</code>.</p>
+                <p>Anche gli stati sono cacheable.</p>
+            </div>
+            <div>
+                <p><b>Perché non fregarsene?</b></p>
+                <p>1) Siamo in un sistema asincrono, sapere che una richiesta è idempotente vuol dire che il client può
+                    implementare un retry senza controllare lo stato della risorsa, mentre nel caso di POST eventuali
+                    timeout dovrebbero essere trattati con più cura. 2) pensate al seguente metodo:
+                    <code>GET /blog/1234/delete HTTP/1.1</code> che è totalmente permesso: dai browser, CDN, reverse
+                    proxies o LB può essere cached. Normalmente non ci sono grosse implicazioni, ma stare alle 'regole'
+                    è poco costoso e previene comportamenti strani o workaround. </p>
+            </div>
+
+            <h5>GET</h5>
+            <p>Il metodo GET richiede la rappresentazione di una risorsa specificata. Dovrebbe essere usata solo per
+                richiedere data (senza includerli). Dipendentemente dalle implementazioni in realtà questi principi
+                potrebbero essere violati, ma questo spesso ha delle controindicazioni, ad esempio esistono delle GET
+                che contengono il Body, ma questo comportamento potrebbe non essere supportato da backend o anche
+                semplicemente browsers</p>
+            <p>Il metodo GET è quello più comune e dovrebbe essere utilizzato la maggior parte delle volte. Alcuni casi
+                in cui viene 'abusato' e dovrebbero essere evitati sono 1) quando il programmatore vuole utilizzare il
+                body e utilizza la POST, ma vuole comunque richiedere solo delle risorse (occhio alla cache, vincoli del
+                webserver/proxy) oppure al contrario vengono utilizzate per operazioni non idempotenti (GET per
+                operazioni che cambiano lo stato a back, non sono particolarmente problematiche, ma violano la semantica
+                e gli standard).</p>
+            <table>
+                <tr>
+                    <th> Request has body</th>
+                    <th> Successful response has body </th>
+                    <th> Safe </th>
+                    <th> Idempotente </th>
+                    <th> Cacheable </th>
+                    <th> Permessa in HTML forms </th>
+                </tr>
+                <tr>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                </tr>
+            </table>
+            <h5>HEAD</h5>
+            <p>Identica alla GET, ma senza body nella risposta.</p>
+            <table>
+                <tr>
+                    <th> Request has body</th>
+                    <th> Successful response has body </th>
+                    <th> Safe </th>
+                    <th> Idempotente </th>
+                    <th> Cacheable </th>
+                    <th> Permessa in HTML forms </th>
+                </tr>
+                <tr>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                </tr>
+            </table>
+            <h5>POST</h5>
+            <p>È il metodo più 'potente', tipicamente utilizzato per mandare dati via HTML form</p>
+            <table>
+                <tr>
+                    <th> Request has body</th>
+                    <th> Successful response has body </th>
+                    <th> Safe </th>
+                    <th> Idempotente </th>
+                    <th> Cacheable </th>
+                    <th> Permessa in HTML forms </th>
+                </tr>
+                <tr>
+                    <td>yes</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>may if specified</td>
+                    <td>yes</td>
+                </tr>
+            </table>
+            <h5>PUT</h5>
+            <p>Utilizzato per cambiare le risorse a back.</p>
+            <table>
+                <tr>
+                    <th> Request has body</th>
+                    <th> Successful response has body </th>
+                    <th> Safe </th>
+                    <th> Idempotente </th>
+                    <th> Cacheable </th>
+                    <th> Permessa in HTML forms </th>
+                </tr>
+                <tr>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>no</td>
+                </tr>
+            </table>
+            <h5>DELETE</h5>
+            <p>Per cancellare le risorse.</p>
+            <table>
+                <tr>
+                    <th> Request has body</th>
+                    <th> Successful response has body </th>
+                    <th> Safe </th>
+                    <th> Idempotente </th>
+                    <th> Cacheable </th>
+                    <th> Permessa in HTML forms </th>
+                </tr>
+                <tr>
+                    <td>may</td>
+                    <td>may</td>
+                    <td>no</td>
+                    <td>yes</td>
+                    <td>no</td>
+                    <td>no</td>
+                </tr>
+            </table>
             <h3 id="cookies">Cookies</h3>
             <img src="images/biscuits.PNG"
                  alt="Biscuits vs Cookies"
@@ -365,5 +553,8 @@
         </footer>
     </main>
 </body>
+
+
+<script src="js/queryparams.js"></script>
 
 </html>

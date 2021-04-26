@@ -57,8 +57,12 @@ h2.link-icon:before {
     border-radius: 5px;
     border-style: solid;
 }
+*/
 
 aside.sidebar-right > nav > ol {
     padding-inline-start: 10px;
 }
- */
+
+table, th, td {
+  border: 1px solid black;
+}
