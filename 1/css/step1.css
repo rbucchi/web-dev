@@ -12,15 +12,6 @@ h1, h2, h3, h4 {
   font-family: zillaslab,palatino,"Palatino Linotype",serif;
 }
 
-h2 {
-    background-color: rgb(181, 228, 87);
-}
-
-h3 {
-  border-bottom: 2px solid currentColor;
-  line-height: 0.85;
-}
-
 h2::before {                 
   content: counter(h2counter) " ";  
   counter-reset: h3counter 1;  
@@ -35,4 +26,21 @@ h3::before {
 h4::before {
   content: counter(h2counter) "." counter(h3counter) "." counter(h4counter)  " ";    
   counter-increment: h4counter;                   
+}
+
+/* 
+h2 {
+    background-color: rgb(181, 228, 87);
+}
+
+h3 {
+  border-bottom: 2px solid currentColor;
+  line-height: 0.85;
+}
+ */
+
+aside > nav {
+	position: sticky;
+	top: 2rem;
+	align-self: start;
 }

@@ -9,38 +9,42 @@
           href="css/step0.css">
     <!-- <link rel="stylesheet"
           href="css/step1.css"> -->
-    <!-- <link rel="stylesheet"
-          href="css/webslides.css"> -->
     <script src="js/step0.js"></script>
-    <!-- <script src="js/webslides.js"></script> -->
     <title>Web dev</title>
 </head>
 
 <body>
-
     <h1>Web dev - Beginner day</h1>
-
     <img src="https://thecodinglove.com/content/027/R34euYx.jpg"
          alt="web development"
          style="width: 25vw;">
-    <aside>
+    <aside class="sidebar-right">
         <nav>
-            <h2>TOC</h2>
+            <h4>TOC</h4>
             <ol>
-                <li><a href="#intro">intro</a></li>
-                <li><a href="#dev_path">dev path</a></li>
-                <li><a href="#how_web_works">how web works</a></li>
-                <li><a href="#sw_di_base">sw di base</a></li>
-                <li><a href="#hands_on">mini Hands on</a></li>
-                <li><a href="#rfc7231">rfc7231</a></li>
-                <li><a href="#risorse_principali">risorse principali</a></li>
+                <li><a href="#intro">Introduzione</a></li>
+                <li><a href="#dev_path">Developer path</a></li>
+                <li><a href="#how_web_works">How web works</a></li>
+                <li><a href="#sw_di_base">Software di base</a>
+                    <ul>
+                        <li><a href="#developer_tools">Developer tools</a></li>
+                    </ul>
+                </li>
+                <li><a href="#hands_on">Mini Hands on</a></li>
+                <li><a href="#rfc7231">RFC7231</a>
+                    <ul>
+                        <li><a href="#url">URL</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="#cookies">Cookies</a></li>
+                    </ul>
+                </li>
+                <li><a href="#risorse_principali">Risorse principali</a></li>
             </ol>
         </nav>
     </aside>
 
-    <article id="webslides"
-             class="vertical">
-
+    <main>
         <section id="intro">
             <h2>Intro</h2>
             <div class="presentation-card">
@@ -48,29 +52,23 @@
                      src="images/me.jpeg"
                      alt="Riccardo"
                      style="float: right; object-fit: contain;">
-                <p>Riccardo</p>
-                <p>riccardo_bucchi@iprel.it</p>
-                <p>Full stack Developer</p>
+                <div>
+                    <h5>Riccardo (Full stack Developer)</h5>
+                    <p>riccardo_bucchi@iprel.it</p>
+                </div>
             </div>
         </section>
-
-
-
         <section id="dev_path">
             <h2>Dev path</h2>
             <p>Source: <a href="https://github.com/kamranahmedse/developer-roadmap">developer-roadmap github</a></p>
-            <!-- <img src="images/dev_path.png"
-                 alt="Developer path"> -->
             <img src="images/frontend_path.png"
                  alt="Frontend Developer path"
                  style="max-width: 80vw;">
         </section>
-
-
-
         <section id="how_web_works">
             <h2>How web works</h2>
-            <p>Source: <a href="https://academind.com/tutorials/how-the-web-works/#how-websites-work">più o meno come
+            <p>Source: <a href="https://academind.com/tutorials/how-the-web-works/#how-websites-work">più o meno
+                    come
                     funziona</a></p>
             <ol>
                 <li>URL viene risolto</li>
@@ -79,19 +77,19 @@
                 <li>La pagina viene renderizzata</li>
             </ol>
             <img src="images/how-the-web-works-big-picture.png"
-                 alt="Big picture"
-                 style="max-width: 100vw;">
+                 alt="Big picture">
             <p><b>1. URL risolto </b></p>
             <p>
                 Il browser traduce l'indirizzo in una Request
             <pre>
-                    Request URL: http://127.0.0.1:8080/
-                    Request Method: GET
-                    Status Code: 200 OK
-                    Remote Address: 127.0.0.1:8080
-                </pre>
+                            Request URL: http://127.0.0.1:8080/
+                            Request Method: GET
+                            Status Code: 200 OK
+                            Remote Address: 127.0.0.1:8080
+                        </pre>
             </p>
-            L'URL (Uniform Resource Locator) è modo in cui nel web viene identificata una risorsa (univoca). Le risorse
+            L'URL (Uniform Resource Locator) è modo in cui nel web viene identificata una risorsa (univoca). Le
+            risorse
             sono
             pagine HTML, documenti CSS, script, immagini, ... .
             source: <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL">mozilla</a>,
@@ -102,46 +100,48 @@
             <p>Anatomia del protocollo è definita da <a href="https://tools.ietf.org/html/rfc7231">RFC7231</a></p>
             Richiesta + Headers
             <pre>
-                Request URL: http://127.0.0.1:8080/
-                Request Method: GET
-                Status Code: 200 OK
-                Remote Address: 127.0.0.1:8080
-                Accept:
-                text/html,...
-                Accept-Encoding: gzip, deflate, br
-                Accept-Language: en-US,en;q=0.9,it;q=0.8
-                Cache-Control: no-cache
-                Connection: keep-alive
-                Host: 127.0.0.1:8080
-                ...
-            </pre>
+                        Request URL: http://127.0.0.1:8080/
+                        Request Method: GET
+                        Status Code: 200 OK
+                        Remote Address: 127.0.0.1:8080
+                        Accept:
+                        text/html,...
+                        Accept-Encoding: gzip, deflate, br
+                        Accept-Language: en-US,en;q=0.9,it;q=0.8
+                        Cache-Control: no-cache
+                        Connection: keep-alive
+                        Host: 127.0.0.1:8080
+                        ...
+                    </pre>
             <p><b> 3. Browser riceve la Response </b></p>
             <p>La response è composta da contenuto + headers</p>
             <pre>
-                &lt;!doctype html\&gt;
-                &lt;html lang="en"\&gt;
+                        &lt;!doctype html\&gt;
+                        &lt;html lang="en"\&gt;
         
-                &lt;head&gt;
-                    &lt;title&lt;Web dev&lt;/title&gt;
-                &lt;/head&gt;
-                &lt;body&gt;
-                ...
-                &lt;\body&gt;
-                HTTP/1.1 200 OK
-                cache-control: max-age=3600
-                last-modified: Tue, 20 Apr 2021 11:05:19 GMT
-                content-length: 3340
-                content-type: text/html; charset=UTF-8
-                Date: Tue, 20 Apr 2021 12:03:54 GMT
-                Connection: keep-alive
-                ...
-            </pre>
+                        &lt;head&gt;
+                            &lt;title&lt;Web dev&lt;/title&gt;
+                        &lt;/head&gt;
+                        &lt;body&gt;
+                        ...
+                        &lt;\body&gt;
+                        HTTP/1.1 200 OK
+                        cache-control: max-age=3600
+                        last-modified: Tue, 20 Apr 2021 11:05:19 GMT
+                        content-length: 3340
+                        content-type: text/html; charset=UTF-8
+                        Date: Tue, 20 Apr 2021 12:03:54 GMT
+                        Connection: keep-alive
+                        ...
+                    </pre>
             <p><b> 4. Browser interpreta e renderizza </b></p>
-            <p>Di fatto qui c'è il nostro "Run Time" che è implementato all'interno del browser e ha vari componenti che
+            <p>Di fatto qui c'è il nostro "Run Time" che è implementato all'interno del browser e ha vari componenti
+                che
                 "disegnano" componenti ed eseguono codice (tutto in fila!).</p>
             <h3> Componenti principali Sito web</h3>
             <ul>
-                <li> HTML (Hyper Text Markup Language) <b>WHAT</b>, non è un reale linguaggio di programmazione, è un
+                <li> HTML (Hyper Text Markup Language) <b>WHAT</b>, non è un reale linguaggio di programmazione, è
+                    un
                     linguaggio che "descrive la struttura del sito" (come anche Latex)</li>
                 <li> CSS (Cascading Style Sheets) <b>HOW</b>, è il "come" i vari componenti dell'HTML devono essere
                     mostrati
@@ -151,17 +151,16 @@
                     Funzionalità/Comportamento.</li>
             </ul>
         </section>
-
-
-
         <section id="sw_di_base">
             <h2>SW di base</h2>
-            <p>Gli strumenti che utilizzeremo nel corso sono l'Editor e i Browser. Tra parantesi ci sono alcuni degli
+            <p>Gli strumenti che utilizzeremo nel corso sono l'Editor e i Browser. Tra parantesi ci sono alcuni
+                degli
                 strumenti che sono facoltativi.</p>
             <ul>
                 <li>Editor (<a href="https://code.visualstudio.com/">VSCODE</a>)</li>
                 <ul>
-                    <li><a href="https://code.visualstudio.com/docs/languages/html">HTML</a>, CSS e JS con supporto già
+                    <li><a href="https://code.visualstudio.com/docs/languages/html">HTML</a>, CSS e JS con supporto
+                        già
                         out-of-the-box</li>
                     <li>HTML già con enclosing tags, 'autocomplete', doc, validazione e strumenti vari</li>
                     <li>CSS idem, più visualizzazione hover</li>
@@ -200,31 +199,36 @@
             </ul>
             <p>Installazione di VSCODE e browser basta scaricare l'installer dal sito ed eventualmente installare
                 l'estensione di VSCODE consigliata (Chrome Developer) dalla barra laterale delle estensioni.</p>
-            <p>Nel caso voleste provare anche a far girare esempi e siti su un semplice webserver di sviluppo, oltre al
+            <p>Nel caso voleste provare anche a far girare esempi e siti su un semplice webserver di sviluppo, oltre
+                al
                 banale comando di <code>python</code> riportato sopra, ecco gli step per farlo attraverso
                 <code>node</code>:
             </p>
             <ul>
                 <li><a href="https://nodejs.org/en/">download node</a> (LST o Current non importa)</li>
-                <li>Aprite un terminale nella root path del sito da servire (per chi non è avvezzo al terminale basta
+                <li>Aprite un terminale nella root path del sito da servire (per chi non è avvezzo al terminale
+                    basta
                     digitare <code>cmd</code> nella barra del file explorer di windows)</il>
-                <li><code>npm install -g http-server</code> (se non funziona bisogna settare la variabile d'ambiente. Se
+                <li><code>npm install -g http-server</code> (se non funziona bisogna settare la variabile
+                    d'ambiente. Se
                     vi
                     dimenticate -g ve lo installa in ./node_modules/http-server)</li>
                 <li><code>http-server</code></li>
                 <li>alla fine dei test lo potete rimuovere con <code>npm remove -g http-server --force</code></li>
             </ul>
-            <h3>Developer tools (aka F12 nel Browser)</h3>
+            <h3 id="developer_tools">Developer tools (aka F12 nel Browser)</h3>
             <a href="https://developer.chrome.com/docs/devtools/">Documentazione</a>
             <h4>Console</h4>
             <ul>
                 <li>Console per loggare e debuggare</li>
-                <li>Interprete JS, qui vive <code>window</code> (che molto in breve è l'oggetto 'environment') e ci è
+                <li>Interprete JS, qui vive <code>window</code> (che molto in breve è l'oggetto 'environment') e ci
+                    è
                     possibile eseguire del codice. Molto utile per debug, test o script veloci</li>
             </ul>
             <h4>Sources</h4>
             <p>
-                Primo debugger, ci permette di debuggare tutto il <code>js</code> caricato. Breakpoint, watch, scope,
+                Primo debugger, ci permette di debuggare tutto il <code>js</code> caricato. Breakpoint, watch,
+                scope,
                 call
                 stack, ecc... .
             </p>
@@ -236,7 +240,8 @@
             </ul>
             <h4>Application</h4>
             <p>
-                Tab contenente lo <i>storage</i> del sito e alcuni concetti in generale un po' più moderni o avanzati
+                Tab contenente lo <i>storage</i> del sito e alcuni concetti in generale un po' più moderni o
+                avanzati
                 che
                 non
                 affronteremo in completo.
@@ -246,20 +251,24 @@
             <p>
                 Visualizzare il codice html e css selezionando il componente grafico rendererizzato dal browser. Ci
                 permette
-                di capire la struttura markup, capire quali css ci sono associati, il come viene disegnato e giocare con
+                di capire la struttura markup, capire quali css ci sono associati, il come viene disegnato e giocare
+                con
                 i
                 suoi stili, attributi, ecc... .
             </p>
             <h4>Device toggle</h4>
-            <p>Simula il comportamento da mobile, quindi utile per vedere la responsivness del sito (piccoli schermi,
-                modalità landscape e portrait), ma anche il comportamento della rete (offline, accesso a dati limitato)
+            <p>Simula il comportamento da mobile, quindi utile per vedere la responsivness del sito (piccoli
+                schermi,
+                modalità landscape e portrait), ma anche il comportamento della rete (offline, accesso a dati
+                limitato)
             </p>
         </section>
-
-
-
         <section id="hands_on">
             <h2>Hands on</h2>
+            <h3>Presentation card</h3>
+            Nella intro, utilizzare la classe <code>presentation-card</code> per giocare con lo stile.
+            <h3>Sidebar</h3>
+            <code>step0.css</code>, Esempio sidebar
             <h3>Header Numbering</h3>
             Abilitare lo style2.css
             <h3>Icone</h3>
@@ -268,23 +277,21 @@
                 <li><a href="https://fontawesome.com">fontawesome</a></li>
                 <li><a href="https://fontawesome.com/icons/link?style=solid">icona</a></li>
                 <li><a href="https://it.wikipedia.org/wiki/Creative_Commons#Tipi_di_licenze">diritti</a></li>
-                <li><a href="https://creativecommons.org/use-remix/attribution/">Come dare l'attribuzione a CC</a></li>
+                <li><a href="https://creativecommons.org/use-remix/attribution/">Come dare l'attribuzione a CC</a>
+                </li>
                 <li>
                     <pre>&lt;a href="#intro"&gt;&lt;img class="link-icon"
-                                     src="images/link-solid.svg"&gt;&lt;/a></pre>
+                         src="images/link-solid.svg"&gt;&lt;/a></pre>
                 </li>
             </ul>
             <h3>Analisi CSSZenGarden</h3>
             <a href="http://www.csszengarden.com/">http://www.csszengarden.com/</a>
             <h3>Edit and Resend</h3>
             GET, PUT example via <a href="https://reqres.in/">https://reqres.in/</a>
-            <h3>Webslides</h3>
+            <!-- <h3>Webslides</h3>
             Trasformiamo il sito in slide per la presentazione: <a
-               href="https://github.com/webslides/webslides">https://github.com/webslides/webslides</a>
+               href="https://github.com/webslides/webslides">https://github.com/webslides/webslides</a> -->
         </section>
-
-
-
         <section id="risorse_principali">
             <h2>Risorse principali</h2>
             <ul>
@@ -293,13 +300,11 @@
                 <li> https://caniuse.com/ </li>
             </ul>
         </section>
-
-
-
         <section id="rfc7231">
             <h2>RFC7231</h2>
             <p><b> TODO: Scegliere e argomentare: </b></p>
-            protocollo HTTP, metodi/verbi, status code, Request&Response, storage (cookie, local, session), header, URI
+            protocollo HTTP, metodi/verbi, status code, Request&Response, storage (cookie, local, session), header,
+            URI
             e
             querystring
             <h3 id="url">URL</h3>
@@ -319,42 +324,46 @@
             </p>
             <h4> Parameters </h4>
             <p>
-                <code>https://www.google.com/search?q=google</code> serve per dare indicazioni al web server aggiuntive
-                oltre alla Risorsa richiesta, normalmente per comporre query, paginazioni o per qualsiasi logica back.
+                <code>https://www.google.com/search?q=google</code> serve per dare indicazioni al web server
+                aggiuntive
+                oltre alla Risorsa richiesta, normalmente per comporre query, paginazioni o per qualsiasi logica
+                back.
                 Più
-                che una specifica web, il parametro è una caratteristica del web server, quindi possono esserci delle
+                che una specifica web, il parametro è una caratteristica del web server, quindi possono esserci
+                delle
                 differenze nella gestione dipendentemente dalle tecnologie utilizzate.
             </p>
             <h4> Anchor </h4>
-            <p>Corrisponde ad una parte del documento individuato. <i>Non è mai mandato al server nella request</i>, ma
+            <p>Corrisponde ad una parte del documento individuato. <i>Non è mai mandato al server nella request</i>,
+                ma
                 viene spesso utilizzato per gli indici.</p>
-            <h3>Cookies</h3>
+            <h3 id="cookies">Cookies</h3>
             <img src="images/biscuits.PNG"
                  alt="Biscuits vs Cookies"
                  style="max-width: 80vw;">
         </section>
-
-
-
         <section id="risorse_principali">
             <h2>Risorse principali</h2>
             <ul>
-                <li> https://www.w3schools.com/ </li>
                 <li> https://developer.mozilla.org/en-US/docs </li>
+                <li> https://css-tricks.com/ </li>
                 <li> https://caniuse.com/ </li>
+                <li> https://www.w3schools.com/ </li>
             </ul>
         </section>
-    </article>
-
-    <footer>
-        <div>"<a rel="nofollow"
-               href="https://fontawesome.com/icons/link?style=solid">Link icon</a>" by <a rel="nofollow"
-               class="external text"
-               href="https://fontawesome.com/">fontawesome</a>, used under <a rel="nofollow"
-               class="external text"
-               href="https://creativecommons.org/licenses/by/2.0/">CC BY</a>"
-        </div>
-    </footer>
+        <footer>
+            <div>"<a rel="nofollow"
+                   href="https://fontawesome.com/icons/link?style=solid">Link icon</a>" by <a rel="nofollow"
+                   class="external text"
+                   href="https://fontawesome.com/">fontawesome</a>, used under <a rel="nofollow"
+                   class="external text"
+                   href="https://creativecommons.org/licenses/by/2.0/">CC BY</a>"
+            </div>
+            <div>
+                Webslides provided by <a href="https://github.com/webslides/webslides/">github</a>
+            </div>
+        </footer>
+    </main>
 </body>
 
 </html>
