@@ -67,6 +67,8 @@
             <img src="images/frontend_path.png"
                  alt="Frontend Developer path"
                  style="max-width: 80vw;">
+            <img src="images/standards.png"
+                 alt="">
         </section>
         <section id="how_web_works">
             <h2>How web works</h2>
@@ -87,25 +89,31 @@
             <pre>
                             Request URL: http://127.0.0.1:8080/
                             Request Method: GET
-                            Status Code: 200 OK
                             Remote Address: 127.0.0.1:8080
                         </pre>
             </p>
-            L'URL (Uniform Resource Locator) è modo in cui nel web viene identificata una risorsa (univoca). Le
-            risorse
-            sono
-            pagine HTML, documenti CSS, script, immagini, ... .
-            source: <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL">mozilla</a>,
-            <a href="https://tools.ietf.org/html/rfc1738">RFC1738</a>
+            <p>L'<abbr title="Uniform Resource Locator">URL</abbr> è modo in cui nel web viene identificata una
+                <b>risorsa</b> (univoca). Spesso sentirete anche parlare di <abbr
+                      title="Uniform Resource Identifier">URI</abbr>, ma per tenerla semplice l'URL è un sottoinsieme
+                dell'URI che sarebbe la definizione più 'generica'.
+            </p>
+            <p>Le <b>risorse</b> sono il 'target' di una chiamata <abbr title="HyperText Transfer Protocol">HTTP</abbr>
+                ad esempio pagine HTML, documenti CSS, script, immagini, ... .
+            </p>
+            <p> source: <a
+                   href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_URL">mozilla</a>,
+                <a href="https://tools.ietf.org/html/rfc1738">RFC1738</a>
+            </p>
             <p><b> 2. Request mandata al server </b></p>
             <p>Via <a href="https://developer.mozilla.org/it/docs/Web/HTTP">Hypertext Transfer Protocol</a> che è un
-                protocollo livello 7, stateless.</p>
+                protocollo <i>estendibile</i>, basato su concetti quali <i>le risorse (URI)</i>, <i>semplice scambio di
+                    messaggi</i>, in un'architettura <i>client-server</i>. L'HTTP è (circa) l'application layer dello
+                stack ISO/OSI (7) ed è un protocollo stateless (ma non sessionless).</p>
             <p>Anatomia del protocollo è definita da <a href="https://tools.ietf.org/html/rfc7231">RFC7231</a></p>
             Richiesta + Headers
             <pre>
                         Request URL: http://127.0.0.1:8080/
                         Request Method: GET
-                        Status Code: 200 OK
                         Remote Address: 127.0.0.1:8080
                         Accept:
                         text/html,...
@@ -119,15 +127,15 @@
             <p><b> 3. Browser riceve la Response </b></p>
             <p>La response è composta da contenuto + headers</p>
             <pre>
-                        &lt;!doctype html\&gt;
-                        &lt;html lang="en"\&gt;
+                        &lt;!doctype html/&gt;
+                        &lt;html lang="en"/&gt;
         
                         &lt;head&gt;
-                            &lt;title&lt;Web dev&lt;/title&gt;
+                            &lt;title&gt;Web dev&lt;/title&gt;
                         &lt;/head&gt;
                         &lt;body&gt;
                         ...
-                        &lt;\body&gt;
+                        &lt;/body&gt;
                         HTTP/1.1 200 OK
                         cache-control: max-age=3600
                         last-modified: Tue, 20 Apr 2021 11:05:19 GMT
@@ -141,6 +149,15 @@
             <p>Di fatto qui c'è il nostro "Run Time" che è implementato all'interno del browser e ha vari componenti
                 che
                 "disegnano" componenti ed eseguono codice (tutto in fila!).</p>
+            <p>Elementi interessanti del browser:
+            <ul>
+                <li>Interprete 'grafico'</li>
+                <li><abbr title="Document Object Model">DOM</abbr> ovvero le API che il browser mette a disposizione per
+                    manipolare 'la pagina'. (vedi <code>object e window</code>)</li>
+                <li>Javascript engine (<a href="https://en.wikipedia.org/wiki/V8_(JavaScript_engine)">V8</a>, ECMAScript
+                    engine, WebAssembly, ...)</li>
+            </ul>
+            </p>
             <h3> Componenti principali Sito web</h3>
             <ul>
                 <li> HTML (Hyper Text Markup Language) <b>WHAT</b>, non è un reale linguaggio di programmazione, è
@@ -153,6 +170,7 @@
                     troppo).
                     Funzionalità/Comportamento.</li>
             </ul>
+
         </section>
         <section id="sw_di_base">
             <h2>SW di base</h2>
@@ -268,6 +286,8 @@
         </section>
         <section id="hands_on">
             <h2>Hands on</h2>
+            <h3>Edit and Resend</h3>
+            GET, PUT example via <a href="https://reqres.in/">https://reqres.in/</a>
             <h3>Presentation card</h3>
             Nella intro, utilizzare la classe <code>presentation-card</code> per giocare con lo stile.
             <h3>Sidebar</h3>
@@ -289,11 +309,6 @@
             </ul>
             <h3>Analisi CSSZenGarden</h3>
             <a href="http://www.csszengarden.com/">http://www.csszengarden.com/</a>
-            <h3>Edit and Resend</h3>
-            GET, PUT example via <a href="https://reqres.in/">https://reqres.in/</a>
-            <!-- <h3>Webslides</h3>
-            Trasformiamo il sito in slide per la presentazione: <a
-               href="https://github.com/webslides/webslides">https://github.com/webslides/webslides</a> -->
         </section>
         <section id="risorse_principali">
             <h2>Risorse principali</h2>
@@ -366,7 +381,7 @@
             <p>Corrisponde ad una parte del documento individuato. <i>Non è mai mandato al server nella request</i>,
                 viene utilizzato per la navigazione in pagina.</p>
             <p>Non ricarica la pagina, ma partecipa alla navigation history</p>
-           <h3 id="http-methods">HTTP request methods (verbs)</h3>
+            <h3 id="http-methods">HTTP request methods (verbs)</h3>
             <p>HTTP definisce una serie di metodi di richiesta per indicare l'azione desiderata da eseguire per una data
                 risorsa.</p>
             <p>Ognuno di loro implementa una semantica diversa, ma alcune caratteristiche comuni sono condivise da un
@@ -412,7 +427,8 @@
                     timeout dovrebbero essere trattati con più cura. 2) pensate al seguente metodo:
                     <code>GET /blog/1234/delete HTTP/1.1</code> che è totalmente permesso: dai browser, CDN, reverse
                     proxies o LB può essere cached. Normalmente non ci sono grosse implicazioni, ma stare alle 'regole'
-                    è poco costoso e previene comportamenti strani o workaround. </p>
+                    è poco costoso e previene comportamenti strani o workaround.
+                </p>
             </div>
 
             <h5>GET</h5>
@@ -537,6 +553,7 @@
                 <li> https://css-tricks.com/ </li>
                 <li> https://caniuse.com/ </li>
                 <li> https://www.w3schools.com/ </li>
+                <li> Materiale: https://github.com/rbucchi/web-dev</li>
             </ul>
         </section>
         <footer>
