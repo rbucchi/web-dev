@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="static/css/css-units.css">
+</head>
+
+<body>
+
+    <section>
+        <b>px: </b> Uno dei più usati, è una misura però assoluta. Rimane una misura 'controversa', perché non corrisponde sempre alla misura reale, ma ad una normalizzata per poterla utilizzare in tutti i dispositivi.
+        <pre>
+        .px-unit {
+            width: 200px;
+        }
+    </pre>
+        <img src="static/images/rewrite_css.jpg"
+             alt="px"
+             class="px-unit">
+    </section>
+    <hr>
+    <section>
+        <b>in, cm, mm, pt (che sono 1/72 di un pollice) e pc (pica che sono 12 pt): </b> Gli svantaggi di px, non utilizzabile su Javascript.. please don't.
+        <pre>
+            .in-unit {
+                width: 2in;
+            }
+        </pre>
+        <img src="static/images/rewrite_css.jpg"
+             alt="in"
+             class="in-unit">
+    </section>
+    <hr>
+    <section>
+        <b>em, rem, ex: </b> Relativa al <code>font-size</code>.
+        <pre>
+                .rem-unit {
+                    width: 12em;
+                }
+            </pre>
+        <img src="static/images/rewrite_css.jpg"
+             alt="em"
+             class="em-unit">
+    </section>
+    <hr>
+    <section>
+        <b>vw, vh, vmin e vmax: </b> Relativa al <code>viewport</code>. Viewport è <i>l'area visibile dall'utente</i>.
+        Questo è interessante, sta prendendo piede 'ultimamente' perché inizialmente non era supportato sopprattutto dalle
+        versioni mobile (meh) <a href="https://caniuse.com/viewport-units">https://caniuse.com/viewport-units</a>.
+        <pre>
+                        .vw-unit {
+                            width: 30vw;
+                        }
+                    </pre>
+        <img src="static/images/rewrite_css.jpg"
+             alt="em"
+             class="vw-unit">
+    </section>
+    <hr>
+    <section>
+        <b>%: </b> Relativa al tag contenitore... Pericolosetto, ma spesso si inizia da qui.
+        <pre>
+                        .vw-unit {
+                            width: 30%;
+                        }
+                    </pre>
+        <img src="static/images/rewrite_css.jpg"
+             alt="em"
+             class="perc-unit">
+    </section>
+
+
+</body>

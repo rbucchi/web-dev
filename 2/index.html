@@ -434,16 +434,12 @@
             </div>
           </header>
 
-          <div class="wrap">
+          <div class="grid vertical-align">
 
-            <p class="text-intro">
-                Esempi notevoli (<a href="html.html">link</a> try yourself)
+            <p>
+                Esempi notevoli (<a href="html.html" target="_blank">link</a> try yourself)
             </p>
 
-            <p class="aligncenter">
-                <img src="static/images/iprel/HtmlCloud.png"
-                     alt="Html Cloud">
-            </p>
           </div>
           
           <footer>
@@ -468,21 +464,24 @@
             </div>
           </header>
          
-          <div class="wrap">
-              
-            <p class="text-intro">
-              ID e CLASS
-            </p>
+        <div class="grid vertical-align">
+            <div class="column">
+                <p class="text-intro">ID e CLASS</p>
 
-            <div>   
-                L'attributo <code>id</code> indica un elemento HTML <b>unico</b> all'interno della pagina.
-                L'attributo <code>class</code> invece <b>un'insieme</b>.
+                <p>L'attributo <code>id</code> indica un elemento HTML <b>unico</b> all'interno della pagina. Viene identificato da <code>#</code></p>
+                <p>L'attributo <code>class</code> invece <b>un'insieme</b>. Viene identificato da <code>.</code></p>
             </div>
-            <div>
-                <pre>&lt;div class="city"&gt;London&lt;/div&gt;</pre>
-                <pre>.city {
-  padding: 10px;
-}</pre>
+            <div class="column">
+                <pre>&lt;div class="city"&gt;London&lt;/div&gt;
+.city {
+    padding: 10px;
+}
+                </pre>
+                <pre>&lt;div id="london-city"&gt;London&lt;/div&gt;
+#london-city {
+    padding: 10px;
+}
+                </pre>
             </div>
           </div>
           
@@ -502,7 +501,7 @@
         <section>
           <header>
             <div class="wrap">
-              <h3>CSS&nbsp;&nbsp;&nbsp;<span class="text-intro alignright">THE LANGUAGE FOR STYLING WEB PAGES</span></h3>
+              <h3>CSS<span class="text-intro alignright">THE LANGUAGE FOR STYLING WEB PAGES</span></h3>
               <hr>
             </div>
           </header>
@@ -516,12 +515,11 @@
                   <strong>CSS</strong> è l’acronimo di <i>Cascading Style Sheets</i> e designa un linguaggio di stile per i documenti web
                 </p>
                 <p class="text-intro">
-                  Gli stili CSS istruiscono un browser su come il documento debba essere presentato all’utente definendone:<br/>
-                  •&emsp;i font<br/>
-                  •&emsp;i colori<br/>
-                  •&emsp;le immagini di sfondo<br/>
-                  •&emsp;il layout<br/>
-                  •&emsp;etc.
+                  Gli stili CSS istruiscono un browser su come il documento debba essere presentato all’utente definendone <b>come</b> gli elementi HTML devono essere mostrati (font, colori, disposizione, ...)
+                  <p>
+                      Prima del css (<a href="css_bad_experiment.html"
+                      target="_blank">link</a>)
+                  </p>
                 </p>
 
                </div>
@@ -563,39 +561,29 @@
         <section>
           <header>
             <div class="wrap">
-              <h3>CSS&nbsp;&nbsp;&nbsp;<span class="text-intro alignright">THE LANGUAGE FOR STYLING WEB PAGES</span></h3>
+              <h3>CSS<span class="text-intro alignright">THE LANGUAGE FOR STYLING WEB PAGES</span></h3>
               <hr>
             </div>
           </header>
 
           <div class="wrap">
 
-            <p class="text-intro">
-              <span style="font-weight: 600;">Argomenti</span>
-            </p>
 
             <div class="grid vertical-align">
+                <div class="cloumn">
+                    <p class="text-intro">
+                        <span style="font-weight: 600;">Sintassi</span>
+                    </p>
+                </div>
               <div class="column">
-
-                <p class="text-intro">
-                  •&emsp;Stili per tag<br/>
-                  •&emsp;Stili per id<br/>
-                  •&emsp;Stili per classe<br/>
-                  •&emsp;Selettori<br/>
-                  •&emsp;Media query<br/>
-                  •&emsp;Flexbox<br/>
-                  •&emsp;Grid<br/>
-                </p>
-
+                <img src="static/images/css-syntax.gif" alt="css syntax">
                </div>
-              <!-- .end .column -->
-              <div class="column">
-                  
-                <p class="aligncenter">
-                  <img src="static/images/iprel/CssCloud.png" alt="Css Cloud">
-                </p>
-
-              </div>
+                <div class="column">
+                    CSS Units<a href="css_units.html">link</a>
+                </div>
+                <div class="column">
+                    CSS Display<a href="css_display.html">link</a>
+                </div>
             </div>
           </div>
           

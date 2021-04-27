@@ -1,0 +1,26 @@
+
+img {
+    border-style: solid;
+    border-color: greenyellow;
+    border-width: 2px;
+}
+
+.px-unit {
+    width: 200px;
+}
+
+.in-unit {
+    width: 2in;
+}
+
+.em-unit {
+    width: 12em;
+}
+
+.vw-unit {
+    width: 30vw;
+}
+
+.perc-unit {
+    width: 30%;
+}
