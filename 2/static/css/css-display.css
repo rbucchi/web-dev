@@ -1,0 +1,10 @@
+.red-border {
+    border-style: solid;
+    border-color: red;
+    border-width: 1px;
+}
+
+.red-border-solid {
+    padding: 10px 10px 10px 10px;
+    background-color: red;
+}

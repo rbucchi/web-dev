@@ -8,8 +8,110 @@
           content="Riccardo">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet"
+          href="static/css/css-display.css">
 </head>
 
 <body>
+    <h1>Intro to: 1) Display, 2) box-model e 3) overflow</h1>
+    <pre>
+div {
+    display: inline; /* Default of all elements, unless UA stylesheet overrides */
+    display: inline-block; /* Characteristics of block, but sits on a line */
+    display: block; /* UserAgent stylesheet makes things like &lt;div&gt; and &lt;section&gt; block */
+    display: none; /* Hide */
+}
+    </pre>
+
+    <section>
+        <h2>Inline</h2>
+        <p>Gli elementi inline sono il sempre* default, non sono affetti da <code>width</code> e <code>height</code></p>
+        <p>
+            Bacon ipsum dolor amet capicola turkey boudin turducken beef ribs burgdoggen chicken ham ground round,
+            hamburger
+            cow
+            tongue venison rump <span class="red-border">pancetta</span>. Pancetta meatball swine short ribs pork belly,
+            pig
+            jerky doner sirloin kevin prosciutto
+            shankle flank salami strip steak. <span class="red-border-solid">Pork</span> frankfurter kevin short ribs,
+            jerky
+            tenderloin pancetta.
+        </p>
+    </section>
+
+    <section>
+        <h2>Inline block</h2>
+        <p>Simile all'inline, ma sono affetti da <code>width</code> e <code>height</code></p>
+        <p>
+            Bacon ipsum dolor amet capicola turkey boudin turducken beef ribs burgdoggen chicken ham ground round,
+            hamburger
+            cow
+            tongue venison rump <span style="display: inline-block" class="red-border">pancetta</span>. Pancetta
+            meatball
+            swine short ribs pork belly, pig
+            jerky doner sirloin kevin prosciutto
+            shankle flank salami strip steak. <span style="display: inline-block"  class="red-border-solid">Pork</span>
+            frankfurter kevin short ribs, jerky
+            tenderloin pancetta.
+        </p>
+    </section>
+
+    <section>
+        <h2>Block</h2>
+        <p>"Mandano a capo" e di default prendono tutta la larghezza dello schermo: <code>div</code>,<code>p</code>,
+            <code>section</code>, <code>h1</code>
+        </p>
+        <p>
+            We can't hear you talk to the slides, high-level we need to touch base off-line before we fire the new ux
+            experience, so
+            back of the net, and guerrilla marketing. This is our north star design we need to leverage our synergies I
+            just wanted
+            to give you a heads-up productize we have put the apim bol, temporarily so that we can later put the
+            monitors on nor
+            drill down, but have bandwidth.
+        </p>
+        <p>
+            Prow scuttle parrel provost Sail ho shrouds spirits boom mizzenmast yardarm. Pinnace holystone mizzenmast
+            quarter crow's
+            nest nipperkin grog yardarm hempen halter furl. Swab barque interloper chantey doubloon starboard grog black
+            jack
+            gangway rutters.
+        </p>
+    </section>
+
+    <section>
+        <h3>Box-model</h3>
+        <p>
+            Prova a modificare il margine e il padding di l'elemento span "pork" e inlineblock a vedere cosa succede.
+        </p>
+    </section>
+
+    <section>
+        <h3>Overflow</h3>
+        <p>
+           Rimpicciolisci un elemento block e cambia la proprietà <code>overflow: unset;</code>.
+        </p>
+    </section>
+
+    <section>
+        Credits:
+        <ul>
+            <li>
+                <a
+                   href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Box_Model/Introduction_to_the_CSS_box_model">box-model</a>
+            </li>
+            <li>
+                https://baconipsum.com/
+            </li>
+            <li>
+                http://officeipsum.com/
+            </li>
+            <li>
+                https://pirateipsum.me/#scrollstop
+            </li>
+
+        </ul>
+    </section>
+
+
 </body>
