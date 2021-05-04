@@ -9,7 +9,11 @@
           href="css/step0.css">
     <!-- <link rel="stylesheet"
           href="css/step1.css"> -->
+    <!-- <link rel="stylesheet"
+                   href="css/step2.css"> -->
     <script src="js/step0.js"></script>
+    <!-- <script src="js/reqres-library.js"></script> -->
+    <!-- <script src="js/queryparams.js"></script> -->
     <title>Web dev</title>
 </head>
 
@@ -23,6 +27,7 @@
             <h4>TOC</h4>
             <ol>
                 <li><a href="#intro">Introduzione</a></li>
+                <li><a href="#goals">Obiettivi</a></li>
                 <li><a href="#dev_path">Developer path</a></li>
                 <li><a href="#how_web_works">How web works</a></li>
                 <li><a href="#sw_di_base">Software di base</a>
@@ -31,7 +36,8 @@
                     </ul>
                 </li>
                 <li><a href="#hands_on">Mini Hands on</a></li>
-                <li><a href="#rfc7231">RFC7231</a>
+                <li><a href="#risorse_principali">Risorse principali</a></li>
+                <li style="display: none;"><a href="#rfc7231">RFC7231</a>
                     <ul>
                         <li><a href="#url">URL</a></li>
                     </ul>
@@ -42,7 +48,6 @@
                         <li><a href="#http-methods">HTTP methods</a></li>
                     </ul>
                 </li>
-                <li><a href="#risorse_principali">Risorse principali</a></li>
             </ol>
         </nav>
     </aside>
@@ -60,6 +65,15 @@
                     <p>riccardo_bucchi@iprel.it</p>
                 </div>
             </div>
+        </section>
+        <section id="goals">
+            <h2>Obiettivi</h2>
+            <ul>
+                <li>Quadro generale, saper individuare i componenti tecnologici per macro area.</li>
+                <li>Comprendere il meccanismo di Request - Response. Accesso alle Risorse.</li>
+                <li>Prendere confidenza con gli strumenti del lavoro.</li>
+                <li>Discernere le componenti di una pagina web, definizione, stili e logica.</li>
+            </ul>
         </section>
         <section id="dev_path">
             <h2>Dev path</h2>
@@ -87,9 +101,9 @@
             <p>
                 Il browser traduce l'indirizzo in una Request
             <pre>
-                            Request URL: http://127.0.0.1:8080/
+                            Request URL: https://www.ultimouomo.com/
                             Request Method: GET
-                            Remote Address: 127.0.0.1:8080
+                            Remote Address: 52.16.207.194:443
                         </pre>
             </p>
             <p>L'<abbr title="Uniform Resource Locator">URL</abbr> è modo in cui nel web viene identificata una
@@ -154,8 +168,17 @@
                 <li>Interprete 'grafico'</li>
                 <li><abbr title="Document Object Model">DOM</abbr> ovvero le API che il browser mette a disposizione per
                     manipolare 'la pagina'. (vedi <code>object e window</code>)</li>
-                <li>Javascript engine (<a href="https://en.wikipedia.org/wiki/V8_(JavaScript_engine)">V8</a>, ECMAScript
-                    engine, WebAssembly, ...)</li>
+                <li>Javascript engine (<a href="https://en.wikipedia.org/wiki/V8_(JavaScript_engine)">V8</a>,
+                    SpiderMonkey, ECMAScript
+                    engine, ...)</li>
+            </ul>
+            </p>
+            <p>
+                <b>OT: RFC's Aprils fool</b>
+            <ul>
+                <li><a href="https://tools.ietf.org/html/rfc1149">A Standard for the Transmission of IP Datagrams on
+                        Avian Carriers</a></li>
+                <li><a href="https://tools.ietf.org/html/rfc8565">Hypertext Jeopardy Protocol (HTJP)</a></li>
             </ul>
             </p>
             <h3> Componenti principali Sito web</h3>
@@ -226,7 +249,7 @@
                 <code>node</code>:
             </p>
             <ul>
-                <li><a href="https://nodejs.org/en/">download node</a> (LST o Current non importa)</li>
+                <li><a href="https://nodejs.org/en/">download node</a> (LST preferibilmente)</li>
                 <li>Aprite un terminale nella root path del sito da servire (per chi non è avvezzo al terminale
                     basta
                     digitare <code>cmd</code> nella barra del file explorer di windows)</il>
@@ -287,11 +310,19 @@
         <section id="hands_on">
             <h2>Hands on</h2>
             <h3>Edit and Resend</h3>
-            GET, PUT example via <a href="https://reqres.in/">https://reqres.in/</a>
-            <h3>Presentation card</h3>
-            Nella intro, utilizzare la classe <code>presentation-card</code> per giocare con lo stile.
+            <p>
+                GET, PUT example via <a href="https://reqres.in/">https://reqres.in/</a>
+            </p>
+            <p>
+                Provate ad effettuare una chiamata GET dalla console.
+            </p>
+            <code id="reqres-output">
+
+            </code>
             <h3>Sidebar</h3>
             <code>step0.css</code>, Esempio sidebar
+            <h3>Presentation card</h3>
+            Nella intro, utilizzare la classe <code>presentation-card</code> per giocare con lo stile.
             <h3>Header Numbering</h3>
             Abilitare lo style2.css
             <h3>Icone</h3>
@@ -313,12 +344,15 @@
         <section id="risorse_principali">
             <h2>Risorse principali</h2>
             <ul>
-                <li> https://www.w3schools.com/ </li>
                 <li> https://developer.mozilla.org/en-US/docs </li>
+                <li> https://css-tricks.com/ </li>
                 <li> https://caniuse.com/ </li>
+                <li> https://www.w3schools.com/ </li>
+                <li> Materiale: https://github.com/rbucchi/web-dev</li>
             </ul>
         </section>
-        <section id="rfc7231">
+        <section id="rfc7231"
+                 style="display: none;">
             <h2>RFC7231</h2>
             <p><b> TODO: Scegliere e argomentare: </b></p>
             protocollo HTTP, metodi/verbi, status code, Request&Response, storage (cookie, local, session), header,
@@ -546,16 +580,7 @@
                  alt="Biscuits vs Cookies"
                  style="max-width: 80vw;">
         </section>
-        <section id="risorse_principali">
-            <h2>Risorse principali</h2>
-            <ul>
-                <li> https://developer.mozilla.org/en-US/docs </li>
-                <li> https://css-tricks.com/ </li>
-                <li> https://caniuse.com/ </li>
-                <li> https://www.w3schools.com/ </li>
-                <li> Materiale: https://github.com/rbucchi/web-dev</li>
-            </ul>
-        </section>
+
         <footer>
             <div>"<a rel="nofollow"
                    href="https://fontawesome.com/icons/link?style=solid">Link icon</a>" by <a rel="nofollow"
@@ -572,6 +597,5 @@
 </body>
 
 
-<script src="js/queryparams.js"></script>
 
 </html>

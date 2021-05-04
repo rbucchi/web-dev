@@ -1,33 +1,5 @@
 /* CSS (e JS) sono incrementali, quindi posso includere più di uno */
 
-body {
-    counter-reset: h2counter 0 h3counter 1 h4counter 1
-}
-
-section {
-  counter-increment: h2counter;  
-}
-
-h1, h2, h3, h4 {
-  font-family: zillaslab,palatino,"Palatino Linotype",serif;
-}
-
-h2::before {                 
-  content: counter(h2counter) " ";  
-  counter-reset: h3counter 1;  
-}
-
-h3::before {
-  content: counter(h2counter) "." counter(h3counter)  " ";    
-  counter-increment: h3counter;  
-  counter-reset: h4counter 1;                   
-}
-
-h4::before {
-  content: counter(h2counter) "." counter(h3counter) "." counter(h4counter)  " ";    
-  counter-increment: h4counter;                   
-}
-
 /* 
 h2 {
     background-color: rgb(181, 228, 87);
@@ -39,8 +11,23 @@ h3 {
 }
  */
 
-aside > nav {
-	position: sticky;
-	top: 2rem;
-	align-self: start;
+/*  ESEMPIO TOC SIDEBAR */
+.sidebar-right {
+    margin-bottom: 1em;
+    position: sticky;
+    float: right;
+    top: 0;
+    right: 0;
+    width: 10vw;
+    padding-left: 1em;
+    z-index: 10;
+    background-color:whitesmoke;
+    border: rgb(233, 226, 233);
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+}
+
+aside.sidebar-right > nav > ol {
+    padding-inline-start: 10px;
 }

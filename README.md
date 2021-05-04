@@ -67,3 +67,22 @@ Parte il 5 maggio, per 6 mezze giornate da 4h.
 * Hands-on .NET API
 * Possibili differenze e confronti tra framework
 
+## Cheatsheet
+
+### VSCode - Command palette
+
+Cerca ed esegui comando su VSCode `Ctrl+Shift+P` (ad esempio apri terminale, seleziona tag, ecc...). Inoltre mostra anche gli shortcut, una manna. 
+
+`Ctrl+P` inoltre è lo stesso meccanismo per aprire i file.
+
+![OpenCommandPalette](OpenCommandPalette.gif)
+
+### Start della lezione
+
+I requisiti (node + http-server) sono nella prima lezione.
+
+```bash
+# cambia i numeri delle lezioni o il path
+C:\Users\bucchric\workspace\corso_web> http-server 1/
+```
+
