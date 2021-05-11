@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Hello, world!</title>
+
+</head>
+
+<body>
+    <p> Nome:
+        <span id="nome-id">
+        </span>
+    </p>
+    <p> Lavoro:
+        <span id="lavoro-id">
+            </span>
+    </p>
+    <p> Animale preferito:
+        <span id="animale-preferito-id">
+                </span>
+    </p>
+</body>
+<script>
+
+    function getReqResByQueryParams(p) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(p);
+    }
+
+    function appendToParagraph(id, content) {
+        var el = document.getElementById(id)
+        el.append(content)
+    }
+
+    appendToParagraph('nome-id', getReqResByQueryParams('name'));
+    appendToParagraph('lavoro-id', getReqResByQueryParams('work'));
+    appendToParagraph('animale-preferito-id', getReqResByQueryParams('favourite-animal'));
+</script>
+
+</html>

@@ -1,144 +1,141 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+          crossorigin="anonymous">
 
     <title>Hello, world!</title>
 
     <style>
-        
+        .row {
+            margin: 10px 0px;
+        }
+
         div .row {
             border: 2px solid blue;
         }
-        
+
         div .col,
         div .col-1,
         div .col-2,
         div .col-3,
         div .col-4,
         div .col-6,
-        div .col-12
-        {
+        div .col-12 {
             border: 2px solid red;
         }
-
     </style>
 
-  </head>
-  <body>
+</head>
 
+<body>
+
+    <p>Ref: <a href="https://getbootstrap.com/docs/4.0/layout/grid/">Bootstrap grid system</a></p>
     <div class="container">
-    <!-- <div class="container-fluid"> -->
+        <!-- <div class="container-fluid"> -->
         <!-- Content here -->
-         
+
         <h3>Incolonnamento</h1>
 
-        <br/>
-    
-        <div class="row">
-          <div class="col">
-            3 colonne uguali
-          </div>
-          <div class="col">
-            Column
-          </div>
-          <div class="col">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          </div>
-        </div>       
+            <div class="row">
+                <div class="col">
+                    3 colonne uguali
+                </div>
+                <div class="col">
+                    Column
+                </div>
+                <div class="col">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                    aliquip ex ea commodo consequat.
+                </div>
+            </div>
 
-        <br/>
-    
-        <div class="row">
-            <div class="col">
-              Column
+            <div class="row">
+                <div class="col">
+                    Column
+                </div>
+                <div class="col-6">
+                    Colonna centrale larga 6/12
+                </div>
+                <div class="col">
+                    Column
+                </div>
             </div>
-            <div class="col-6">
-              Colonna centrale larga 6/12
-            </div>
-            <div class="col">
-              Column
-            </div>
-        </div>        
 
-        <br/>
-    
-        <div class="row">
-            <div class="col-6">
-              Colonna larga 6
+            <div class="row">
+                <div class="col-6">
+                    Colonna larga 6
+                </div>
+                <div class="col-6">
+                    Colonna larga 6
+                </div>
+                <div class="col">
+                    Colonna rimanente va a capo e prende tutto lo spazio
+                </div>
             </div>
-            <div class="col-6">
-              Colonna larga 6
-            </div>
-            <div class="col">
-              Colonna rimanente va a capo e prende tutto lo spazio
-            </div>
-        </div> 
 
-        <br/>
+            <h3>Incolonnamento responsive</h1>
 
-        <h3>Incolonnamento responsive</h1>
+                <div class="row">
+                    <div class="col-6 col-md-4">
+                        Colonna larga 6 in layout stretti
+                        Colonna larga 4 in layout larghi
+                    </div>
+                    <div class="col-6 col-md-4">
+                        Colonna larga 6 in layout stretti
+                        Colonna larga 4 in layout larghi
+                    </div>
+                </div>
 
-        <br/>
-    
-        <div class="row">
-            <div class="col-6 col-md-4">
-              Colonna larga 6 in layout stretti
-              Colonna larga 4 in layout larghi
-            </div>
-            <div class="col-6 col-md-4">
-              Colonna larga 6 in layout stretti
-              Colonna larga 4 in layout larghi
-            </div>
-        </div>   
+                <div class="row">
+                    <div class="col-12 col-sm-6">
+                        Colonna larga 12 in layout mobile
+                        Colonna larga 6 in layout larghi
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        Colonna larga 12 in layout mobile
+                        Colonna larga 6 in layout larghi
+                    </div>
+                </div>
 
-        <br/>
-    
-        <div class="row">
-            <div class="col-12 col-sm-6">
-              Colonna larga 12 in layout mobile
-              Colonna larga 6 in layout larghi
-            </div>
-            <div class="col-12 col-sm-6">
-              Colonna larga 12 in layout mobile
-              Colonna larga 6 in layout larghi
-            </div>
-        </div>    
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        Colonna larga 12 in layout mobile
+                        Colonna larga 6 in layout medi
+                        Colonna larga 3 in layout desktop
+                    </div>
+                    <div class="col-12 col-sm-6 col-lg-3">
+                        Colonna larga 12 in layout mobile
+                        Colonna larga 6 in layout medi
+                        Colonna larga 3 in layout desktop
+                    </div>
+                </div>
 
-        <br/>
-    
-        <div class="row">
-            <div class="col-12 col-sm-6 col-lg-3">
-              Colonna larga 12 in layout mobile
-              Colonna larga 6 in layout medi
-              Colonna larga 3 in layout desktop
-            </div>
-            <div class="col-12 col-sm-6 col-lg-3">
-              Colonna larga 12 in layout mobile
-              Colonna larga 6 in layout medi
-              Colonna larga 3 in layout desktop
-            </div>
-        </div> 
-
-        <br/>
-
-     </div>
+    </div>
 
 
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+            crossorigin="anonymous"></script>
 
     <!-- Option 2: Separate Popper and Bootstrap JS -->
     <!--
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
     -->
-  </body>
+</body>
+
 </html>
