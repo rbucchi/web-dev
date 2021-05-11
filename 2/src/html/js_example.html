@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <script>
+        function appendList() {
+            var ul = document.getElementById("lista-spesa");
+            var li = document.createElement("li");
+            var daComprare = document.getElementById("da-comprare-input").value;
+            li.appendChild(document.createTextNode(daComprare));
+            ul.appendChild(li);
+        }
+
+        function increment() {
+            var counterEl = document.getElementById("counter");
+            var counter = Number(counterEl.innerText);
+            counter++;
+            counterEl.innerText = counter;
+        }
+    </script>
+</head>
+
+<body>
+    <input id="da-comprare-input"
+           type="text"
+           placeholder="Lista della spesa">
+    <button onclick="appendList()">Add</button>
+    <ul id="lista-spesa">
+
+    </ul>
+    <hr>
+
+    <p onclick="increment()">Counter: <span id="counter">0</span></p>
+</body>
+
+</html>
