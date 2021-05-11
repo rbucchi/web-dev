@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>HTML Tutorial</title>
+
+    <!-- Stile -->
+    <style>
+        a:link {
+            color: blue;
+        }
+
+        a:visited {
+            color: green;
+        }
+
+        a:hover {
+            color: greenyellow;
+        }
+
+        /*  
+    : sono le pseudo class
+    :: sono i pseudo elements (la differenza è che questa "aggiunge contenuti")
+*/
+        a:target::before {
+            content: "!"
+        }
+
+        input:focus {
+            background: lightgreen;
+        }
+
+        input:disabled {
+            text-decoration: line-through;
+        }
+
+        input:required {
+            border-width: 2px;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.30);
+        }
+
+        tr:nth-child(2n) {
+            background-color: rgb(159, 201, 218);
+        }
+
+        table, tr, td {
+            border-collapse: collapse;
+            border-width: thin;
+            border-style: double;
+        }
+    </style>
+
+</head>
+
+<body>
+    <p>Pseudo-class (e pseudo-element) sono parecchio usati, agiscono su uno 'stato' particolare dell'elemento</p>
+
+    <ul>
+        <li><a id="link-1"
+               href="#link-1">Link</a></li>
+        <li><a id="link-2"
+               href="#link-2">Link</a></li>
+    </ul>
+    <hr>
+
+    <form action="GET">
+        <input placeholder="Username"
+               required>
+        <input placeholder="password"
+               type=password>
+    </form>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>head</th>
+                <th>head</th>
+                <th>head</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>cell</td>
+                <td>cell</td>
+                <td>cell</td>
+            </tr>
+            <tr>
+                <td>cell</td>
+                <td>cell</td>
+                <td>cell</td>
+            </tr>
+            <tr>
+                <td>cell</td>
+                <td>cell</td>
+                <td>cell</td>
+            </tr>
+            <tr>
+                <td>cell</td>
+                <td>cell</td>
+                <td>cell</td>
+            </tr>
+            <tr>
+                <td>cell</td>
+                <td>cell</td>
+                <td>cell</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

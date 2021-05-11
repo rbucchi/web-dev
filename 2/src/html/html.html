@@ -28,15 +28,20 @@
     <script>
         console.log('Hello world!')
     </script> -->
+    <!-- <script defer src="static/js/print-date.js"></script> -->
 </head>
 
 <body>
     <!-- LINK-->
     Main resource w3schools <a href="https://www.w3schools.com/html/default.asp">link</a>
 
-    <!-- BREAK LINE -->
-    <!-- This is more a shouldn't -->
-    <br>
+    <!-- HEADINGS -->
+    <h1>Title 1</h1>
+    <h2>Title 2</h2>
+    <h3>Title 3</h3>
+    <h6>Title 6</h6>
+
+
 
     <!-- IMAGES -->
     <img src="static/images/meme/html_programmer_meme.jpeg"
@@ -47,10 +52,42 @@
     <!-- PARAGRAPH -->
     <p>This is a single paragraph</p>
     <p>This is a second paragraph <span style="color:green">while this is a span</span></p>
+    <!-- BREAK LINE -->
+    <!-- This is more a shouldn't -->
+    <p>This is a single <br> paragraph with &lt;br&gt;</p>
+    <p>This is a single paragraph with a lot of space in it</p>
+    <p>This is a single paragraph &nbsp;&nbsp;&nbsp;&nbsp; with a lot of (bad) space in it</p>
+
+    <p>All'interno dell'HTML "&" viene utilizzato tipo escape character, formalmente Entity Reference (<a
+           href="https://dev.w3.org/html5/html-author/charref">link</a>)</p>
 
     <!-- DIV CONTAINER -->
     <div>Div is (slash was) the most used container</div>
+    <p>Ora vengono utilizzati molto i tag semantici introdotti prevalentemente con HTML v5:</p>
+    <!-- PREFORMATTED -->
+    <pre>
+    &lt;article&gt;
+    &lt;aside&gt;
+    &lt;details&gt;
+    &lt;figcaption&gt;
+    &lt;figure&gt;
+    &lt;footer&gt;
+    &lt;header&gt;
+    &lt;main&gt;
+    &lt;mark&gt;
+    &lt;nav&gt;
+    &lt;section&gt;
+    &lt;summary&gt;
+    &lt;time&gt;
+</pre>
+    <!-- SEMANTIC -->
 
+    <p>Perché utilizzare la semantica?</p>
+    <ul>
+        <li>SEO ranking</li>
+        <li>Screen readers</li>
+        <li>Pulizia del codice</li>
+    </ul>
     <!-- UNORDERED LIST -->
     <ul>
         <li>technologists</li>
@@ -64,12 +101,6 @@
         <li>thinkers</li>
         <li>builders</li>
     </ol>
-
-    <!-- HEADINGS -->
-    <h1>Title 1</h1>
-    <h2>Title 2</h2>
-    <h3>Title 3</h3>
-    <h6>Title 6</h6>
 
     <!-- TABLE -->
     <table>
@@ -103,18 +134,19 @@
         USA
     </address>
 
-    <!-- SEMANTIC -->
-    <p>
-        Esistono dei tag che hanno una semantica (esempio <code>&lt;table&gt;</code>) e altri no (esempio <code>&lt;div&gt;</code>).
-        Tanti tag semantici sono stati introdotti da HTML5, come article, aside, audio, canvas, footer, header, main, ... .
-    </p>
+    <hr>
 
-    <p>Perché utilizzare la semantica?</p>
-    <ul>
-        <li>SEO ranking</li>
-        <li>Screen readers</li>
-        <li>Pulizia del codice</li>
-    </ul>
+    <h3>Esempi completi</h3>
+    <ol>
+        <li><a href="../examples/class-2a-html/1-struttura.html">Struttura HTML</a></li>
+        <li><a href="../examples/class-2a-html/2-delimitazione-contenuto.html">Contenuto</a></li>
+        <li><a href="../examples/class-2a-html/3-immagine.html">Immagini</a>*</li>
+        <li><a href="../examples/class-2a-html/4-audio-video.html">Audio/video</a></li>
+        <li><a href="../examples/class-2a-html/5-liste.html">Liste</a></li>
+        <li><a href="../examples/class-2a-html/6-tabella.html">Tabelle</a></li>
+        <li><a href="../examples/class-2a-html/7-stili.html">Stili*</a></li>
+        <li><a href="../examples/class-2a-html/8-input.html">Input*</a></li>
+    </ol>
 </body>
 
 </html>

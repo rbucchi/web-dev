@@ -9,7 +9,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet"
-          href="static/css/css-display.css">
+          href="../css/css-display.css">
 </head>
 
 <body>
@@ -46,7 +46,7 @@ div {
             Bacon ipsum dolor amet capicola turkey boudin turducken beef ribs burgdoggen chicken ham ground round,
             hamburger
             cow
-            tongue venison rump <span style="display: inline-block" class="red-border">pancetta</span>. Pancetta
+            tongue venison rump <span class="red-border">pancetta</span>. Pancetta
             meatball
             swine short ribs pork belly, pig
             jerky doner sirloin kevin prosciutto
@@ -82,15 +82,36 @@ div {
     <section>
         <h3>Box-model</h3>
         <p>
-            Prova a modificare il margine e il padding di l'elemento span "pork" e inlineblock a vedere cosa succede.
+            Prova a modificare il margine, bordo e padding degli elementi degli elementi sottostanti e vedere il
+            comportamento dipendentemente dal tipo di <code>display</code>.
+        </p>
+        <p>
+            <span class="red-border" style="display: inline-block;">pancetta</span>
+            <br>
+            <span class="red-border" style="display: inline-block;">pancetta</span>
         </p>
     </section>
 
     <section>
         <h3>Overflow</h3>
         <p>
-           Rimpicciolisci un elemento block e cambia la proprietà <code>overflow: unset;</code>.
+            <pre>
+div {
+    overflow: visible; /* Default, il contenuto continua anche al di fuori dell'altezza */
+    overflow: hidden; /* il contrario di visible, finita l'altezza il contenuto viene tagliato */
+    overflow: auto; /* Utilizza le scroll bar se necessarie */
+    overflow: scroll; /* mostra la scrollbar in ogni caso  */
+    /* In ogni caso è specificabile la x e y con overflow-x e overflow-y*/
+}
+                </pre>
         </p>
+        <div class="example-overflow">
+            Prow scuttle parrel provost Sail ho shrouds spirits boom mizzenmast yardarm. Pinnace holystone mizzenmast
+            quarter crow's
+            nest nipperkin grog yardarm hempen halter furl. Swab barque interloper chantey doubloon starboard grog black
+            jack
+            gangway rutters.
+        </div>
     </section>
 
     <section>
