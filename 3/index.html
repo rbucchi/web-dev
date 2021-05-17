@@ -1,280 +1,1248 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+      prefix="og: http://ogp.me/ns#">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport"
-          content="width=device-width,initial-scale=1">
-    <title>Web dev</title>
+          content="width=device-width, initial-scale=1">
+
+    <!-- SEO -->
+    <title>WebSlides: Making HTML presentations easy</title>
+    <meta name="description"
+          content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
+          rel="stylesheet">
+
+    <!-- CSS WebSlides -->
+    <link rel="stylesheet"
+          type='text/css'
+          media='all'
+          href="src/common/css/webslides.css">
+    <link rel="stylesheet"
+          type='text/css'
+          media='all'
+          href="src/common/css/custom-style.css">
+
+    <!-- Optional - CSS SVG Icons (Font Awesome) -->
+    <link rel="stylesheet"
+          type='text/css'
+          media='all'
+          href="src/common/css/svg-icons.css">
+
+    <!-- FAVICONS -->
+    <link rel="shortcut icon"
+          sizes="16x16"
+          href="src/common/images/favicons/favicon.png">
+    <link rel="shortcut icon"
+          sizes="32x32"
+          href="src/common/images/favicons/favicon-32.png">
+    <link rel="apple-touch-icon icon"
+          sizes="76x76"
+          href="src/common/images/favicons/favicon-76.png">
+    <link rel="apple-touch-icon icon"
+          sizes="120x120"
+          href="src/common/images/favicons/favicon-120.png">
+    <link rel="apple-touch-icon icon"
+          sizes="152x152"
+          href="src/common/images/favicons/favicon-152.png">
+    <link rel="apple-touch-icon icon"
+          sizes="180x180"
+          href="src/common/images/favicons/favicon-180.png">
+    <link rel="apple-touch-icon icon"
+          sizes="192x192"
+          href="src/common/images/favicons/favicon-192.png">
+
+    <!-- Android -->
+    <meta name="mobile-web-app-capable"
+          content="yes">
+    <meta name="theme-color"
+          content="#333333">
+
 </head>
 
 <body>
-    <h1>Web dev - day 3</h1>
-    <aside class="sidebar-right">
-        <nav>
-            <h4>TOC</h4>
-            <ol>
-                <li><a href="#rfc7231">RFC7231</a>
-                    <ul>
-                        <li><a href="#url">URL</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#cookies">Cookies</a></li>
-                    </ul>
-                    <ul>
-                        <li><a href="#http-methods">HTTP methods</a></li>
-                    </ul>
-                </li>
-            </ol>
-        </nav>
-    </aside>
 
-    <main>
-        
-        <section id="rfc7231">
-            <h2>RFC7231</h2>
-            <p><b> TODO: Scegliere e argomentare: </b></p>
-            protocollo HTTP, metodi/verbi, status code, Request&Response, storage (cookie, local, session), header,
-            URI
-            e
-            querystring
-            <h3 id="url">URL</h3>
-            <img src="images/mdn-url-all.png">
-            <h4> Schema</h4>
-            <p>
-                Indica il protocollo, normalmente è <code>http, https, mailto, file, ftp</code>
-            </p>
-            <h4> Authority </h4>
-            <p>
-                Domain name + port (se non è quella di default, ovvero 80 per http e 443 per https)
-            </p>
-            <h4> Path </h4>
-            <p>
-                Siamo già 'dentro' il server e indica al suo interno dove si trova la risorsa. Può indicare anche
-                fisicamente il path di dove si trova, ma tipicamente è solo un'astrazione (speriamo).
-            </p>
-            <h4> Parameters </h4>
-            <p>
-                <code>https://www.google.com/search?q=google</code> serve per dare indicazioni al web server aggiuntive
-                oltre alla Risorsa richiesta, normalmente per comporre query, paginazioni o per qualsiasi logica
-                back.
-                Più che una specifica web, il parametro è una caratteristica del web server, quindi possono esserci
-                delle differenze nella gestione dipendentemente dalle tecnologie utilizzate.
-            </p>
-            <p>
-                La sintassi è <code>?[key1]=[value1]&[key2]=[value2]</code>, ecco alcuni esempi:
-            <ul>
-                <li><b>Tracking:</b> <code>?sessionid=123</code> </li>
-                <li><b>Order, filter, paging:</b> <code>?page=1&sort=asc&price-range=10-100</code></li>
-                <li><b>Search:</b> <code>?q=allowed+character+query+parameters</code></li>
-                <li>...</li>
-            </ul>
-            <a href="http://tools.ietf.org/html/rfc3986">RFC 3986 - Uniform Resource Identifier (URI): Generic
-                Syntax</a>
-            <ul>
-                <li>Unreserved: ALPHA / DIGIT / "-" / "." / "_" / "~" / </li>
-                <li>PERCENT-ENCODED (aka %20 come spazio o %22 come doublequotes)</li>
-                <li>Sub-delimeters: "!" / "$" / "&" / "'" / "(" / ")" / "*" / "+" / "," / ";" / "="</li>
-                <li>":" / "@" / "/" / "?"</li>
-            </ul>
-            <p>Esempio: https://reqres.in/ e <code>js/queryparams.js</code>. Apri la console e verifica
-                i due comportamenti</p>
-            1) <div>
-                <input type="number"
-                       step="1"
-                       value="0"
-                       id="counter1">
-                <button onclick="getReqResByInput()">Call Id by input</button>
-            </div>
-            2) <div>Scrivi il parameto <code>id</code> e verifica l'output <button
-                        onclick="getReqResByQueryParams()">Call Id by input</button></div>
+    <main role="main">
+        <article id="webslides"
+                 class="vertical">
 
-            </p>
-            <h4> Anchor </h4>
-            <p>Corrisponde ad una parte del documento individuato. <i>Non è mai mandato al server nella request</i>,
-                viene utilizzato per la navigazione in pagina.</p>
-            <p>Non ricarica la pagina, ma partecipa alla navigation history</p>
-            <h3 id="http-methods">HTTP request methods (verbs)</h3>
-            <p>HTTP definisce una serie di metodi di richiesta per indicare l'azione desiderata da eseguire per una data
-                risorsa.</p>
-            <p>Ognuno di loro implementa una semantica diversa, ma alcune caratteristiche comuni sono condivise da un
-                gruppo di loro: ad es. un metodo di richiesta può essere sicuro, idempotente o memorizzabile nella
-                cache.</p>
-            <ul>
-                <li>GET</li>
-                <li>HEAD</li>
-                <li>POST</li>
-                <li>PUT</li>
-                <li>DELETE</li>
-                <li>CONNECT (per autenticazioni, handshake su SSL)</li>
-                <li>OPTIONS (tipicamente per verificare le capacità del server o analizzare CORS)</li>
-                <li>TRACE</li>
-                <li>PATCH (una sorta di PUT in cui non viene messo tutto il corpo)</li>
-            </ul>
-            <div>
-                <p><b>SICURO:</b> un metodo è considerato sicuro vuol dire che non può modificare lo stato del server
-                    (read-only). I metodi safe
-                    sono tipicamente GET, HEAD e OPTIONS. Tutti i metodi safe sono anche idempotenti, ma non vice versa.
-                </p>
-                <p><b>IDEMPOTENTE:</b> ad una richiesta identica corrisponde la stessa risposta anche se effettuata più
-                    di
-                    una volta, non avendo side-effect. Anche qui può dipendere dall'implementazione, ma generalmente
-                    sono
-                    considerate idempotenti le operazioni Sicure, inoltre la DELETE e la PUT, mentre la POST è il
-                    classico
-                    esempio di operazione non idempotente.</p>
-                <p>Per 'risposta identica' fa eccezione il codice ritorno del server, ad esempio una DELETE sulla stessa
-                    risorsa ha lo stesso risultato, ma non lo stesso codice stato (prima 200, poi 404 tipicamente)</p>
-                <p><b>CACHEABLE:</b> alcuni metodi possono essere cacheable come la GET, HEAD o POST, altri non possono
-                    mai*
-                    esserlo, ad esempio PUT e DELETE.</p>
-                <p>Tuttavia esistono degli header HTTP che permettono di cambiare questo comportamento, tipicamente
-                    quando
-                    non si vuole che una chiamata sia cacheable si specifica <code>Cache-Control: no-cache</code>.</p>
-                <p>Anche gli stati sono cacheable.</p>
-            </div>
-            <div>
-                <p><b>Perché non fregarsene?</b></p>
-                <p>1) Siamo in un sistema asincrono, sapere che una richiesta è idempotente vuol dire che il client può
-                    implementare un retry senza controllare lo stato della risorsa, mentre nel caso di POST eventuali
-                    timeout dovrebbero essere trattati con più cura. 2) pensate al seguente metodo:
-                    <code>GET /blog/1234/delete HTTP/1.1</code> che è totalmente permesso: dai browser, CDN, reverse
-                    proxies o LB può essere cached. Normalmente non ci sono grosse implicazioni, ma stare alle 'regole'
-                    è poco costoso e previene comportamenti strani o workaround.
-                </p>
-            </div>
 
-            <h5>GET</h5>
-            <p>Il metodo GET richiede la rappresentazione di una risorsa specificata. Dovrebbe essere usata solo per
-                richiedere data (senza includerli). Dipendentemente dalle implementazioni in realtà questi principi
-                potrebbero essere violati, ma questo spesso ha delle controindicazioni, ad esempio esistono delle GET
-                che contengono il Body, ma questo comportamento potrebbe non essere supportato da backend o anche
-                semplicemente browsers</p>
-            <p>Il metodo GET è quello più comune e dovrebbe essere utilizzato la maggior parte delle volte. Alcuni casi
-                in cui viene 'abusato' e dovrebbero essere evitati sono 1) quando il programmatore vuole utilizzare il
-                body e utilizza la POST, ma vuole comunque richiedere solo delle risorse (occhio alla cache, vincoli del
-                webserver/proxy) oppure al contrario vengono utilizzate per operazioni non idempotenti (GET per
-                operazioni che cambiano lo stato a back, non sono particolarmente problematiche, ma violano la semantica
-                e gli standard).</p>
-            <table>
-                <tr>
-                    <th> Request has body</th>
-                    <th> Successful response has body </th>
-                    <th> Safe </th>
-                    <th> Idempotente </th>
-                    <th> Cacheable </th>
-                    <th> Permessa in HTML forms </th>
-                </tr>
-                <tr>
-                    <td>no</td>
-                    <td>yes</td>
-                    <td>yes</td>
-                    <td>yes</td>
-                    <td>yes</td>
-                    <td>yes</td>
-                </tr>
-            </table>
-            <h5>HEAD</h5>
-            <p>Identica alla GET, ma senza body nella risposta.</p>
-            <table>
-                <tr>
-                    <th> Request has body</th>
-                    <th> Successful response has body </th>
-                    <th> Safe </th>
-                    <th> Idempotente </th>
-                    <th> Cacheable </th>
-                    <th> Permessa in HTML forms </th>
-                </tr>
-                <tr>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>yes</td>
-                    <td>yes</td>
-                    <td>yes</td>
-                    <td>no</td>
-                </tr>
-            </table>
-            <h5>POST</h5>
-            <p>È il metodo più 'potente', tipicamente utilizzato per mandare dati via HTML form</p>
-            <table>
-                <tr>
-                    <th> Request has body</th>
-                    <th> Successful response has body </th>
-                    <th> Safe </th>
-                    <th> Idempotente </th>
-                    <th> Cacheable </th>
-                    <th> Permessa in HTML forms </th>
-                </tr>
-                <tr>
-                    <td>yes</td>
-                    <td>yes</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>may if specified</td>
-                    <td>yes</td>
-                </tr>
-            </table>
-            <h5>PUT</h5>
-            <p>Utilizzato per cambiare le risorse a back.</p>
-            <table>
-                <tr>
-                    <th> Request has body</th>
-                    <th> Successful response has body </th>
-                    <th> Safe </th>
-                    <th> Idempotente </th>
-                    <th> Cacheable </th>
-                    <th> Permessa in HTML forms </th>
-                </tr>
-                <tr>
-                    <td>yes</td>
-                    <td>no</td>
-                    <td>no</td>
-                    <td>yes</td>
-                    <td>no</td>
-                    <td>no</td>
-                </tr>
-            </table>
-            <h5>DELETE</h5>
-            <p>Per cancellare le risorse.</p>
-            <table>
-                <tr>
-                    <th> Request has body</th>
-                    <th> Successful response has body </th>
-                    <th> Safe </th>
-                    <th> Idempotente </th>
-                    <th> Cacheable </th>
-                    <th> Permessa in HTML forms </th>
-                </tr>
-                <tr>
-                    <td>may</td>
-                    <td>may</td>
-                    <td>no</td>
-                    <td>yes</td>
-                    <td>no</td>
-                    <td>no</td>
-                </tr>
-            </table>
-            <h3 id="cookies">Cookies</h3>
-            <img src="images/biscuits.PNG"
-                 alt="Biscuits vs Cookies"
-                 style="max-width: 80vw;">
-        </section>
 
-        <footer>
-            <div>"<a rel="nofollow"
-                   href="https://fontawesome.com/icons/link?style=solid">Link icon</a>" by <a rel="nofollow"
-                   class="external text"
-                   href="https://fontawesome.com/">fontawesome</a>, used under <a rel="nofollow"
-                   class="external text"
-                   href="https://creativecommons.org/licenses/by/2.0/">CC BY</a>"
-            </div>
-            <div>
-                Webslides provided by <a href="https://github.com/webslides/webslides/">github</a>
-            </div>
-        </footer>
+            <section id="title"
+                     class="aligncenter">
+                <span class="background" style="background-image:url('src/common/images/iprel/Background.png')"></span>
+
+                <div class="wrap">
+
+                    <p>
+                        <img src="src/common/images/iprel/iprel.png"
+                             alt="Iprel Progetti">
+                    </p>
+                    <h1 class="text-landing">
+                        WEB CODE ADVANCED (1/2)
+                    </h1>
+                    <p class="text-subtitle">Presentation by <strong>Riccardo Bucchi</strong></p>
+                </div>
+            </section>
+
+
+
+            <section>
+
+                <div class="wrap size-50">
+                    <h3>SOMMARIO</h3>
+                    <hr>
+                    <div class="toc">
+                        <ol>
+                            <li>
+                                <a href="#slide=3">Introduzione</a>
+                            </li>
+                            <li>
+                                <a href="#slide=4">HTML</a>
+                                <ol>
+                                    <li>
+                                        <a href="#slide=5">Fondamentali (sintassi, nesting, block vs inline)</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=9">Componenti notevoli</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=10">Class e Id</a>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <a href="#slide=9">CSS</a>
+                                <ol>
+                                    <li>
+                                        <a href="#slide=12">Fondamentali (units, selectors e display)</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=14">Tecniche avanzate (responsiveness)</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=16">Bootstrap + form</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=17">Inclusione libreria</a>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <a href="#slide-18"> Handson (test su form)</a>
+                            </li>
+                            <li>
+                                <a href="#slide=19">Javascript</a>
+                                <ol>
+                                    <li>
+                                        <a href="#slide=19">Breve introduzione</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=21">Esempi di DOM manipulation</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=22">Naming (prossima lezione)</a>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                  <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>Slide 0 - Proxies<span class="text-intro alignright"></span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <p>Acting on behalf of "something"</p>
+                    <div class="grid">
+                        <div class="column">
+                            <h3>
+                                Forward proxy
+                            </h3><img src="src/images/forward-proxy.webp"
+                                 alt="forward proxy">
+                            <p>Acting on behalf of "client"</p>
+                            <ul>
+                                <li>
+                                    Sicurezza (site blocking, additional layer)
+                                </li>
+                                <li>"Anonimizzazione"</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h3>
+                                Reverse proxy
+                            </h3><img src="src/images/reverse-proxy.webp"
+                                 alt="reverse proxy">
+                            <p>Acting on behalf of "producer"</p>
+                            <ul>
+                                <li>"CDN" <ul>
+                                        <li>TLS support</li>
+                                        <li>caching, compression, etc.</li>
+                                    </ul>
+                                </li>
+                                <li>Protezione della visibilità dei server interni</li>
+                                <li>Load Balancing* / AB testing* (anche se Reverse Proxy è associato a solo webserver)
+                                </li>
+                                <li>In generale avere un punto d'entrata offre flessibilità</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h3 id="http-methods">HTTP request methods (verbs)</h3>
+                    <div class="grid">
+                        <p>HTTP definisce una serie di metodi di richiesta per indicare l'azione desiderata da eseguire
+                            per una data
+                            risorsa.</p>
+                        <p>Ognuno di loro implementa una semantica diversa, ma alcune caratteristiche comuni sono
+                            condivise da un
+                            gruppo di loro: ad es. un metodo di richiesta può essere sicuro, idempotente o memorizzabile
+                            nella
+                            cache.</p>
+                        <ul>
+                            <li>GET</li>
+                            <li>HEAD</li>
+                            <li>POST</li>
+                            <li>PUT</li>
+                            <li>DELETE</li>
+                            <li>CONNECT (per autenticazioni, handshake su SSL)</li>
+                            <li>OPTIONS (tipicamente per verificare le capacità del server o analizzare CORS)</li>
+                            <li>TRACE</li>
+                            <li>PATCH (una sorta di PUT in cui non viene messo tutto il corpo)</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h3 id="http-methods">HTTP request methods (verbs)</h3>
+                    <div class="grid">
+                        <p><b>SICURO:</b> un metodo è considerato sicuro vuol dire che non può modificare lo stato del
+                            server
+                            (read-only). I metodi safe
+                            sono tipicamente GET, HEAD e OPTIONS. Tutti i metodi safe sono anche idempotenti, ma non
+                            vice versa.
+                        </p>
+                        <p><b>IDEMPOTENTE:</b> ad una richiesta identica corrisponde la stessa risposta anche se
+                            effettuata più
+                            di
+                            una volta, non avendo side-effect. Anche qui può dipendere dall'implementazione, ma
+                            generalmente
+                            sono
+                            considerate idempotenti le operazioni Sicure, inoltre la DELETE e la PUT, mentre la POST è
+                            il
+                            classico
+                            esempio di operazione non idempotente.</p>
+                        <p>Per 'risposta identica' fa eccezione il codice ritorno del server, ad esempio una DELETE
+                            sulla stessa
+                            risorsa ha lo stesso risultato, ma non lo stesso codice stato (prima 200, poi 404
+                            tipicamente)</p>
+                        <p><b>CACHEABLE:</b> alcuni metodi possono essere cacheable come la GET, HEAD o POST, altri non
+                            possono
+                            mai*
+                            esserlo, ad esempio PUT e DELETE.</p>
+                        <p>Tuttavia esistono degli header HTTP che permettono di cambiare questo comportamento,
+                            tipicamente
+                            quando
+                            non si vuole che una chiamata sia cacheable si specifica
+                            <code>Cache-Control: no-cache</code>.
+                        </p>
+                        <p>Anche gli stati sono cacheable.</p>
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h3 id="http-methods">HTTP request methods (verbs)</h3>
+                    <div class="grid">
+                        <h5>GET</h5>
+                        <p>Il metodo GET richiede la rappresentazione di una risorsa specificata. Dovrebbe essere usata
+                            solo per
+                            richiedere data (senza includerli). Dipendentemente dalle implementazioni in realtà questi
+                            principi
+                            potrebbero essere violati, ma questo spesso ha delle controindicazioni, ad esempio esistono
+                            delle GET
+                            che contengono il Body, ma questo comportamento potrebbe non essere supportato da backend o
+                            anche
+                            semplicemente browsers</p>
+                        <p>Il metodo GET è quello più comune e dovrebbe essere utilizzato la maggior parte delle volte.
+                            Alcuni casi
+                            in cui viene 'abusato' e dovrebbero essere evitati sono 1) quando il programmatore vuole
+                            utilizzare il
+                            body e utilizza la POST, ma vuole comunque richiedere solo delle risorse (occhio alla cache,
+                            vincoli del
+                            webserver/proxy) oppure al contrario vengono utilizzate per operazioni non idempotenti (GET
+                            per
+                            operazioni che cambiano lo stato a back, non sono particolarmente problematiche, ma violano
+                            la semantica
+                            e gli standard).</p>
+                        <table>
+                            <tr>
+                                <th> Request has body</th>
+                                <th> Successful response has body </th>
+                                <th> Safe </th>
+                                <th> Idempotente </th>
+                                <th> Cacheable </th>
+                                <th> Permessa in HTML forms </th>
+                            </tr>
+                            <tr>
+                                <td>no</td>
+                                <td>yes</td>
+                                <td>yes</td>
+                                <td>yes</td>
+                                <td>yes</td>
+                                <td>yes</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h5>HEAD</h5>
+                    <p>Identica alla GET, ma senza body nella risposta.</p>
+                    <table>
+                        <tr>
+                            <th> Request has body</th>
+                            <th> Successful response has body </th>
+                            <th> Safe </th>
+                            <th> Idempotente </th>
+                            <th> Cacheable </th>
+                            <th> Permessa in HTML forms </th>
+                        </tr>
+                        <tr>
+                            <td>no</td>
+                            <td>no</td>
+                            <td>yes</td>
+                            <td>yes</td>
+                            <td>yes</td>
+                            <td>no</td>
+                        </tr>
+                    </table>
+                </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h5>POST</h5>
+                    <p>È il metodo più 'potente', tipicamente utilizzato per mandare dati via HTML form</p>
+                    <table>
+                        <tr>
+                            <th> Request has body</th>
+                            <th> Successful response has body </th>
+                            <th> Safe </th>
+                            <th> Idempotente </th>
+                            <th> Cacheable </th>
+                            <th> Permessa in HTML forms </th>
+                        </tr>
+                        <tr>
+                            <td>yes</td>
+                            <td>yes</td>
+                            <td>no</td>
+                            <td>no</td>
+                            <td>may if specified</td>
+                            <td>yes</td>
+                        </tr>
+                    </table>
+                </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h5>PUT</h5>
+                    <p>Utilizzato per cambiare le risorse a back.</p>
+                    <table>
+                        <tr>
+                            <th> Request has body</th>
+                            <th> Successful response has body </th>
+                            <th> Safe </th>
+                            <th> Idempotente </th>
+                            <th> Cacheable </th>
+                            <th> Permessa in HTML forms </th>
+                        </tr>
+                        <tr>
+                            <td>yes</td>
+                            <td>no</td>
+                            <td>no</td>
+                            <td>yes</td>
+                            <td>no</td>
+                            <td>no</td>
+                        </tr>
+                    </table>
+                </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h5>DELETE</h5>
+                    <p>Per cancellare le risorse.</p>
+                    <table>
+                        <tr>
+                            <th> Request has body</th>
+                            <th> Successful response has body </th>
+                            <th> Safe </th>
+                            <th> Idempotente </th>
+                            <th> Cacheable </th>
+                            <th> Permessa in HTML forms </th>
+                        </tr>
+                        <tr>
+                            <td>may</td>
+                            <td>may</td>
+                            <td>no</td>
+                            <td>yes</td>
+                            <td>no</td>
+                            <td>no</td>
+                        </tr>
+                    </table>
+                </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h5>Riassunto</h5>
+                    <table>
+                        <tr>
+                            <th> Method</th>
+                            <th> Request has body</th>
+                            <th> Response has body </th>
+                            <th> Safe </th>
+                            <th> Idempotente </th>
+                            <th> Cacheable </th>
+                            <th> Can in forms </th>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>no</td>
+                            <td>yes</td>
+                            <td>yes</td>
+                            <td>yes</td>
+                            <td>yes</td>
+                            <td>yes</td>
+                        </tr>
+                        <tr>
+                            <td>HEAD</td>
+                            <td>no</td>
+                            <td>no</td>
+                            <td>yes</td>
+                            <td>yes</td>
+                            <td>yes</td>
+                            <td>no</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>yes</td>
+                            <td>yes</td>
+                            <td>no</td>
+                            <td>no</td>
+                            <td>may if specified</td>
+                            <td>yes</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td>yes</td>
+                            <td>no</td>
+                            <td>no</td>
+                            <td>yes</td>
+                            <td>no</td>
+                            <td>no</td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>may</td>
+                            <td>may</td>
+                            <td>no</td>
+                            <td>yes</td>
+                            <td>no</td>
+                            <td>no</td>
+                        </tr>
+                    </table>
+                </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h3 id="http-methods">HTTP request methods (verbs)</h3>
+                    <div class="grid">
+                        <div class="column">
+                            <h4>Perché non fregarsene?</h4>
+                            <p>1) Siamo in un sistema asincrono, sapere che una richiesta è idempotente vuol dire che il
+                                client può
+                                implementare un retry senza controllare lo stato della risorsa, mentre nel caso di POST
+                                eventuali
+                                timeout dovrebbero essere trattati con più cura.
+                            </p>
+                            <p> 2) pensate al seguente metodo:
+                                <code>GET /blog/1234/delete HTTP/1.1</code> che è totalmente permesso: dai browser, CDN,
+                                reverse
+                                proxies o LB può essere cached. Normalmente non ci sono grosse implicazioni, ma stare
+                                alle
+                                'regole'
+                                è poco costoso e previene comportamenti strani o workaround.
+                            </p>
+                        </div>
+                        <div class="column">
+                            <h4>Perché fregarsene?</h4>
+                            <p>1) Capita che non abbiamo bisogno di concetti tipo "Cachable" o "supportato nei Forms".
+                                "Safe" è comunque a livello applicativo, e quindi non mi interessa vincolare
+                                l'implementazione alla semantica (per complessità).
+                            </p>
+                            <p> 2) Workaround. E.g. devo fare una chiamata che concettualmente è una <code>GET</code>,
+                                richiedo solamente dei dati, ma devo passare a back una quantità di dati considerevole.
+                                L'URL potrebbe non bastare e utilizzo una <code>POST</code>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>Response Status Codes </h2>
+                    <div class="grid">
+                        <div class="column">
+                            <p>
+                                Gli Status Code sono i codici semantici attraverso cui si definisce il risultato della
+                                Request. Sono composti da 3 cifre.
+                            </p>
+
+                            <p>
+                                <i>I client HTTP non devono saper codificare tutti gli Status Code, ma sono obbligati a
+                                    decifrarne la classe, definita dalla prima cifra.</i>
+                            </p>
+                            <ul>
+                                <li>1xx (Informational): The request was received, continuing process (tipica nelle
+                                    WebSocket)
+                                </li>
+
+                                <li>
+                                    2xx (Successful): The request was successfully received,
+                                    understood, and accepted
+                                    <ol>
+                                        <li>200, OK.</li>
+                                        <li>201, Creata la risorsa (ad esempio POST).</li>
+                                        <li>202, Accettata e sto processando la richiesta.</li>
+                                        <li>204/5, Accettata e non ho contenuto di risposta. Il 5 indica al client che
+                                            deve 'rinfrescare la view'.</li>
+                                    </ol>
+                                </li>
+
+                                <li>
+                                    3xx (Redirection): Further action needs to be taken in order to
+                                    complete the request
+                                </li>
+
+                                <li>
+                                    4xx (Client Error): The request contains bad syntax or cannot be
+                                    fulfilled
+                                    <ol>
+                                        <li>400, Bad request.</li>
+                                        <li>401, Unauthorized.</li>
+                                        <li>404, Not found.</li>
+                                    </ol>
+                                </li>
+
+                                <li>
+                                    5xx (Server Error): The server failed to fulfill an apparently
+                                    valid request
+                                    <ol>
+                                        <li>500, Internal server error</li>
+                                        <li>502, Bad gateway</li>
+                                    </ol>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>URL</h2>
+                    <div class="grid">
+                        <div class="column">
+                            <img src="src/images/mdn-url-all.png">
+                            <h4> Schema</h4>
+                            <p>
+                                Indica il protocollo, normalmente è <code>http, https, mailto, file, ftp</code>
+                            </p>
+                            <h4> Authority </h4>
+                            <p>
+                                Domain name + port (se non è quella di default, ovvero 80 per http e 443 per https)
+                            </p>
+                            <h4> Path </h4>
+                            <p>
+                                Siamo già 'dentro' il server e indica al suo interno dove si trova la risorsa. Può
+                                indicare anche
+                                fisicamente il path di dove si trova, ma tipicamente è solo un'astrazione (speriamo).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>URL</h2>
+                    <div class="grid">
+                        <img src="src/images/mdn-url-all.png">
+                        <div class="column">
+
+                            <h4> Parameters </h4>
+                            <p>
+                                <code>https://www.google.com/search?q=google</code> serve per dare indicazioni al web
+                                server
+                                aggiuntive
+                                oltre alla Risorsa richiesta, normalmente per comporre query, paginazioni o per
+                                qualsiasi logica
+                                back.
+                                Più che una specifica web, il parametro è una caratteristica del web server, quindi
+                                possono esserci
+                                delle differenze nella gestione dipendentemente dalle tecnologie utilizzate.
+                            </p>
+                            <p><a href="http://tools.ietf.org/html/rfc3986">RFC 3986 - Uniform Resource Identifier
+                                    (URI):
+                                    Generic
+                                    Syntax</a></p>
+                            <p><a href="src/examples/http-queryparams.html">Esempio con JS</a></p>
+                        </div>
+                        <div class="column">
+                            <p>
+                                La sintassi è <code>?[key1]=[value1]&[key2]=[value2]</code>, ecco alcuni esempi:
+                            <ul>
+                                <li><b>Tracking:</b> <code>?sessionid=123</code> </li>
+                                <li><b>Order, filter, paging:</b> <code>?page=1&sort=asc&price-range=10-100</code></li>
+                                <li><b>Search:</b> <code>?q=allowed+character+query+parameters</code></li>
+                                <li>...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>URL</h2>
+                    <div class="grid">
+                        <img src="src/images/mdn-url-all.png">
+                        <div class="column">
+
+                            <h4> Anchor </h4>
+                            <p>
+                                E.g.: <code>http://127.0.0.1:8080/#slide=15</code>, naviga fino all'<code>ID</code> di
+                                un tag. <b>Non</b> viene mandata al server, ma interagisce solo con il browser per due
+                                motivi: referencing e history.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+
+                    <div class="grid vertical-align">
+                        <div class="column">
+
+                            <p class="text-intro">
+                                <code>Javascript</code> è nato nel 1995 dal progetto Netscape, motivo per cui è
+                                indissolubilmente legato al Web.
+                                Ad oggi, vista la sua popolarità, è stato adottato anche a back (e.g.: nodejs) o
+                                addirittura nei db (couchdb o mongodb)
+                            </p>
+                            <p class="text-intro">
+                                Questo vuol dire in realtà molto, perché a parte i paradigmi, vuol dire che:
+                            <ul>
+                                <li>Javascript, dom e window sono strettamente legati</li>
+                                <li>Adozione obbligata di modello asincrono (prima callback, poi Promise, poi async)
+                                </li>
+                                <li>Supporto per funzionalità specifiche per animazioni, ma non per il file system o
+                                    rete</li>
+                                <li>...</li>
+                            </ul>
+                            </p>
+
+                        </div>
+                        <div class="column">
+                            <img src="src/images/netscape_vs_ie.png"
+                                 alt="Netscape vs ie">
+                        </div>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+
+                    <div class="grid vertical-align">
+                        <div class="column">
+
+                            <p class="text-intro">
+                                È un linguaggio di programmazione interpretato, first class function, proto-based,
+                                multi-paradigm, single-threaded, dynamic.
+                            </p>
+                            <img class="size-70 aligncenter"
+                                 src="src/images/js_thegoodparts.jpeg"
+                                 alt="The good parts">
+                        </div>
+                        <div class="column">
+
+                            <pre style="margin: 0; line-height: 125%">
+<span class="markup">&lt;p</span> <span style="color: #1e90ff">id=</span><span style="color: #aa5500">&quot;my&quot;</span><span class="markup">&gt;</span>Click the button<span class="markup">&lt;/p&gt;</span>
+
+<span class="markup">&lt;button</span> <span style="color: #1e90ff">onclick=</span><span style="color: #aa5500">"myFun()"</span><span class="markup">&gt;</span>Click Me!<span class="markup">&lt;/button&gt;</span>
+
+<span class="markup">&lt;script&gt;</span>
+
+    <span style="color: #0000aa">function</span> myFun() {
+        <span style="color: #0000aa">var</span> x = <span style="color: #00aaaa">document</span>.getElementById(<span style="color: #aa5500">&quot;my&quot;</span>);
+        x.style.fontSize = <span style="color: #aa5500">&quot;25px&quot;</span>;
+        x.style.color = <span style="color: #aa5500">&quot;red&quot;</span>;
+    }
+
+<span class="markup">&lt;/script&gt;</span>
+            </pre>
+
+                        </div>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                              <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT
+                            (Naming)<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <div class="grid vertical-align">
+                        <div class="column">
+                            <h3>Javascript vs Java</h3>
+                            <p>
+                                Problema n.0 di Javascript, viene associato ad un altro linguaggio con cui centra poco.
+                                Javascript, in principio Mocha poi Livescript e JS, è stato creato molto velocemente e
+                                la scusa
+                                è "cercavamo un nome e la sintassi ricorda Java".
+                                Probabilmente è stata anche una mossa di marketing visto che negli anni 90 Java era
+                                sulla cresta dell'onda.
+                            </p>
+                            <p>
+                                Ad oggi però questo crea il problema non trascurabile dei confronti:
+                            <ol>
+                                <li>Object Oriented vs Object Based</li>
+                                <li>Classi vs Object (solo poi supporto classi)</li>
+                                <li>Non funzionale (solo poi supporto) vs funzionale</li>
+                                <li>Sintassi simili, cambiate nel tempo (<code>==</code> e <code>===</code>)</li>
+                            </ol>
+                            </p>
+                        </div>
+                        <div class="column">
+                            <h3>Javascript vs ECMAScript</h3>
+                            <p>
+                                ECMAScript è lo standard, Javascript l'implementazione. Semplificando possiamo trattarli
+                                come sinonimi, ma dobbiamo sapere che nel web ci sono diverse versioni supportate.
+                            <ol>
+                                <li>ECMAScript 1-3 ES1-3 anni 90</li>
+                                <li>ECMAScript 5 ES5 2009</li>
+                                <li>ECMAScript 6 ES6 2015</li>
+                                <li>ECMAScript 7 ES7 2016</li>
+                                <li>ECMAScript 8 ES8 2017</li>
+                                <li>ECMAScript 9 ES9 2018</li>
+                            </ol>
+                            <p>Per "ESNext" si intende la prossima</p>
+                            <a href="https://kangax.github.io/compat-table/es6/">tabella compatibilità</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>JS Cheatsheet ed esempi</h2>
+
+                    <p>Basics, scope and functions: <a href="src/examples/js_example.html">link</a></p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>HTML + JS<span class="text-intro alignright">CORE FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+
+                    <p class="text-intro">
+                        Esercizio form: <a target="_blank"
+                           href="src/examples/class-2c-bootstrap/4-forms-submit.html">link</a>
+                    </p>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>JS Cheatsheet ed esempi</h2>
+            
+                    <p>Equality, objects, closures e inheritance: <a href="src/examples/js_next_example.html">link</a></p>
+                </div>
+            
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section class="slide-center">
+                <span class="background" style="background-image:url('src/common/images/iprel/Background.png')"></span>
+
+                <div class="wrap">
+
+                    <div class="content-right">
+                        <h2>
+                            <strong>SEE YOU NEXT LESSON</strong>
+                        </h2>
+                        <br />
+                        <blockquote>
+                            <p>"When something is such a creative medium as the web, the limits to it are our
+                                imagination."
+                                <cite>Tim Berners-Lee</cite>
+                            </p>
+                        </blockquote>
+                        <p>Best,<br>
+                            <span class="text-subtitle"><strong>Riccardo Bucchi</strong></span>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+
+
+        </article>
+        <!-- end article -->
     </main>
+    <!-- end main -->
+
+    <!-- A global footer
+
+     <footer role="contentinfo">
+      <div class="wrap">
+        <p>An <a href="https://github.com/webslides/webslides">open source solution</a>, by <a href="https://twitter.com/webslides">@webslides</a>.</p>
+      </div>
+    </footer>  -->
+
+    <!-- Required -->
+    <script src="src/common/js/webslides.js"></script>
+    <script>
+        window.ws = new WebSlides();
+    </script>
+
+    <!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
+    <script defer
+            src="src/common/js/svg-icons.js"></script>
+
 </body>
-
-
 
 </html>

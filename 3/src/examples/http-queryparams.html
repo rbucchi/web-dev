@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <script>
+        function getReqResByInput1() {
+            let counter1 = document.getElementById('input1');
+            callAndPrint(parseInt(counter1.value));
+        }
+
+        function getReqResByQueryParams() {
+            // https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            callAndPrint(id);
+        }
+
+
+        function setQueryParamFromInput2() {
+            const searchParams = new URLSearchParams(window.location.search);
+            searchParams.set("id", parseInt(document.getElementById('input2').value));
+            var newRelativePathQuery = window.location.pathname + '?' + searchParams.toString();
+            history.pushState(null, '', newRelativePathQuery);
+        }
+
+        function callAndPrint(id) {
+            let xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://reqres.in/api/products/" + id, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    console.log(xhr.response);
+                }
+            }
+            xhr.send();
+        }
+    </script>
+</head>
+
+<body>
+    1) <div>
+        <input type="number"
+               step="1"
+               value="0"
+               id="input1">
+        <button onclick="getReqResByInput1()">Call Id by Input1</button>
+    </div>
+    2) <div>
+        <input type="number"
+               step="1"
+               value="0"
+               id="input2">
+        <button onclick="setQueryParamFromInput2()">Set from Input2</button>
+
+        <button onclick="getReqResByQueryParams()">Call Id by
+            Query params</button>
+    </div>
+    <div>
+        Qual è la differenza fondamentale?
+    </div>
+</body>
+
+</html>

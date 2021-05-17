@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <h1>Javascript cheatsheet ed esempi</h1>
+
+    <h2>Sintassi basi</h2>
+
+    <p>Dichiarazioni variabili, espressioni, statement e control flow non verrà elencato perché 99% uguale ai principali
+        linguaggi imperativi. Oltretutto JS si ispira alla sintassi di Java che è C# con la maiuscola, quindi
+        <code>if, switch, for, do, break & continue</code> sono identitci. Se siete comunque curiosi: <a
+           href="https://eloquentjavascript.net/02_program_structure.html">JS early doc</a>.
+    </p>
+
+    <h3>Differenze notevoli</h3>
+
+    <h4>Variabili</h4>
+
+    <p>JS è weakly e dynamic typed, quindi:</p>
+    <img src="../images/var_quads.png"
+         alt="Var quad">
+    <ul>
+        <li>Nessun controllo compile-time (hanno fatto delle librerie - Typescript)</li>
+        <li>Una variabile può 'cambiare' tipo, infatti alla dichiarazione tipicamente non viene esplicitato</li>
+        <li>Non importa dichiarare delle variabili (diventa interessante quando parliamo di Oggetti e Prototype
+            inheritance)</li>
+    </ul>
+
+    <h5>Tipi</h5>
+
+    <pre>
+// number
+let age = 33;
+// string
+let name = 'Riccardo'
+let greetings = `My name is ${name}`;
+// boolean
+let bold = true;
+// array
+let owns = ['Table', 'Some Dylan Dog', 42, true];
+// objects
+let riccardo = {
+    name: 'Riccardo',
+    owns: owns,
+    greetings: function(){
+        return `My name is ${name}`;
+    },
+}
+    </pre>
+
+    <h4>Scope Variables</h4>
+
+    <p>TL;DR: dichiara attraverso <code>const</code> o <code>let</code> sempre il più 'vicino' all'utilizzo</p>
+
+
+    <p>Quattro tipi per dichiarare una variabile:</p>
+    <ul>
+        <li>Nessuna dichiarazione, global scope</li>
+        <li><code>var</code> (pre ES6) (global o local scope, ma attenzione all'<code>hoisting</code></li>
+        <li><code>let</code> come var, ma block scope</li>
+        <li><code>const</code> block scope e costante</li>
+    </ul>
+
+    <p>Esistono due tipi di scope (zona del codice in cui è definita una variabile):</p>
+    <ol>
+        <li>Global scope (accessibile ovunque)</li>
+        <li>Local scope (accessibile in tutti gli <code>inner scope</code></li>
+        <ul>
+            <li>Function scope (nativo), pre ES6 era l'unico modo per definire un local scope
+                (<code><abbr title="Immediately Invoked Function Expression">IIFE</abbr></code></li>
+            <li>Block scope (solo post ES6), lo scope è anche all'interno dei 'blocchi' (<code>{},for, if</code>)</li>
+        </ul>
+    </ol>
+
+    <code>Look at Developer tools for variable examples</code>
+    <script>
+        globalVariable = 'global';
+        var globalVarVariable = 'global'; // var nell'outer scope == global
+        let letVariable = 'not global';
+        const constVariable = 'not global';
+
+        // window nel brwoser è il global scope. In nodejs dovrebbe essere global
+        console.log(window.globalVariable);
+        console.log(window.globalVarVariable);
+        // comunque visibili da console (ma non da window), perché sono nel 'block scope' più outer
+        console.log(window.letVariable);
+        console.log(window.constVariable);
+
+        function firstFunctionScope() {
+            secondGlobalVariable = 'global';
+            var secondVarVariable = 'not global';
+        }
+
+        firstFunctionScope();
+
+        function blockScopeExample() {
+            if (true) {
+                let letGreetings = 'Baron Munchausen';
+                console.log("Hello " + letGreetings);
+                var varGreetings = 'Baron Munchausen';
+                console.log("Hello " + varGreetings);
+            }
+            console.log("Hello " + varGreetings);
+            // NOPE -> Reference Exception
+            // console.log("Hello" + letGreetings);
+        }
+
+        blockScopeExample('David');
+
+        for (let letI = 0; letI < [1, 2, 3].length; letI++) { }
+        for (var varI = 0; varI < [1, 2, 3].length; varI++) { }
+        // Reference Error
+        // console.log(letI);
+        console.log(varI);
+
+        // esempio Hoisting
+        function testHoisting(condition) {
+            console.log(colorVar);
+            // console.log(color); ReferenceError
+            if (condition) {
+                var colorVar = 'blue';
+                let color = 'blue';
+                return color;
+            }
+        }
+        testHoisting(true);
+
+    </script>
+
+
+    <hr>
+
+    <h4>Functions</h4>
+
+    <p>Ci sono tre metodi (e tutti con risultati diversi) per dichiarare le funzioni in JS:</p>
+    <pre>
+// 1. dichiarazione
+function helloWorld(params){
+    return 'Hello world';
+}
+
+// 2. Funzioni come valori
+// differisce dalla prima per l'hoisting
+let helloWorld = function(params){
+    return 'Hello world';
+};
+
+// 3. Arrow functions (> ES6)
+// differisce dalle altre per this, che vedremo in futuro.
+let helloWorld = (params) => {
+    return 'Hello world';
+};
+</pre>
+
+    <hr>
+
+    <h2>Javascript e il DOM</h2>
+
+    <p>
+        Javascript è nato come linguaggio per il web e quindi viene normalmente associato ad una serie di funzioni e
+        caratteristiche che però non sono 'native', ma sono implementate attraverso l'interprete che vive nel browser,
+        tra cui il DOM (Document Object Model) inteso come 'albero HTML' e altre API del browser (come
+        <code>history, storage, ...</code>)
+    </p>
+
+    <h3>Trovare elementi</h3>
+
+    <pre>
+document.getElementById('id-element');
+document.getElementsByName('img');
+document.getElementsByClassName('column');
+document.querySelector("p")
+document.querySelector("p.some-class")
+document.querySelectorAll("p")
+    </pre>
+
+    <h3>Creare o cambiare elementi</h3>
+
+    <pre>
+function replaceImages() {
+    let images = document.body.getElementsByTagName("img");
+        for (let i = images.length - 1; i >= 0; i--) {
+            let image = images[i];
+            if (image.alt) {
+                let text = document.createTextNode(image.alt);
+                image.parentNode.replaceChild(text, image);
+        }
+    }
+}
+    </pre>
+
+    <h3>Cambiare le caratteristiche degli elementi (attributi, animazioni, ...)</h3>
+    <pre>
+
+    </pre>
+
+    <script>
+        function appendList() {
+            var ul = document.getElementById("lista-spesa");
+            var li = document.createElement("li");
+            var daComprare = document.getElementById("da-comprare-input").value;
+            li.appendChild(document.createTextNode(daComprare));
+            ul.appendChild(li);
+        }
+
+        function increment() {
+            var counterEl = document.getElementById("counter");
+            var counter = Number(counterEl.innerText);
+            counter++;
+            counterEl.innerText = counter;
+        }
+
+        function swapPTags() {
+            var el = document.querySelectorAll('p.swappable');
+
+        }
+
+        function changeStyle() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            var el = document.getElementById('p-style');
+            el.style = `background-color: ${color}`;
+        }
+    </script>
+
+    <p onclick="increment()">Counter: <span id="counter">0</span></p>
+
+    <input id="da-comprare-input"
+           type="text"
+           placeholder="Lista della spesa">
+    <button onclick="appendList()">Add</button>
+    <ul id="lista-spesa">
+
+    </ul>
+
+    <div id="p-style">Div con style cambiable</div>
+    <button onclick="changeStyle()">Cambia colore</button>
+
+</body>
+
+</html>

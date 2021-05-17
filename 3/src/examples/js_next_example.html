@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+    <h1>Javascript cheatsheet ed esempi</h1>
+
+    <h3>Equality operators</h3>
+
+    <p>Gli operatori sono quelli 'classici' <code>==, !=, >=, <=, unary, &&, ||, !</code></p>
+
+    <p>Occhio all'equality:</p>
+    <pre>
+"" == "0" // false
+0 == "" // true
+0 == "0" // true
+false == "false" // false
+false == "0" // true
+false == undefined // false
+false == null // false
+null == undefined // true
+" \t\r\n" == 0 // true
+
+    </pre>
+    <p>Dopo poco tempo JS ha rilasciato lo <code>strict equality</code> aggiungendo il terzo carattere
+        <code>===, !==</code>, per dare un senso a questo linguaggio:
+    </p>
+
+    <pre>
+"" === "0" // false
+0 === "" // false
+0 === "0" // false
+false === "false" // false
+false === "0" // false
+false === undefined // false
+false === null // false
+null === undefined // false
+" \t\r\n" === 0 // false
+
+</pre>
+
+    <h4>Falsy (e truthy) values</h4>
+
+    <ul>
+        <li>false</li>
+        <li>0</li>
+        <li>'', "", ``</li>
+        <li>null</li>
+        <li>undefined</li>
+        <li>NaN</li>
+    </ul>
+
+    <p>Questi valori sono molto utili perché JS al contrario di tanti altri linguaggi ha più valori 'nulli' e questo riduce molto la verbosità, anche se ovviamente bisogna stare attenti a considerare null come una stringa vuota o lo 0. Tutto il resto è <code>truthy</code> e dal momento che gli operatori logici restituiscono il valore stesso (e non <code>true/false</code>) spesso viene utilizzata questa notazione per non lanciare <code>ReferenceError</code>:</p>
+<pre>
+let obj = { name: 'Riccardo' };
+(obj || {}).name // Riccardo
+(obj2 || {}).name // undefined
+obj.name // throw ReferenceError
+</pre>
+
+    <h3>Objects</h3>
+
+    <p>Tutto in JS è un oggetto (a parte i valori base e i non-valori <code>null, undefined e NaN</code>).</p>
+
+    <p>La notazione è tipo un <code>hashmap</code> chiave-valore con proprietà che possono essere attributi, oggetti,
+        array o funzioni. <abbr title="JSON">JavaScript Object Notation</abbr> sono di fatto... oggetti Javascript.</p>
+    <pre>
+    let obj = {
+        foo: 'bar',
+        myFunction: function(){
+
+        },
+        foo2: 'bar2',
+    }
+
+    // Accessing attributes:
+
+    obj.foo; // bar
+    obj['foo'] // bar
+    let accessor = 'foo';
+    obj[accessor] // bar
+
+    // è possibile cancellare le proprietà e definirle al volo
+    delete obj.foo;
+    obj.foo // undefined;
+    obj.foo = 'bar';
+    obj.foo // bar
+
+    // è possibile iterare tra le proprietà
+
+    for(let i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            console.log(i, '' + obj[i]);
+        }
+    }
+
+</pre>
+
+    <h3>Closures (intro)</h3>
+
+    <p>
+        Prima del concetto di block scope (e delle classi), non c'era altro modo di creare degli inner scope a parte
+        l'utilizzo delle funzioni. Per creare <code>scope 'privati' o 'locali'</code> venivano (e vengono) utilizzate le
+        <code>closure</code> (e il pattern <code>IIFE</code>):
+    </p>
+    <code>Look at Developer tools for variable examples</code>
+    <script>
+        function generateLocalScope(name) {
+            let privateName = name;
+            return () => privateName;
+        }
+        let localScope1 = generateLocalScope('Riccardo');
+        let localScope2 = generateLocalScope('Clementino');
+        console.log(localScope1());
+        console.log(localScope2());
+
+        // IIFE Pattern
+        (function () {
+            /* statements */
+        })();
+
+        // IIFE Examples
+        const createBankAccount = (name, balance) => (function (initName, initBalance) {
+            // private things
+            let name = initName;
+            let balance = initBalance;
+
+            function withdraw(amount) {
+                if (balance < amount) return "Insufficient money";
+                if (balance >= amount) {
+                    balance -= amount;
+                    return balance;
+                }
+                throw new Error('smth ain\'t go as expected');
+            }
+
+            function greets() {
+                return `Hello ${name}, you own ${balance} fanta money!`;
+            }
+            return {
+                withdraw: withdraw,
+                greets: greets,
+            }
+        })(name, balance);
+
+    </script>
+
+    <h3>Inheritance</h3>
+
+    <p>Da ES6 in avanti ci sono le classi, ma javascript è nato senza e utilizza(va) i <code>prototipi</code> come
+        inheritance. Il fatto che abbiano poi introdotto degli statement Object Oriented (che poi 'compilano' sotto nei
+        pattern nativi) aumenta l'entropia di questo discorso, ma difatto vi basta sapere che:
+    </p>
+    <ul>
+        <li>L'eredità per prototipi funziona che qualsiasi oggetto ha un 'padre' e quindi c'è questa catena di oggetti
+            che arriva all'environment <code>window</code></li>
+        <li>All'esecuzione di un metodo o all'invocazione di un attributo l'interprete javascript prova ad eseguirlo
+            sull'oggetto in questione e ripete l'operazione se non trova il metodo/attributo fino alla fine della
+            catena.</li>
+    </ul>
+
+    <pre>
+    function Foo() {
+        this.value = 42;
+    }
+    Foo.prototype = {
+        method: function() {}
+    };
+    
+    function Bar() {}
+    
+    // Set Bar's prototype to a new instance of Foo
+    Bar.prototype = new Foo();
+    Bar.prototype.foo = 'Hello World';
+    
+    // Make sure to list Bar as the actual constructor
+    Bar.prototype.constructor = Bar;
+    
+    var test = new Bar(); // create a new bar instance
+    
+    // The resulting prototype chain
+    test [instance of Bar]
+        Bar.prototype [instance of Foo]
+            { foo: 'Hello World' }
+            Foo.prototype
+                { method: ... }
+                Object.prototype
+                    { toString: ... /* etc. */ }
+
+</pre>
+
+</body>
+
+</html>
