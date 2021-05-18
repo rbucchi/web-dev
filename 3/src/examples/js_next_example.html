@@ -68,9 +68,13 @@
 
     <p>Questi valori sono molto utili perché JS al contrario di tanti altri linguaggi ha più valori 'nulli' e questo
         riduce molto la verbosità, anche se ovviamente bisogna stare attenti a considerare null come una stringa vuota o
-        lo 0. Tutto il resto è <code>truthy</code> e dal momento che gli operatori logici restituiscono il valore stesso
+        lo 0. Tutto il resto è <code>truthy</code>.
+    </p>
+    <p>
+        Gli operatori logici restituiscono il valore stesso
         (e non <code>true/false</code>) spesso viene utilizzata questa notazione per non lanciare
-        <code>ReferenceError</code>:</p>
+        <code>ReferenceError</code>:
+    </p>
     <pre>
 <code class="language-javascript">
     let obj = { name: 'Riccardo' };
@@ -165,6 +169,9 @@
 
     <h3>Inheritance</h3>
 
+    <img src="../images/prototype_chain.png"
+         alt="Proto chain">
+
     <p>Da ES6 in avanti ci sono le classi, ma javascript è nato senza e utilizza(va) i <code>prototipi</code> come
         inheritance. Il fatto che abbiano poi introdotto degli statement Object Oriented (che poi 'compilano' sotto nei
         pattern nativi) aumenta l'entropia di questo discorso, ma difatto vi basta sapere che:
@@ -207,9 +214,48 @@
                         { toString: ... /* etc. */ }
     </code>
 
-    <p>Quindi sì all'override, ma non esiste l'overload (può essere utilizzato una sorta di hashmap con un oggetto o i parametri di default, ma occhio alla compatibilità)</p>
 
 </pre>
+    <p>Quindi sì all'override, ma non esiste l'overload (può essere utilizzato una sorta di hashmap con un oggetto o i
+        parametri di default, ma occhio alla compatibilità)</p>
+
+    <p>Post ES6 sono state introdotte le classi che semplificano il concetto di prototype inheritance (credo solo
+        sintatticamente).</p>
+    <pre><code class="language-javascript">
+    class Animal {
+
+        constructor(name) {
+            this.speed = 0;
+            this.name = name;
+        }
+
+        run(speed) {
+            this.speed = speed;
+            alert(`${this.name} runs with speed ${this.speed}.`);
+        }
+
+        stop() {
+            this.speed = 0;
+            alert(`${this.name} stands still.`);
+        }
+    }
+
+    class Rabbit extends Animal {
+        hide() {
+         alert(`${this.name} hides!`);
+        }
+
+        stop() {
+            super.stop(); // call parent stop
+            this.hide(); // and then hide
+        }
+    }
+
+    let rabbit = new Rabbit("White Rabbit");
+
+    rabbit.run(5); // White Rabbit runs with speed 5.
+    rabbit.stop(); // White Rabbit stands still. White Rabbit hides!
+</code></pre>
 
 </body>
 

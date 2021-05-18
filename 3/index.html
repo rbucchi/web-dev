@@ -98,53 +98,39 @@
                     <div class="toc">
                         <ol>
                             <li>
-                                <a href="#slide=3">Introduzione</a>
-                            </li>
-                            <li>
-                                <a href="#slide=4">HTML</a>
+                                <a href="#slide=4">RFC7231 (fondamentali HTTP)</a>
                                 <ol>
                                     <li>
-                                        <a href="#slide=5">Fondamentali (sintassi, nesting, block vs inline)</a>
+                                        <a href="#slide=4">Verbi HTTP</a>
                                     </li>
                                     <li>
-                                        <a href="#slide=9">Componenti notevoli</a>
+                                        <a href="#slide=6">HTTP Headers</a>
                                     </li>
                                     <li>
-                                        <a href="#slide=10">Class e Id</a>
+                                        <a href="#slide=14">Response status codes</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=15">URL</a>
                                     </li>
                                 </ol>
                             </li>
                             <li>
-                                <a href="#slide=9">CSS</a>
+                                <a href="#slide=18">Javascript</a>
                                 <ol>
                                     <li>
-                                        <a href="#slide=12">Fondamentali (units, selectors e display)</a>
+                                        <a href="#slide=20">Naming</a>
                                     </li>
                                     <li>
-                                        <a href="#slide=14">Tecniche avanzate (responsiveness)</a>
+                                        <a href="#slide=21">Basi</a>
                                     </li>
                                     <li>
-                                        <a href="#slide=16">Bootstrap + form</a>
+                                        <a href="#slide=22">Esercizio con form</a>
                                     </li>
                                     <li>
-                                        <a href="#slide=17">Inclusione libreria</a>
-                                    </li>
-                                </ol>
-                            </li>
-                            <li>
-                                <a href="#slide-18"> Handson (test su form)</a>
-                            </li>
-                            <li>
-                                <a href="#slide=19">Javascript</a>
-                                <ol>
-                                    <li>
-                                        <a href="#slide=19">Breve introduzione</a>
+                                        <a href="#slide=23">Equality e objects</a>
                                     </li>
                                     <li>
-                                        <a href="#slide=21">Esempi di DOM manipulation</a>
-                                    </li>
-                                    <li>
-                                        <a href="#slide=22">Naming (prossima lezione)</a>
+                                        <a href="#slide=24">Flavours e stato dell'arte</a>
                                     </li>
                                 </ol>
                             </li>
@@ -359,7 +345,8 @@
                                         <li>Authorization, <code>Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l</code>
                                         </li>
                                         <li>Accept, cosa accetta la richiesta
-                                            <code>Accept: text/html, text/plain;</code></li>
+                                            <code>Accept: text/html, text/plain;</code>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>
@@ -513,8 +500,11 @@
 
                 <div class="wrap">
                     <h5>POST</h5>
-                    <p>È il metodo più 'potente' (perché tecnicamente supporta più cose), tipicamente utilizzato per mandare dati via HTML form.</p>
-                    <p>Occhio però che più 'potente' viene tradotto in 'uso sempre questo', se le implementazioni sono in casa ok, ma esistono comunque delle limitazioni o filtri anche a livello puramente tecnologico.</p>
+                    <p>È il metodo più 'potente' (perché tecnicamente supporta più cose), tipicamente utilizzato per
+                        mandare dati via HTML form.</p>
+                    <p>Occhio però che più 'potente' viene tradotto in 'uso sempre questo', se le implementazioni sono
+                        in casa ok, ma esistono comunque delle limitazioni o filtri anche a livello puramente
+                        tecnologico.</p>
                     <table>
                         <tr>
                             <th> Request has body</th>
@@ -560,7 +550,9 @@
 
                 <div class="wrap">
                     <h5>PUT</h5>
-                    <p>Utilizzato per cambiare le risorse a back. Può essere usato anche per la creazione della risorsa, è considerato idempotente perché si passa <b>tutto</b> l'oggetto e ritorna l'oggetto stesso (come conferma).</p>
+                    <p>Utilizzato per cambiare le risorse a back. Può essere usato anche per la creazione della risorsa,
+                        è considerato idempotente perché si passa <b>tutto</b> l'oggetto e ritorna l'oggetto stesso
+                        (come conferma).</p>
                     <table>
                         <tr>
                             <th> Request has body</th>
@@ -606,7 +598,9 @@
 
                 <div class="wrap">
                     <h5>DELETE</h5>
-                    <p>Per cancellare le risorse. Esistono in natura anche API che implementano delete tramite GET (<code>DELETE /api/user/2/delete</code>), ma questa normalmente è pacificamente usata (o filtrata).</p>
+                    <p>Per cancellare le risorse. Esistono in natura anche API che implementano delete tramite GET
+                        (<code>DELETE /api/user/2/delete</code>), ma questa normalmente è pacificamente usata (o
+                        filtrata).</p>
                     <table>
                         <tr>
                             <th> Request has body</th>
@@ -1116,7 +1110,8 @@
                             <h3>Javascript vs Java</h3>
                             <p>
                                 Problema n.0 di Javascript, viene associato ad un altro linguaggio con cui centra poco.
-                                Javascript, in principio Mocha poi Livescript e solo poi JS, è stato creato molto velocemente e
+                                Javascript, in principio Mocha poi Livescript e solo poi JS, è stato creato molto
+                                velocemente e
                                 la scusa
                                 è "cercavamo un nome e la sintassi ricorda Java".
                                 Probabilmente è stata anche una mossa di marketing visto che negli anni 90 Java era
@@ -1128,12 +1123,15 @@
                                 <li>Object Oriented vs Object Based</li>
                                 <li>Classi vs Object (solo con ES6 supporto classi)</li>
                                 <li>Non funzionale (poi credo supportato con JAVA 8) vs funzionale</li>
-                                <li>Sintassi simili, cambiate nel tempo (camelCase, alcune keyword, indentazione e <code>==</code> e <code>===</code>)</li>
+                                <li>Sintassi simili, cambiate nel tempo (camelCase, alcune keyword, indentazione e
+                                    <code>==</code> e <code>===</code>)</li>
                             </ol>
                             </p>
                         </div>
                         <div class="column">
-                            <h3>Javascript vs <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-262/">ECMAScript</a></h3>
+                            <h3>Javascript vs <a
+                                   href="https://www.ecma-international.org/publications-and-standards/standards/ecma-262/">ECMAScript</a>
+                            </h3>
                             <p>
                                 ECMAScript è lo standard, Javascript l'implementazione. Semplificando possiamo trattarli
                                 come sinonimi, ma dobbiamo sapere che nel web ci sono diverse versioni supportate.
