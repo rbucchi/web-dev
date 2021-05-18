@@ -8,6 +8,9 @@
           content="Riccardo">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
+    <link href="../css/prism.css"
+          rel="stylesheet" />
+    <script src="../js/prism.js"></script>
 </head>
 
 <body>
@@ -39,24 +42,36 @@
     <h5>Tipi</h5>
 
     <pre>
-// number
-let age = 33;
-// string
-let name = 'Riccardo'
-let greetings = `My name is ${name}`;
-// boolean
-let bold = true;
-// array
-let owns = ['Table', 'Some Dylan Dog', 42, true];
-// objects
-let riccardo = {
-    name: 'Riccardo',
-    owns: owns,
-    greetings: function(){
-        return `My name is ${name}`;
-    },
-}
+<code class="language-javascript">
+    // number
+    let age = 33;
+    // string
+    let name = 'Riccardo'
+    let greetings = `My name is ${name}`;
+    let introducing = greetings + " I'm " + age + " y o";
+    // boolean
+    let bold = true;
+    // array
+    let owns = ['Table', 'Some Dylan Dog', 42, true];
+    // objects
+    let riccardo = {
+        name: 'Riccardo',
+        owns: owns,
+        greetings: function(){
+            return `My name is `;
+        },
+    }
+    // functions
+    let myFunction = function() {};
+
+    // non types
+    undefined
+    null
+    NaN
+</code>
     </pre>
+
+    <p>By value e by reference abbastanza classico, i valori nativi sono by value, mentre array e oggetti sono by reference.</p>
 
     <h4>Scope Variables</h4>
 
@@ -66,7 +81,7 @@ let riccardo = {
     <p>Quattro tipi per dichiarare una variabile:</p>
     <ul>
         <li>Nessuna dichiarazione, global scope</li>
-        <li><code>var</code> (pre ES6) (global o local scope, ma attenzione all'<code>hoisting</code></li>
+        <li><code>var</code> (pre ES6) (global o local scope, ma attenzione all'<code>hoisting</code>)</li>
         <li><code>let</code> come var, ma block scope</li>
         <li><code>const</code> block scope e costante</li>
     </ul>
@@ -74,10 +89,10 @@ let riccardo = {
     <p>Esistono due tipi di scope (zona del codice in cui è definita una variabile):</p>
     <ol>
         <li>Global scope (accessibile ovunque)</li>
-        <li>Local scope (accessibile in tutti gli <code>inner scope</code></li>
+        <li>Local scope (accessibile in tutti gli <code>inner scope</code>)</li>
         <ul>
             <li>Function scope (nativo), pre ES6 era l'unico modo per definire un local scope
-                (<code><abbr title="Immediately Invoked Function Expression">IIFE</abbr></code></li>
+                (<code><abbr title="Immediately Invoked Function Expression">IIFE</abbr></code>)</li>
             <li>Block scope (solo post ES6), lo scope è anche all'interno dei 'blocchi' (<code>{},for, if</code>)</li>
         </ul>
     </ol>
@@ -144,22 +159,62 @@ let riccardo = {
 
     <p>Ci sono tre metodi (e tutti con risultati diversi) per dichiarare le funzioni in JS:</p>
     <pre>
-// 1. dichiarazione
-function helloWorld(params){
-    return 'Hello world';
-}
+<code class="language-javascript">
+    // 1. dichiarazione
+    function helloWorld(params){
+        return 'Hello world';
+    }
+    
+    // 2. Funzioni come valori
+    // differisce dalla prima per l'hoisting
+    let helloWorld = function(params){
+        return 'Hello world';
+    };
+    
+    // 3. Arrow functions (> ES6)
+    // differisce dalle altre per this, che vedremo in futuro.
+    let helloWorld = (params) => {
+        return 'Hello world';
+    };
+</code>
+</pre>
 
-// 2. Funzioni come valori
-// differisce dalla prima per l'hoisting
-let helloWorld = function(params){
-    return 'Hello world';
-};
-
-// 3. Arrow functions (> ES6)
-// differisce dalle altre per this, che vedremo in futuro.
-let helloWorld = (params) => {
-    return 'Hello world';
-};
+    <p>
+        Javascript è un linguaggio nel quale le funzioni sono 'Higher-Order Function', ovvero possono essere trattate
+        come qualsiasi altra variabile.
+    </p>
+    <pre>
+<code class="language-javascript">
+    // function as variable
+    let helloWorld = function(params){
+        return 'Hello world';
+    };
+    
+    // function as return value
+    function greetFactory(name) {
+        return () => {
+            return `Hello !`;
+        }
+    }
+    
+    // function as input parameter (Callback)
+    function expression(action, x, y) {
+        console.log(action(x, y));
+    }
+    
+    // approccio funzionale (volendo ci ritorneremo sopra nelle prossime lezioni)
+    
+    function repeat(n, action){
+        for(let i = 0; i &lt; n; i++) {
+            action(i);
+        }
+    }
+    
+    let array = [];
+    repeat(10, i => {
+        array.push(i);
+    })
+</code>
 </pre>
 
     <hr>
@@ -173,35 +228,58 @@ let helloWorld = (params) => {
         <code>history, storage, ...</code>)
     </p>
 
+    <h3>Interazione di base</h3>
+
+    <pre>
+<code class="language-javascript">
+    console.log(message);
+    console.table(obj);
+    console.error(error);
+    
+    console.assert(condition);
+    
+    alert(message);
+    prompt(message, defaultInput);
+    confirm(message);
+</code>
+</pre>
+
     <h3>Trovare elementi</h3>
 
     <pre>
-document.getElementById('id-element');
-document.getElementsByName('img');
-document.getElementsByClassName('column');
-document.querySelector("p")
-document.querySelector("p.some-class")
-document.querySelectorAll("p")
+<code class="language-javascript">
+    document.getElementById('id-element');
+    document.getElementsByName('img');
+    document.getElementsByClassName('column');
+    document.querySelector("p")
+    document.querySelector("p.some-class")
+    document.querySelectorAll("p")
+</code>
     </pre>
 
     <h3>Creare o cambiare elementi</h3>
 
     <pre>
-function replaceImages() {
-    let images = document.body.getElementsByTagName("img");
-        for (let i = images.length - 1; i >= 0; i--) {
-            let image = images[i];
-            if (image.alt) {
-                let text = document.createTextNode(image.alt);
-                image.parentNode.replaceChild(text, image);
+<code class="language-javascript">
+    function replaceImages() {
+        let images = document.body.getElementsByTagName("img");
+            for (let i = images.length - 1; i >= 0; i--) {
+                let image = images[i];
+                if (image.alt) {
+                    let text = document.createTextNode(image.alt);
+                    image.parentNode.replaceChild(text, image);
+            }
         }
     }
-}
+</code>
     </pre>
 
     <h3>Cambiare le caratteristiche degli elementi (attributi, animazioni, ...)</h3>
     <pre>
-
+        <code class="language-javascript">
+var el = document.getElementById('p-style');
+el.style = `background-color: ${color}`;
+        </code>
     </pre>
 
     <script>

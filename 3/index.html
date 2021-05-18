@@ -173,7 +173,7 @@
                 </header>
 
                 <div class="wrap">
-                    <p>Acting on behalf of "something"</p>
+                    <p>Definizione generalista: Acting on behalf of "something"</p>
                     <div class="grid">
                         <div class="column">
                             <h3>
@@ -231,7 +231,7 @@
                 </header>
 
                 <div class="wrap">
-                    <h3 id="http-methods">HTTP request methods (verbs)</h3>
+                    <h3 id="http-methods">HTTP methods (verbs)</h3>
                     <div class="grid">
                         <p>HTTP definisce una serie di metodi di richiesta per indicare l'azione desiderata da eseguire
                             per una data
@@ -242,15 +242,13 @@
                             nella
                             cache.</p>
                         <ul>
-                            <li>GET</li>
-                            <li>HEAD</li>
-                            <li>POST</li>
-                            <li>PUT</li>
-                            <li>DELETE</li>
+                            <li>GET (richiesta di una risorsa)</li>
+                            <li>POST (creazione di una risorsa)</li>
+                            <li>PUT (modifica di una risorsa</li>
+                            <li>DELETE (cancellazione di una risorsa)</li>
+                            <li>PATCH (una sorta di PUT in cui non viene messo tutto il corpo)</li>
                             <li>CONNECT (per autenticazioni, handshake su SSL)</li>
                             <li>OPTIONS (tipicamente per verificare le capacità del server o analizzare CORS)</li>
-                            <li>TRACE</li>
-                            <li>PATCH (una sorta di PUT in cui non viene messo tutto il corpo)</li>
                         </ul>
                     </div>
 
@@ -278,7 +276,7 @@
                 </header>
 
                 <div class="wrap">
-                    <h3 id="http-methods">HTTP request methods (verbs)</h3>
+                    <h3 id="http-methods">HTTP methods (verbs) - caratteristiche</h3>
                     <div class="grid">
                         <p><b>SICURO:</b> un metodo è considerato sicuro vuol dire che non può modificare lo stato del
                             server
@@ -304,6 +302,8 @@
                             possono
                             mai*
                             esserlo, ad esempio PUT e DELETE.</p>
+                        <p><b>TECNICA:</b> esistono varie differenze prettamente tecniche, ad esempio alcuni metodi non
+                            'supportano' la presenza del body nella richiesta o nella risposta.</p>
                         <p>Tuttavia esistono degli header HTTP che permettono di cambiare questo comportamento,
                             tipicamente
                             quando
@@ -320,8 +320,8 @@
                         <hr>
                         <p>
                             <span class="alignleft">
-                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
-                                        </span>
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
                         </p>
                     </div>
                 </footer>
@@ -337,7 +337,70 @@
                 </header>
 
                 <div class="wrap">
-                    <h3 id="http-methods">HTTP request methods (verbs)</h3>
+                    <h3 id="http-methods">HTTP headers</h3>
+                    <div class="grid">
+                        <p>Gli headers non sono altro che delle informazioni mandate insieme al <b>verbo</b> e
+                            all'<b>URL</b> nella forma <code>chiave: valore</code>. Possono essere <b>diversi</b> per
+                            request e
+                            response.</p>
+                        <p>Influiscono sui comportamenti degli endpoint (meno dell'applicativo), ad esempio quando
+                            definiscono 'non usare la cache' sarà il webserver o il cdn ad interpretare questo
+                            messaggio.</p>
+                        <p>Gli header applicativi comunque esistono e tipicamente vengono prefissi con la
+                            <code>X-</code> (tipo <code>X-SomeInformation</code>), anche se poi da tempo hanno
+                            incominciato a far parte dello standard.
+                        </p>
+                        <div>
+                            <p>Esempi notevoli:
+                            <ul>
+                                <li>
+                                    Request
+                                    <ul>
+                                        <li>Authorization, <code>Authorization: Basic YWxhZGRpbjpvcGVuc2VzYW1l</code>
+                                        </li>
+                                        <li>Accept, cosa accetta la richiesta
+                                            <code>Accept: text/html, text/plain;</code></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    Entrambe
+                                    <ul>
+                                        <li>Content-Type, cosa c'è nel body della richiesta (e.g.:
+                                            <code>Content-Type: text/html; charset=UTF-8</code> )
+                                        </li>
+                                        <li>Cache-Control, informazioni/azioni sulla cache.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                                    <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                                    </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+
+                <header>
+                    <div class="wrap">
+                        <h3>RFC7231<span class="text-intro alignright">CORE HTTP FUNDAMENTALS</span></h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h3 id="http-methods">HTTP request methods (verbs) </h3>
                     <div class="grid">
                         <h5>GET</h5>
                         <p>Il metodo GET richiede la rappresentazione di una risorsa specificata. Dovrebbe essere usata
@@ -346,9 +409,8 @@
                             principi
                             potrebbero essere violati, ma questo spesso ha delle controindicazioni, ad esempio esistono
                             delle GET
-                            che contengono il Body, ma questo comportamento potrebbe non essere supportato da backend o
-                            anche
-                            semplicemente browsers</p>
+                            che contengono il Body, ma questo comportamento potrebbe non essere supportato da backend,
+                            , webserver o browser. </p>
                         <p>Il metodo GET è quello più comune e dovrebbe essere utilizzato la maggior parte delle volte.
                             Alcuni casi
                             in cui viene 'abusato' e dovrebbero essere evitati sono 1) quando il programmatore vuole
@@ -451,7 +513,8 @@
 
                 <div class="wrap">
                     <h5>POST</h5>
-                    <p>È il metodo più 'potente', tipicamente utilizzato per mandare dati via HTML form</p>
+                    <p>È il metodo più 'potente' (perché tecnicamente supporta più cose), tipicamente utilizzato per mandare dati via HTML form.</p>
+                    <p>Occhio però che più 'potente' viene tradotto in 'uso sempre questo', se le implementazioni sono in casa ok, ma esistono comunque delle limitazioni o filtri anche a livello puramente tecnologico.</p>
                     <table>
                         <tr>
                             <th> Request has body</th>
@@ -497,7 +560,7 @@
 
                 <div class="wrap">
                     <h5>PUT</h5>
-                    <p>Utilizzato per cambiare le risorse a back.</p>
+                    <p>Utilizzato per cambiare le risorse a back. Può essere usato anche per la creazione della risorsa, è considerato idempotente perché si passa <b>tutto</b> l'oggetto e ritorna l'oggetto stesso (come conferma).</p>
                     <table>
                         <tr>
                             <th> Request has body</th>
@@ -543,7 +606,7 @@
 
                 <div class="wrap">
                     <h5>DELETE</h5>
-                    <p>Per cancellare le risorse.</p>
+                    <p>Per cancellare le risorse. Esistono in natura anche API che implementano delete tramite GET (<code>DELETE /api/user/2/delete</code>), ma questa normalmente è pacificamente usata (o filtrata).</p>
                     <table>
                         <tr>
                             <th> Request has body</th>
@@ -671,7 +734,8 @@
                 </header>
 
                 <div class="wrap">
-                    <h3 id="http-methods">HTTP request methods (verbs)</h3>
+                    <h3 id="http-methods">HTTP methods (verbs) </h3>
+                    <h5>Test on <a href="https://reqres.in/">https://reqres.in/</a> or in the wild</h5>
                     <div class="grid">
                         <div class="column">
                             <h4>Perché non fregarsene?</h4>
@@ -860,9 +924,6 @@
                                 oltre alla Risorsa richiesta, normalmente per comporre query, paginazioni o per
                                 qualsiasi logica
                                 back.
-                                Più che una specifica web, il parametro è una caratteristica del web server, quindi
-                                possono esserci
-                                delle differenze nella gestione dipendentemente dalle tecnologie utilizzate.
                             </p>
                             <p><a href="http://tools.ietf.org/html/rfc3986">RFC 3986 - Uniform Resource Identifier
                                     (URI):
@@ -1055,7 +1116,7 @@
                             <h3>Javascript vs Java</h3>
                             <p>
                                 Problema n.0 di Javascript, viene associato ad un altro linguaggio con cui centra poco.
-                                Javascript, in principio Mocha poi Livescript e JS, è stato creato molto velocemente e
+                                Javascript, in principio Mocha poi Livescript e solo poi JS, è stato creato molto velocemente e
                                 la scusa
                                 è "cercavamo un nome e la sintassi ricorda Java".
                                 Probabilmente è stata anche una mossa di marketing visto che negli anni 90 Java era
@@ -1065,14 +1126,14 @@
                                 Ad oggi però questo crea il problema non trascurabile dei confronti:
                             <ol>
                                 <li>Object Oriented vs Object Based</li>
-                                <li>Classi vs Object (solo poi supporto classi)</li>
-                                <li>Non funzionale (solo poi supporto) vs funzionale</li>
-                                <li>Sintassi simili, cambiate nel tempo (<code>==</code> e <code>===</code>)</li>
+                                <li>Classi vs Object (solo con ES6 supporto classi)</li>
+                                <li>Non funzionale (poi credo supportato con JAVA 8) vs funzionale</li>
+                                <li>Sintassi simili, cambiate nel tempo (camelCase, alcune keyword, indentazione e <code>==</code> e <code>===</code>)</li>
                             </ol>
                             </p>
                         </div>
                         <div class="column">
-                            <h3>Javascript vs ECMAScript</h3>
+                            <h3>Javascript vs <a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-262/">ECMAScript</a></h3>
                             <p>
                                 ECMAScript è lo standard, Javascript l'implementazione. Semplificando possiamo trattarli
                                 come sinonimi, ma dobbiamo sapere che nel web ci sono diverse versioni supportate.
@@ -1142,7 +1203,7 @@
 
                     <p class="text-intro">
                         Esercizio form: <a target="_blank"
-                           href="src/examples/class-2c-bootstrap/4-forms-submit.html">link</a>
+                           href="src/examples/exercise-forms-submit.html">link</a>
                     </p>
 
                 </div>
@@ -1169,10 +1230,11 @@
                 </header>
                 <div class="wrap">
                     <h2>JS Cheatsheet ed esempi</h2>
-            
-                    <p>Equality, objects, closures e inheritance: <a href="src/examples/js_next_example.html">link</a></p>
+
+                    <p>Equality, objects, closures e inheritance: <a href="src/examples/js_next_example.html">link</a>
+                    </p>
                 </div>
-            
+
                 <footer>
                     <div class="wrap">
                         <hr>
@@ -1180,6 +1242,114 @@
                             <span class="alignleft">
                                             <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
                                         </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT
+                            Flavours<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <div class="grid">
+                        <div class="row">
+                            <img src="src/images/State-of-JS-Typescript-usage_.png"
+                                 alt="Flavours"
+                                 class="size-70 aligncenter">
+                        </div>
+                        <div class="row">
+                            <ul>
+                                <li>Vanilla Javascript (normalmente &lt; ES6)</li>
+                                <li>Typescript, trasformazione JS in Object Oriented, con static typing e interfacce
+                                </li>
+                                <li>Elm, puramente funzionale, static typing, immutability e module system</li>
+                                <li>*jQuery, non è realmente un 'flavour', ma una libreria storica, che comunque ha
+                                    influenzato molto la sintassi e il mondo js</li>
+                            </ul>
+                            <p>
+                                A parte Vanilla JS &lt; ES6 questi linguaggi vengono eseguiti sul browser (o su
+                                qualsiasi altri ambienti) attraverso dei 'transpiler'. (e.g.: <a
+                                   href="https://babeljs.io/">Babel</a> )
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <div class="grid">
+                        <h2>Javascript State of the Art</h2>
+                        <p>Uno dei problemi maggiori di JS come potrete aver notato è la velocità di crescita dello
+                            strumento, probabilmente dovuto a 1) mercato florido, 2) 'giovinezza', 3) paradigma di
+                            partenza (contestualmente al periodo storico) non nella norma</p>
+                        <p>Fortunatamente da dopo l'adozione di ES6, quindi da qualche anno a questa parte, la
+                            proliferazione è diminuita. Sia per l'andamento del mercato, sia per il forte cambiamento
+                            che ha introdotto ES6.</p>
+                        <p>Uno strumento utile e autocontenuto (anche se abbastanza autoreferenziale) è <a
+                               href="https://2020.stateofjs.com/en-US/">stateofjs</a></p>
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>JS modello asincrono</h2>
+
+                    <p><a href="src/examples/js_async_example.html">link</a></p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                                    </span>
                         </p>
                     </div>
                 </footer>

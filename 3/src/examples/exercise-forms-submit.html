@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0"
+          crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        form {
+            margin: 20px 0px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container">
+        <h1>Form Handson</h1>
+        <p>
+            I Form possono fare una chiamata HTTP (GET o POST). Dei cosiddetti 'verbi' HTTP ne parleremo meglio
+            settimana
+            prossima, ma indicativamente la GET utilizza un semplice URL e i parametri sono passati 'in linea', mentre
+            la
+            POST interroga sempre un URL, ma manda un 'contenuto' o 'body'.
+        </p>
+        <p> In seguito ci sono due esempi di Form, uno GET e uno POST</p>
+        <hr>
+
+        <h3>Obiettivo 1</h3>
+        <ol>
+            <li>apri i file da modificare <code>3\src\examples\exercise-forms-submit.html</code>
+            <li>apri il file da ispezionare <code>3\src\examples\x-get-landing-page.html</code></li>
+            <li> Analizza con i dev tools il form GET, verifica gli elementi e i loro attributi</li>
+            <li> Clicca submit e verifica la Request/Response sempre con i dev tools
+                <ul>
+                    <li>Che URL invoca?</li>
+                    <li>Il form ha effetto sull'URL?</li>
+                </ul>
+            </li>
+            <li> Aggiungi elementi del form a completare la pagina risultante, con i parametri
+                <code>name, work e favourite-animal</code>
+            </li>
+            <li>hit: <a href="https://www.w3schools.com/tags/att_input_name.asp">documentazione elemento input (e
+                    name)</a></li>
+        </ol>
+
+        <h3>Form with GET & QueryString</h1>
+
+            <form action="x-get-landing-page.html"
+                  method="GET">
+
+                <div class="row g-3 align-items-center">
+
+                    <div class="mb-1">
+                        <input type="text"
+                               placeholder="Inserisci il nome"
+                               class="form-control"
+                               name="parametro-1">
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+    </div>
+    <hr>
+    <div class="container">
+        <h3>Obiettivo 2</h3>
+        <div>
+            <p>Risultato da ottenere:</p>
+            <pre>
+{
+    name: "Riccardo",
+    favourite-animal: "your-favourite",
+    sex: "?",
+    id: "93",
+    createdAt: "2021-05-18T15:26:00.279Z"
+}
+            </pre>
+        </div>
+        <ol>
+            <li>apri i file da modificare <code>3\src\examples\exercise-forms-submit.html</code>
+            <li> Analizza con i dev tools il form POST, la differenza fondamentale sta negli attributi di
+                <code>form</code>
+            </li>
+            <li> Clicca submit e verifica la Request/Response sempre con i dev tools
+                <ul>
+                    <li>Qual è la differenza rispetto la chiamata precedente?</li>
+                </ul>
+            </li>
+            <li> Sperimenta la chiamata diversa su questo URL <code>https://reqres.in/api/users</code> (è un'API che
+                al posto di una pagina html restituisce un oggetto come definito dal chiamante)
+            </li>
+            <li> Inserisci un altro componente del form (controllo). Dalla <a
+                   href="https://getbootstrap.com/docs/5.0/forms/select/">documentazione boootstrap</a> scegli il
+                'select' e inserisci opzioni e valori a tuo piacimento. Ripeti per il combo</li>
+            <li>hint: i dati del form, come nel primo esempio, vengono definiti dall'attributo <code>name</code>
+                dell'elemento (control), mentre il valore da <code>value</code></li>
+            <li>Guarda com'è fatta la POST</li>
+        </ol>
+
+        <h3>Form with POST & Body</h1>
+            <form action="https://reqres.in/api/users"
+                  method="POST">
+                <div class="row g-3 align-items-center">
+                    <div class="mb-1">
+                        <input type="text"
+                               placeholder="Inserisci qui il nome"
+                               class="form-control"
+                               name="name">
+                    </div>
+                    <div class="mb-1">
+                        &lt;!-- Inserisci un componente select qui per far selezionare l'animale preferito --&gt;
+                    </div>
+                    <div class="mb-1">
+                        &lt;!-- Inserisci un componente combo per far selezionare il sesso --&gt;
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+    </div>
+    <hr>
+    <div class="container">
+        <h3>Obiettivo 3</h3>
+        <ol>
+            <li>apri i file da modificare <code>3\src\examples\exercise-forms-submit.html</code>
+            <li> Scrivi il codice di validazione del prossimo form</li>
+            <li> I requisiti sono:
+                <ul>
+                    <li>la mail dev'essere nel formato ammesso</li>
+                    <li>l'età dev'essere sopra ai diciotto anni</li>
+                </ul>
+            </li>
+            <li>In fondo al form è presente una lista che deve diventare visibile se presenti errori e deve elencare gli
+                errori correnti</li>
+        </ol>
+
+        <h3>Form with validation</h1>
+
+            <form action="javascript:void(0);"
+                  onsubmit="validate()"
+                  name="validation-form">
+
+                <div class="row g-3 align-items-center">
+
+                    <div class="mb-1">
+                        <input type="text"
+                               placeholder="Inserisci qui la mail"
+                               class="form-control"
+                               name="email">
+                    </div>
+                    <div class="mb-1">
+                        <input type="number"
+                               min="0"
+                               placeholder="Inserisci qui la tua età"
+                               class="form-control"
+                               name="age">
+                    </div>
+                    <ul id="error-list"
+                        style="display: none;">
+
+                    </ul>
+
+                    <button type="submit"
+                            class="btn btn-primary">Submit</button>
+                </div>
+
+            </form>
+            <script>
+                let myForm = document.forms['validation-form'];
+
+                /**
+                 * Simple email validation through RegEx (not really tested, please do not use outside of this snippet)
+                 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+                */
+                function validateEmail(value) {
+                    return /^.+@.+\..{2,3}$/.test(value)
+                }
+
+                /**
+                 * Clear any innerHTML inside an id=error-list tag
+                */
+                function clearErrorList() {
+                    var ul = document.getElementById("error-list");
+                    // clear yourself
+                    ul.innerHTML = "";
+                }
+
+                /**
+                 * Append some li tag inside an id=error-list tag 
+                 */
+                function appendList(text) {
+                    var ul = document.getElementById("error-list");
+                    var li = document.createElement("li");
+                    li.appendChild(document.createTextNode(text));
+                    ul.appendChild(li);
+                }
+
+                function validate() {
+                    clearErrorList();
+                    let errorList = [];
+
+                    // TYPE YOUR CODE HERE
+                }
+            </script>
+    </div>
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
+            crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js" integrity="sha384-lpyLfhYuitXl2zRZ5Bn2fqnhNAKOAaM/0Kr9laMspuaMiZfGmfwRNFh8HlMy49eQ" crossorigin="anonymous"></script>
+    -->
+</body>
+
+</html>

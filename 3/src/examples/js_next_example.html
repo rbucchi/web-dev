@@ -8,6 +8,9 @@
           content="Riccardo">
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
+    <link href="../css/prism.css"
+          rel="stylesheet" />
+    <script src="../js/prism.js"></script>
 </head>
 
 <body>
@@ -20,15 +23,17 @@
 
     <p>Occhio all'equality:</p>
     <pre>
-"" == "0" // false
-0 == "" // true
-0 == "0" // true
-false == "false" // false
-false == "0" // true
-false == undefined // false
-false == null // false
-null == undefined // true
-" \t\r\n" == 0 // true
+<code class="language-javascript">
+    "" == "0" // false
+    0 == "" // true
+    0 == "0" // true
+    false == "false" // false
+    false == "0" // true
+    false == undefined // false
+    false == null // false
+    null == undefined // true
+    " \t\r\n" == 0 // true
+</code>
 
     </pre>
     <p>Dopo poco tempo JS ha rilasciato lo <code>strict equality</code> aggiungendo il terzo carattere
@@ -36,15 +41,17 @@ null == undefined // true
     </p>
 
     <pre>
-"" === "0" // false
-0 === "" // false
-0 === "0" // false
-false === "false" // false
-false === "0" // false
-false === undefined // false
-false === null // false
-null === undefined // false
-" \t\r\n" === 0 // false
+<code class="language-javascript">
+    "" === "0" // false
+    0 === "" // false
+    0 === "0" // false
+    false === "false" // false
+    false === "0" // false
+    false === undefined // false
+    false === null // false
+    null === undefined // false
+    " \t\r\n" === 0 // false
+</code>
 
 </pre>
 
@@ -59,12 +66,18 @@ null === undefined // false
         <li>NaN</li>
     </ul>
 
-    <p>Questi valori sono molto utili perché JS al contrario di tanti altri linguaggi ha più valori 'nulli' e questo riduce molto la verbosità, anche se ovviamente bisogna stare attenti a considerare null come una stringa vuota o lo 0. Tutto il resto è <code>truthy</code> e dal momento che gli operatori logici restituiscono il valore stesso (e non <code>true/false</code>) spesso viene utilizzata questa notazione per non lanciare <code>ReferenceError</code>:</p>
-<pre>
-let obj = { name: 'Riccardo' };
-(obj || {}).name // Riccardo
-(obj2 || {}).name // undefined
-obj.name // throw ReferenceError
+    <p>Questi valori sono molto utili perché JS al contrario di tanti altri linguaggi ha più valori 'nulli' e questo
+        riduce molto la verbosità, anche se ovviamente bisogna stare attenti a considerare null come una stringa vuota o
+        lo 0. Tutto il resto è <code>truthy</code> e dal momento che gli operatori logici restituiscono il valore stesso
+        (e non <code>true/false</code>) spesso viene utilizzata questa notazione per non lanciare
+        <code>ReferenceError</code>:</p>
+    <pre>
+<code class="language-javascript">
+    let obj = { name: 'Riccardo' };
+    (obj || {}).name // Riccardo
+    (obj2 || {}).name // undefined
+    obj.name // throw ReferenceError
+</code>
 </pre>
 
     <h3>Objects</h3>
@@ -74,34 +87,30 @@ obj.name // throw ReferenceError
     <p>La notazione è tipo un <code>hashmap</code> chiave-valore con proprietà che possono essere attributi, oggetti,
         array o funzioni. <abbr title="JSON">JavaScript Object Notation</abbr> sono di fatto... oggetti Javascript.</p>
     <pre>
-    let obj = {
-        foo: 'bar',
-        myFunction: function(){
-
-        },
-        foo2: 'bar2',
-    }
-
-    // Accessing attributes:
-
-    obj.foo; // bar
-    obj['foo'] // bar
-    let accessor = 'foo';
-    obj[accessor] // bar
-
-    // è possibile cancellare le proprietà e definirle al volo
-    delete obj.foo;
-    obj.foo // undefined;
-    obj.foo = 'bar';
-    obj.foo // bar
-
-    // è possibile iterare tra le proprietà
-
-    for(let i in obj) {
-        if (obj.hasOwnProperty(i)) {
-            console.log(i, '' + obj[i]);
+    <code class="language-javascript">
+        let obj = {
+            foo: 'bar',
+            myFunction: function(){
+            },
+            foo2: 'bar2',
         }
-    }
+        // Accessing attributes:
+        obj.foo; // bar
+        obj['foo'] // bar
+        let accessor = 'foo';
+        obj[accessor] // bar
+        // è possibile cancellare le proprietà e definirle al volo
+        delete obj.foo;
+        obj.foo // undefined;
+        obj.foo = 'bar';
+        obj.foo // bar
+        // è possibile iterare tra le proprietà
+        for(let i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                console.log(i, '' + obj[i]);
+            }
+        }
+    </code>
 
 </pre>
 
@@ -169,32 +178,36 @@ obj.name // throw ReferenceError
     </ul>
 
     <pre>
-    function Foo() {
-        this.value = 42;
-    }
-    Foo.prototype = {
-        method: function() {}
-    };
-    
-    function Bar() {}
-    
-    // Set Bar's prototype to a new instance of Foo
-    Bar.prototype = new Foo();
-    Bar.prototype.foo = 'Hello World';
-    
-    // Make sure to list Bar as the actual constructor
-    Bar.prototype.constructor = Bar;
-    
-    var test = new Bar(); // create a new bar instance
-    
-    // The resulting prototype chain
-    test [instance of Bar]
-        Bar.prototype [instance of Foo]
-            { foo: 'Hello World' }
-            Foo.prototype
-                { method: ... }
-                Object.prototype
-                    { toString: ... /* etc. */ }
+    <code class="language-javascript">
+        function Foo() {
+            this.value = 42;
+        }
+        Foo.prototype = {
+            method: function() {}
+        };
+        
+        function Bar() {}
+        
+        // Set Bar's prototype to a new instance of Foo
+        Bar.prototype = new Foo();
+        Bar.prototype.foo = 'Hello World';
+        
+        // Make sure to list Bar as the actual constructor
+        Bar.prototype.constructor = Bar;
+        
+        var test = new Bar(); // create a new bar instance
+        
+        // The resulting prototype chain
+        test [instance of Bar]
+            Bar.prototype [instance of Foo]
+                { foo: 'Hello World' }
+                Foo.prototype
+                    { method: ... }
+                    Object.prototype
+                        { toString: ... /* etc. */ }
+    </code>
+
+    <p>Quindi sì all'override, ma non esiste l'overload (può essere utilizzato una sorta di hashmap con un oggetto o i parametri di default, ma occhio alla compatibilità)</p>
 
 </pre>
 

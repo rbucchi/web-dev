@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <title>Hello, world!</title>
+
+</head>
+
+<body>
+    <p> Nome:
+        <span id="nome-id">
+        </span>
+    </p>
+    <p> Lavoro:
+        <span id="lavoro-id">
+            </span>
+    </p>
+    <p> Animale preferito:
+        <span id="animale-preferito-id">
+                </span>
+    </p>
+</body>
+<script>
+
+    /**
+     * Dato un parametro restituisce il valore dall URL
+     * @param {param} Chiave del parametro.
+     */
+    function getParamsFromURL(param) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+    }
+
+    /**
+     * Appende del contenuto ad elemento HTML dato l'id
+     * @param {string} id identificativo del tag.
+     * @param {string} content Contenuto da appendere.
+     */
+    function appendToParagraph(id, content) {
+        var el = document.getElementById(id)
+        el.append(content)
+    }
+
+    appendToParagraph('nome-id', getParamsFromURL('name'));
+    appendToParagraph('lavoro-id', getParamsFromURL('work'));
+    appendToParagraph('animale-preferito-id', getParamsFromURL('favourite-animal'));
+</script>
+
+</html>
