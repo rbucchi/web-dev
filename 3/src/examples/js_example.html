@@ -169,6 +169,22 @@ console.log(array); // 0
         }
         testHoisting(true);
 
+        function outer() {
+            let variable1 = 1;
+            var variable2 = 2;
+            function inner() {
+                let innervariable1 = 1;
+                var innervariable2 = 2;
+                console.log('inner scope');
+                console.log(variable1);
+                console.log(variable2);
+            }
+            inner();
+            //console.log(innervariable2)
+            // console.log(innervariable1)
+        }
+        let myouterFunction = outer;
+        console.log('test');
     </script>
 
 
@@ -253,6 +269,8 @@ console.log(array); // 0
 <code class="language-javascript">
     console.log(message);
     console.table(obj);
+    // displays an interactive list of the properties of the specified JavaScript object.
+    console.dir(function);
     console.error(error);
     
     console.assert(condition);

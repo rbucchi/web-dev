@@ -64,7 +64,19 @@
                         <input type="text"
                                placeholder="Inserisci il nome"
                                class="form-control"
-                               name="parametro-1">
+                               name="name">
+                    </div>
+                    <div class="mb-1">
+                        <input type="text"
+                               placeholder="Inserisci il lavoro"
+                               class="form-control"
+                               name="work">
+                    </div>
+                    <div class="mb-1">
+                        <input type="text"
+                               placeholder="Inserisci l'animale"
+                               class="form-control"
+                               name="favourite-animal">
                     </div>
 
                     <button type="submit"
@@ -103,7 +115,8 @@
             </li>
             <li> Inserisci un altro componente del form (controllo). Dalla <a
                    href="https://getbootstrap.com/docs/5.0/forms/select/">documentazione boootstrap</a> scegli il
-                'select' e inserisci opzioni e valori a tuo piacimento. Ripeti per il combo</li>
+                'select' e inserisci opzioni e valori a tuo piacimento. Ripeti il passo per il componente Radio button
+            </li>
             <li>hint: i dati del form, come nel primo esempio, vengono definiti dall'attributo <code>name</code>
                 dell'elemento (control), mentre il valore da <code>value</code></li>
             <li>Guarda com'è fatta la POST</li>
@@ -120,10 +133,39 @@
                                name="name">
                     </div>
                     <div class="mb-1">
-                        &lt;!-- Inserisci un componente select qui per far selezionare l'animale preferito --&gt;
+                        <select class="form-select"
+                                name="favourite-animal"
+                                aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="Owl">Owl</option>
+                            <option value="Lion">Lion</option>
+                            <option value="Whale">Whale</option>
+                        </select>
                     </div>
                     <div class="mb-1">
-                        &lt;!-- Inserisci un componente combo per far selezionare il sesso --&gt;
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="sex"
+                                   value="?"
+                                   id="flexRadioDefault1">
+                            <label class="form-check-label"
+                                   for="flexRadioDefault1">
+                                ?
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input"
+                                   type="radio"
+                                   name="sex"
+                                   value="z"
+                                   id="flexRadioDefault2"
+                                   checked>
+                            <label class="form-check-label"
+                                   for="flexRadioDefault2">
+                                z
+                            </label>
+                        </div>
                     </div>
 
                     <button type="submit"
@@ -209,10 +251,28 @@
                 }
 
                 function validate() {
+                    document.getElementById('error-list').style = 'display: none';
                     clearErrorList();
-                    let errorList = [];
 
-                    // TYPE YOUR CODE HERE
+                    let errorList = [];
+                    if (!validateEmail(myForm.email.value)) {
+                        errorList.push('email sbagliata');
+                    }
+
+                    if (!myForm.age.value || !myForm.email.value) {
+                        errorList.push('Età e mail obbligatori')
+                    }
+
+                    if (myForm.age.value < 18) {
+                        errorList.push('non accettiamo minorenni');
+                    }
+
+                    if (errorList.length > 0) {
+                        document.getElementById('error-list').style = 'display: block';
+                        for (let i = 0; i < errorList.length; i++) {
+                            appendList(errorList[i]);
+                        }
+                    }
                 }
             </script>
     </div>
