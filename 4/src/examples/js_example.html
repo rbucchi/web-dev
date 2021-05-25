@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link href="../common/css/prism.css"
+          rel="stylesheet" />
+    <script src="../common/js/prism.js"></script>
+</head>
+
+<body>
+
+    <h1>Javascript cheatsheet ed esempi</h1>
+
+    <h2>Sintassi basi</h2>
+
+    <p>Dichiarazioni variabili, espressioni, statement e control flow non verrà elencato perché 99% uguale ai principali
+        linguaggi imperativi. Oltretutto JS si ispira alla sintassi di Java che è C# con la maiuscola, quindi
+        <code>if, switch, for, do, break & continue</code> sono identitci. Se siete comunque curiosi: <a
+           href="https://eloquentjavascript.net/02_program_structure.html">JS early doc</a>.
+    </p>
+
+    <h3>Differenze notevoli</h3>
+
+    <h4>Variabili</h4>
+
+    <p>JS è weakly e dynamic typed, quindi:</p>
+    <img src="../images/var_quads.png"
+         alt="Var quad">
+    <ul>
+        <li>Nessun controllo compile-time (hanno fatto delle librerie - Typescript)</li>
+        <li>Una variabile può 'cambiare' tipo, infatti alla dichiarazione tipicamente non viene esplicitato</li>
+        <li>Non importa dichiarare delle variabili (diventa interessante quando parliamo di Oggetti e Prototype
+            inheritance)</li>
+    </ul>
+
+    <h5>Tipi</h5>
+
+    <pre>
+<code class="language-javascript">
+    // number
+    let age = 33;
+    // string
+    let name = 'Riccardo'
+    let greetings = `My name is ${name}`;
+    let introducing = greetings + " I'm " + age + " y o";
+    // boolean
+    let bold = true;
+    // array
+    let owns = ['Table', 'Some Dylan Dog', 42, true];
+    // objects
+    let riccardo = {
+        name: 'Riccardo',
+        owns: owns,
+        greetings: function(){
+            return `My name is `;
+        },
+    }
+    // functions
+    let myFunction = function() {};
+
+    // non types
+    undefined
+    null
+    NaN
+</code>
+    </pre>
+
+    <p>By value e by reference abbastanza classico, i valori nativi sono by value, mentre array e oggetti sono by
+        reference.</p>
+
+    <h5>Array</h5>
+
+    <p>Per anni sono stato l'unico elemento tipo-lista presnte, adesso esistono anche Set e Map, sono di fatto delle
+        liste perché non hanno una dimensione fissata.</p>
+    <pre><code class="language-javascript">
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array
+// Definizione
+let array = [];
+// push/ pop
+array.push(0);
+array.push('second element');
+array.length
+// 2
+let element = array.pop();
+console.log(element); //'second element'
+console.log(array); // 0
+    </code></pre>
+
+    <h4>Scope Variables</h4>
+
+    <p>TL;DR: dichiara attraverso <code>const</code> o <code>let</code> sempre il più 'vicino' all'utilizzo</p>
+
+
+    <p>Quattro tipi per dichiarare una variabile:</p>
+    <ul>
+        <li>Nessuna dichiarazione, global scope</li>
+        <li><code>var</code> (pre ES6) (global o local scope, ma attenzione all'<code>hoisting</code>)</li>
+        <li><code>let</code> come var, ma block scope</li>
+        <li><code>const</code> block scope e costante</li>
+    </ul>
+
+    <p>Esistono due tipi di scope (zona del codice in cui è definita una variabile):</p>
+    <ol>
+        <li>Global scope (accessibile ovunque)</li>
+        <li>Local scope (accessibile in tutti gli <code>inner scope</code>)</li>
+        <ul>
+            <li>Function scope (nativo), pre ES6 era l'unico modo per definire un local scope
+                (<code><abbr title="Immediately Invoked Function Expression">IIFE</abbr></code>)</li>
+            <li>Block scope (solo post ES6), lo scope è anche all'interno dei 'blocchi' (<code>{},for, if</code>)</li>
+        </ul>
+    </ol>
+
+    <code>Look at Developer tools for variable examples</code>
+    <script>
+        globalVariable = 'global';
+        var globalVarVariable = 'global'; // var nell'outer scope == global
+        let letVariable = 'not global';
+        const constVariable = 'not global';
+
+        // window nel brwoser è il global scope. In nodejs dovrebbe essere global
+        console.log(window.globalVariable);
+        console.log(window.globalVarVariable);
+        // comunque visibili da console (ma non da window), perché sono nel 'block scope' più outer
+        console.log(window.letVariable);
+        console.log(window.constVariable);
+
+        function firstFunctionScope() {
+            secondGlobalVariable = 'global';
+            var secondVarVariable = 'not global';
+        }
+
+        firstFunctionScope();
+
+        function blockScopeExample() {
+            if (true) {
+                let letGreetings = 'Baron Munchausen';
+                console.log("Hello " + letGreetings);
+                var varGreetings = 'Baron Munchausen';
+                console.log("Hello " + varGreetings);
+            }
+            console.log("Hello " + varGreetings);
+            // NOPE -> Reference Exception
+            // console.log("Hello" + letGreetings);
+        }
+
+        blockScopeExample('David');
+
+        for (let letI = 0; letI < [1, 2, 3].length; letI++) { }
+        for (var varI = 0; varI < [1, 2, 3].length; varI++) { }
+        // Reference Error
+        // console.log(letI);
+        console.log(varI);
+
+        // esempio Hoisting
+        function testHoisting(condition) {
+            console.log(colorVar);
+            // console.log(color); ReferenceError
+            if (condition) {
+                var colorVar = 'blue';
+                let color = 'blue';
+                return color;
+            }
+        }
+        testHoisting(true);
+
+        function outer() {
+            let variable1 = 1;
+            var variable2 = 2;
+            function inner() {
+                let innervariable1 = 1;
+                var innervariable2 = 2;
+                console.log('inner scope');
+                console.log(variable1);
+                console.log(variable2);
+            }
+            inner();
+            //console.log(innervariable2)
+            // console.log(innervariable1)
+        }
+        let myouterFunction = outer;
+        console.log('test');
+    </script>
+
+
+    <hr>
+
+    <h4>Functions</h4>
+
+    <p>Ci sono tre metodi (e tutti con risultati diversi) per dichiarare le funzioni in JS:</p>
+    <pre>
+<code class="language-javascript">
+    // 1. dichiarazione
+    function function1(params){
+        return 'Hello world';
+    }
+    
+    // 2. Funzioni come valori
+    // differisce dalla prima per l'hoisting
+    let function2 = function(params){
+        return 'Hello world';
+    };
+    
+    // 3. Arrow functions (> ES6)
+    // differisce dalle altre per this, che vedremo in futuro.
+    let function3 = (params) => {
+        return 'Hello world';
+    };
+
+    // shorthand per una funzione anonima (senza nome) che non ha parametri in ingresso e restituisce la stringa 'hello world'
+    let function4 = () => 'Hello world';
+</code>
+</pre>
+
+    <p>
+        Javascript è un linguaggio nel quale le funzioni sono 'Higher-Order Function', ovvero possono essere trattate
+        come qualsiasi altra variabile.
+    </p>
+    <pre>
+<code class="language-javascript">
+    // function as variable
+    let helloWorld = function(params){
+        return 'Hello world';
+    };
+    
+    // function as return value
+    function greetFactory(name) {
+        return () => {
+            return `Hello !`;
+        }
+    }
+    
+    // function as input parameter (Callback)
+    function expression(action, x, y) {
+        console.log(action(x, y));
+    }
+    
+    // approccio funzionale (volendo ci ritorneremo sopra nelle prossime lezioni)
+    
+    function repeat(n, action){
+        for(let i = 0; i &lt; n; i++) {
+            action(i);
+        }
+    }
+    
+    let array = [];
+    repeat(10, i => {
+        array.push(i);
+    })
+</code>
+</pre>
+
+    <hr>
+
+    <h2>Javascript e il DOM</h2>
+
+    <p>
+        Javascript è nato come linguaggio per il web e quindi viene normalmente associato ad una serie di funzioni e
+        caratteristiche che però non sono 'native', ma sono implementate attraverso l'interprete che vive nel browser,
+        tra cui il DOM (Document Object Model) inteso come 'albero HTML' e altre API del browser (come
+        <code>history, storage, ...</code>)
+    </p>
+
+    <h3>Interazione di base</h3>
+
+    <pre>
+<code class="language-javascript">
+    console.log(message);
+    console.table(obj);
+    // displays an interactive list of the properties of the specified JavaScript object.
+    console.dir(function);
+    console.error(error);
+    
+    console.assert(condition);
+    
+    alert(message);
+    prompt(message, defaultInput);
+    confirm(message);
+</code>
+</pre>
+
+    <h3>Trovare elementi</h3>
+
+    <pre>
+<code class="language-javascript">
+    document.getElementById('id-element');
+    document.getElementsByName('img');
+    document.getElementsByClassName('column');
+    document.querySelector("p")
+    document.querySelector("p.some-class")
+    document.querySelectorAll("p")
+</code>
+    </pre>
+
+    <h3>Creare o cambiare elementi</h3>
+
+    <pre>
+<code class="language-javascript">
+    function replaceImages() {
+        let images = document.body.getElementsByTagName("img");
+            for (let i = images.length - 1; i >= 0; i--) {
+                let image = images[i];
+                if (image.alt) {
+                    let text = document.createTextNode(image.alt);
+                    image.parentNode.replaceChild(text, image);
+            }
+        }
+    }
+</code>
+    </pre>
+
+    <h3>Cambiare le caratteristiche degli elementi (attributi, animazioni, ...)</h3>
+    <pre>
+        <code class="language-javascript">
+var el = document.getElementById('p-style');
+el.style = `background-color: ${color}`;
+        </code>
+    </pre>
+
+    <script>
+        function appendList() {
+            var ul = document.getElementById("lista-spesa");
+            var li = document.createElement("li");
+            var daComprare = document.getElementById("da-comprare-input").value;
+            li.appendChild(document.createTextNode(daComprare));
+            ul.appendChild(li);
+        }
+
+        function increment() {
+            var counterEl = document.getElementById("counter");
+            var counter = Number(counterEl.innerText);
+            counter++;
+            counterEl.innerText = counter;
+        }
+
+        function swapPTags() {
+            var el = document.querySelectorAll('p.swappable');
+
+        }
+
+        function changeStyle() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            var el = document.getElementById('p-style');
+            el.style = `background-color: ${color}`;
+        }
+    </script>
+
+    <p onclick="increment()">Counter: <span id="counter">0</span></p>
+
+    <input id="da-comprare-input"
+           type="text"
+           placeholder="Lista della spesa">
+    <button onclick="appendList()">Add</button>
+    <ul id="lista-spesa">
+
+    </ul>
+
+    <div id="p-style">Div con style cambiable</div>
+    <button onclick="changeStyle()">Cambia colore</button>
+
+</body>
+
+</html>

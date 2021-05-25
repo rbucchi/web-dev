@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="en"
+      prefix="og: http://ogp.me/ns#">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <!-- SEO -->
+    <title>WebSlides: Making HTML presentations easy</title>
+    <meta name="description"
+          content="WebSlides is the easiest way to make HTML presentations, portfolios, and landings. Just essential features.">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,700,700i%7CMaitree:200,300,400,600,700&amp;subset=latin-ext"
+          rel="stylesheet">
+
+    <!-- CSS WebSlides -->
+    <link rel="stylesheet"
+          type='text/css'
+          media='all'
+          href="src/common/css/webslides.css">
+    <link rel="stylesheet"
+          type='text/css'
+          media='all'
+          href="src/common/css/custom-style.css">
+
+    <!-- Optional - CSS SVG Icons (Font Awesome) -->
+    <link rel="stylesheet"
+          type='text/css'
+          media='all'
+          href="src/common/css/svg-icons.css">
+
+    <!-- FAVICONS -->
+    <link rel="shortcut icon"
+          sizes="16x16"
+          href="src/common/images/favicons/favicon.png">
+    <link rel="shortcut icon"
+          sizes="32x32"
+          href="src/common/images/favicons/favicon-32.png">
+    <link rel="apple-touch-icon icon"
+          sizes="76x76"
+          href="src/common/images/favicons/favicon-76.png">
+    <link rel="apple-touch-icon icon"
+          sizes="120x120"
+          href="src/common/images/favicons/favicon-120.png">
+    <link rel="apple-touch-icon icon"
+          sizes="152x152"
+          href="src/common/images/favicons/favicon-152.png">
+    <link rel="apple-touch-icon icon"
+          sizes="180x180"
+          href="src/common/images/favicons/favicon-180.png">
+    <link rel="apple-touch-icon icon"
+          sizes="192x192"
+          href="src/common/images/favicons/favicon-192.png">
+
+    <!-- Android -->
+    <meta name="mobile-web-app-capable"
+          content="yes">
+    <meta name="theme-color"
+          content="#333333">
+
+</head>
+
+<body>
+
+    <main role="main">
+        <article id="webslides"
+                 class="vertical">
+
+
+
+            <section id="title"
+                     class="aligncenter">
+                <span class="background" style="background-image:url('src/common/images/iprel/Background.png')"></span>
+
+                <div class="wrap">
+
+                    <p>
+                        <img src="src/common/images/iprel/iprel.png"
+                             alt="Iprel Progetti">
+                    </p>
+                    <h1 class="text-landing">
+                        WEB CODE ADVANCED (2/2)
+                    </h1>
+                    <p class="text-subtitle">Presentation by <strong>Riccardo Bucchi</strong></p>
+                </div>
+            </section>
+
+
+
+            <section>
+
+                <div class="wrap size-50">
+                    <h3>SOMMARIO</h3>
+                    <hr>
+                    <div class="toc">
+                        <ol>
+                            <li>
+                                <a href="#slide=3">Javascript</a>
+                                <ol>
+                                    <li>
+                                        <a href="#slide=3">Basi</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=4">Equality, inheritance e closures</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=5">Esercizio su oggetti</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=6">Modello asincrono</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=7"> <code>this</code> </a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=9"> Flavours </a>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                  <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>Basics, scope, functions and DOM: <a target="_blank"
+                           href="src/examples/js_example.html">link</a></h2>
+
+                    <h3>Riassunto</h3>
+                    <p><b>Dynamically and weakly typed:</b> ovvero nessun controllo compile-time, variabili possono
+                        cambiare tipo, nessun autocomplete. </p>
+                    <p><b>Scope:</b> nativamente utilizza il function scope, <code>let</code> introduce il concetto di
+                        block scope. Quindi potete utilizzare <code>let</code> per rimanere su concetti 'familiari' di
+                        block scope, ma dovete sapere che una function crea il suo scope.</p>
+                    <p><b>Functions:</b> in JS le funzioni sono <i>Higher-Order</i>, ovvero sono trattate come
+                        variabili, quindi normalmente vengono assegnate o passate come parametro in un metodo.</p>
+                    <p><b>DOM (e browser API):</b> nell'environment 'browser' abbiamo a disposizione tutta una serie di
+                        metodi per manipolare il DOM e interagire con elementi o browser.</p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>Equality, objects, inheritance e closures: <a target="_blank"
+                           href="src/examples/js_next_example.html">link</a></h2>
+
+                    <h3>Riassunto</h3>
+                    <p><b>Equality:</b> usate <code>=== e !==</code> </p>
+                    <p><b>Objects:</b> oggetti molto flessibili, largamente usati non solo per pojo, eredità o design
+                        pattern, ma anche per hashmap.</p>
+                    <p><b>Polimorfismo:</b> JS supporta un diverso modello di polimorfismo rispetto ai linguaggi <abbr
+                              title="Object Oriented Programming">OOP</abbr>, tramite prototipo. Fortunatamente,
+                        soprattutto per chi nasce come OOP developer attualmente esiste una sintassi più chiara. JS
+                        rimane comunque <abbr title="Object Based Programming">OBP</abbr> perché non supporta
+                        overloading.</p>
+                    <p><b>Closures:</b> concetto che può sembrare atipico, ma largamente utilizzato, per creare degli
+                        scope interni e/o implementare il concetto di 'privato'.</p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>Handson javascript</h2>
+
+                    <p>Esercizio sugli oggetti: <a target="_blank"
+                           href="src/examples/js_handson1.html">link</a></p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>JS modello asincrono <a target="_blank" href="src/examples/js_async_example.html">link</a></h2>
+
+                    <p>Nel corso degli anni il modello asincrono si è evoluto tramite 3 concetti:
+                    <ol>
+                        <li>callbacks</li>
+                        <li>Promise</li>
+                        <li>async/await</li>
+                    </ol>
+                    <p>Questi concetti sono fondamentali per:
+                    <ol>
+                        <li>Evitare di bloccare l'esecuzione di JS e quindi il browser</li>
+                        <li>Gestire il modello di chiamate remote</li>
+                    </ol>
+                    </p>
+                    </p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <h2>JS la trappola this</h2>
+
+                    <p>Esempi this (e new): <a target="_blank"
+                           href="src/examples/js_this_example.html">link</a>
+                    </p>
+                    <h3>Riassunto</h3>
+                    <p><b>this:</b> funzionamento ortodosso in classi e metodi, ma occhio ai this dentro le funzioni o
+                        arrow functions.</p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT
+                            Flavours<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <div class="grid">
+                        <div class="row">
+                            <img src="src/images/State-of-JS-Typescript-usage_.png"
+                                 alt="Flavours"
+                                 class="size-70 aligncenter">
+                        </div>
+                        <div class="row">
+                            <ul>
+                                <li>Vanilla Javascript (normalmente &lt; ES6)</li>
+                                <li>Typescript, trasformazione JS in Object Oriented, con static typing e interfacce
+                                </li>
+                                <li>Elm, puramente funzionale, static typing, immutability e module system</li>
+                                <li>*jQuery, non è realmente un 'flavour', ma una libreria storica, che comunque ha
+                                    influenzato molto la sintassi e il mondo js</li>
+                            </ul>
+                            <p>
+                                A parte Vanilla JS &lt; ES6 questi linguaggi vengono eseguiti sul browser (o su
+                                qualsiasi altri ambienti) attraverso dei 'transpiler'. (e.g.: <a
+                                   href="https://babeljs.io/">Babel</a> )
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>JAVASCRIPT<span class="text-intro alignright">THE LANGUAGE FOR PROGRAMMING WEB PAGES</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+                <div class="wrap">
+                    <div class="grid">
+                        <h2>Javascript State of the Art</h2>
+                        <p>Uno dei problemi maggiori di JS come potrete aver notato è la velocità di crescita dello
+                            strumento, probabilmente dovuto a 1) mercato florido, 2) 'giovinezza', 3) paradigma di
+                            partenza (contestualmente al periodo storico) non nella norma</p>
+                        <p>Fortunatamente da dopo l'adozione di ES6, quindi da qualche anno a questa parte, la
+                            proliferazione è diminuita. Sia per l'andamento del mercato, sia per il forte cambiamento
+                            che ha introdotto ES6.</p>
+                        <p>Uno strumento utile e autocontenuto (anche se abbastanza autoreferenziale) è <a
+                               href="https://2020.stateofjs.com/en-US/">stateofjs</a></p>
+                    </div>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section class="slide-center">
+                <span class="background" style="background-image:url('src/common/images/iprel/Background.png')"></span>
+
+                <div class="wrap">
+
+                    <div class="content-right">
+                        <h2>
+                            <strong>SEE YOU NEXT LESSON</strong>
+                        </h2>
+                        <br />
+                        <blockquote>
+                            <p>"When something is such a creative medium as the web, the limits to it are our
+                                imagination."
+                                <cite>Tim Berners-Lee</cite>
+                            </p>
+                        </blockquote>
+                        <p>Best,<br>
+                            <span class="text-subtitle"><strong>Riccardo Bucchi</strong></span>
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+
+
+        </article>
+        <!-- end article -->
+    </main>
+    <!-- end main -->
+
+    <!-- A global footer
+
+     <footer role="contentinfo">
+      <div class="wrap">
+        <p>An <a href="https://github.com/webslides/webslides">open source solution</a>, by <a href="https://twitter.com/webslides">@webslides</a>.</p>
+      </div>
+    </footer>  -->
+
+    <!-- Required -->
+    <script src="src/common/js/webslides.js"></script>
+    <script>
+        window.ws = new WebSlides();
+    </script>
+
+    <!-- OPTIONAL - svg-icons.js (fontastic.me - Font Awesome as svg icons) -->
+    <script defer
+            src="src/common/js/svg-icons.js"></script>
+
+</body>
+
+</html>

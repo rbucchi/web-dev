@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link href="../common/css/prism.css"
+          rel="stylesheet" />
+    <script src="../common/js/prism.js"></script>
+</head>
+
+<body>
+
+    <h1>Javascript cheatsheet ed esempi</h1>
+
+    <h3>Operators</h3>
+
+    <p>"Standard", non ci sono particolari differenze, quindi esistono quelli classici
+        (<code>+, -, *, % , /, **, ...</code>), unary (<code>--, ++, -, ...</code> ) e bitwise
+        (<code>&, |, >>, ^</code>) </p>
+    <p>L'assignment anche qui è "standard" <code> =, +=, ...</code></p>
+    <p>Esiste il Ternary (<code> condition ? expr1 : expr2 </code>). Esistono anche il coalesce e nullish operator, ma
+        da versioni recentissime (tipo 2020). Tendenzialmente però sono molto utilizzati in altri linguaggi, in js
+        invece no (vedi falsy values e logical operators)</p>
+    <p><code>typeof operand</code> ritorna una <i>stringa</i> che identifica il tipo dell'oggetto.</p>
+    <p><code>[value] instanceof [type]</code> ritorna un booleano indicante se l'oggetto è un'instanze di tipo definito.
+        Ripercorre la catena di eredità.</p>
+    <h3>Equality operators</h3>
+
+    <p>Gli operatori sono quelli 'classici' <code>==, !=, >=, <= </code></p>
+
+    <p>Occhio all'equality:</p>
+    <pre>
+<code class="language-javascript">
+    "" == "0" // false
+    0 == "" // true
+    0 == "0" // true
+    false == "false" // false
+    false == "0" // true
+    false == undefined // false
+    false == null // false
+    null == undefined // true
+    " \t\r\n" == 0 // true
+</code>
+
+    </pre>
+    <p>Dopo poco tempo JS ha rilasciato lo <code>strict equality</code> aggiungendo il terzo carattere
+        <code>===, !==</code>, per dare un senso a questo linguaggio:
+    </p>
+
+    <pre>
+<code class="language-javascript">
+    "" === "0" // false
+    0 === "" // false
+    0 === "0" // false
+    false === "false" // false
+    false === "0" // false
+    false === undefined // false
+    false === null // false
+    null === undefined // false
+    " \t\r\n" === 0 // false
+</code>
+
+</pre>
+
+    <h4>Falsy (e truthy) values</h4>
+
+    <ul>
+        <li>false</li>
+        <li>0</li>
+        <li>'', "", ``</li>
+        <li>null</li>
+        <li>undefined</li>
+        <li>NaN</li>
+    </ul>
+
+    <p>Questi valori sono molto utili perché JS al contrario di tanti altri linguaggi ha più valori 'nulli' e questo
+        riduce molto la verbosità, anche se ovviamente bisogna stare attenti a considerare null come una stringa vuota o
+        lo 0. Tutto il resto è <code>truthy</code>.
+    </p>
+    <p>
+        Gli operatori logici restituiscono il valore stesso
+        (e non solo <code>true/false</code>) spesso viene utilizzata questa notazione per non lanciare
+        <code>ReferenceError</code> (traendo vantaggio anche dalla <code>Short-circuit evaluation</code>):
+    </p>
+    <pre>
+<code class="language-javascript">
+    let obj = { name: 'Riccardo' };
+    (obj || {}).name // Riccardo
+    (obj2 || {}).name // undefined
+    obj2.name // throw ReferenceError
+</code>
+</pre>
+
+    <h3>Closures</h3>
+
+    <p> La <b>chiusura</b> è la capacità di accedere ad uno scope locale da quello che lo racchiude.</p>
+    <p> La chiusura viene creata tutte le volte che viene invocata una funzione e ha la sua vita. Come spesso accade
+        anche negli altri linguaggi, in JS esiste un Garbage Collector che pulisce la memoria per tutte le aree di
+        memoria non più accessibili, quindi la chiusura di una funzione rimane in memoria fino a quando rimane un
+        riferimento alla funzione.</p>
+    <p>
+        Per creare <code>scope 'privati' o 'locali'</code> venivano (e vengono) utilizzate le
+        <code>closure</code> (e il pattern
+        <code><abbr title="Immediately Invoked Function Expression">IIFE</abbr></code>):
+    </p>
+    <code>Look at Developer tools for variable examples</code>
+    <script>
+        function generateLocalScope(name) {
+            let privateName = name;
+            return () => privateName;
+        }
+        let localScope1 = generateLocalScope('Riccardo');
+        let localScope2 = generateLocalScope('Clementino');
+        console.log(localScope1());
+        console.log(localScope2());
+
+        // IIFE Pattern
+        (function () {
+            /* statements */
+        })();
+
+        // IIFE Examples
+        // 1. semplice
+        function createBankAccount1(initName, initBalance) {
+            // private things
+            let name = initName;
+            let balance = initBalance;
+
+            function withdraw(amount) {
+                if (balance < amount) return "Insufficient money";
+                if (balance >= amount) {
+                    balance -= amount;
+                    return balance;
+                }
+                throw new Error('smth ain\'t go as expected');
+            }
+
+            function greets() {
+                return `Hello ${name}, you own ${balance} fanta money!`;
+            }
+            return {
+                withdraw: withdraw,
+                greets: greets,
+            }
+        }
+
+        // 2. alternativo, forse più utilizzato: l'arrow function ritorna una funzione anonima
+        const createBankAccount2 = (name, balance) => (function (initName, initBalance) {
+            // private things
+            let name = initName;
+            let balance = initBalance;
+
+            function withdraw(amount) {
+                if (balance < amount) return "Insufficient money";
+                if (balance >= amount) {
+                    balance -= amount;
+                    return balance;
+                }
+                throw new Error('smth ain\'t go as expected');
+            }
+
+            function greets() {
+                return `Hello ${name}, you own ${balance} fanta money!`;
+            }
+            return {
+                withdraw: withdraw,
+                greets: greets,
+            }
+        })(name, balance);
+
+        let owner = createBankAccount1('owner', 100);
+    </script>
+
+    <h3>Objects</h3>
+
+    <p>Tutto in JS è un oggetto (a parte i valori base e i non-valori <code>null, undefined e NaN</code>).</p>
+
+    <p>La notazione è tipo un <code>hashmap</code> chiave-valore con proprietà che possono essere attributi, oggetti,
+        array o funzioni. </p>
+    
+    <pre>
+    <code class="language-javascript">
+        let obj = {
+            foo: 'bar',
+            myFunction: function(){
+            },
+            foo2: 'bar2',
+        }
+        // Accessing attributes:
+        obj.foo; // bar
+        obj['foo'] // bar
+        let accessor = 'foo';
+        obj[accessor] // bar
+        // è possibile cancellare le proprietà e definirle al volo
+        delete obj.foo;
+        obj.foo // undefined;
+        obj.foo = 'bar';
+        obj.foo // bar
+        // è possibile iterare tra le proprietà
+        for(let i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                console.log(i, '' + obj[i]);
+            }
+        }
+
+        // esistono 3 modi per creare un oggetto:
+        // 1. object literal
+        let obj1 = {};
+        // 2. Object.create(object) una funzione nativa di JS
+        let obj2 = Object.create({});
+        let obj3 = Object.create(obj1);
+        // 3. keyword new + funzione
+        function MyType(){} // costruttore
+        let obj4 = new MyType();
+    </code>
+
+</pre>
+    <p><abbr title="JavaScript Object Notation">JSON</abbr> sono di fatto... oggetti Javascript.</p>
+    <p>Non supportano i metodi, sono fatti come DTO/POJO</p>
+    <pre>
+    <code class="language-javascript">
+        let myJson = {
+            foo: 'bar',
+            foo2: 'bar2',
+        }
+        myJson['foo3'] = 'bar3';
+        let myJsonString = JSON.stringify(myJson);
+        JSON.parse(myJsonString);
+    </code>
+    </pre>
+    <h4>Prototipi</h4>
+
+    <p>Il <b>prototipo</b> è un template dal quale gli oggetti attingono per capire quali proprietà o metodi hanno. </p>
+
+    <p>Per creare oggetti di un certo 'tipo', quindi, JS utilizza i prototipi: </p>
+
+    <p><i>Look at developer tools for script</i></p>
+    <script>
+        // funzione, costruttore
+        // dichiarazione dei metodi e delle proprietà come scope locale alla funzione
+        function Point(x, y) {
+            this.x = x;
+            this.y = y;
+            this.whoIam = function () {
+                console.log(`Point`);
+            }
+        }
+
+        // dichiarazione esplicita
+        Point.prototype.label = null;
+        Point.prototype.move = function (x, y) {
+            this.x += x;
+            this.y += y;
+        };
+        Point.prototype.whereAmI = function () {
+            console.log(`(${this.x}, ${this.y})`);
+        }
+
+        let p = new Point(0, 0);
+        p.move(1, 1);
+        p.whereAmI();
+        console.log(Object.getPrototypeOf(p));
+        console.log(Object.getPrototypeOf(Point));
+
+        // NOTA
+        // vedrete __proto__, [[prototype]], Object.getPrototypeOf(obj) e prototype
+        // __proto__ è il puntatore
+        // Object.getPrototypeOf({}) e prototype sono l'oggetto prototipo (template)
+        // questo perché fino a ECMAScript 2015 non c'era un modo standard per accedervi, ma ogni browser/environment aveva le sue peculiarità
+    </script>
+
+    <p>Che differenza c'è tra una funzione e un costruttore? nessuna, una funzione ha <b>sempre</b> un prototipo
+        (<u>prototype</u>)</u> che è quello collegato a Function e a sua volta è collegato a Object.</p>
+    <p>Se modifichiamo il prototipo modifichiamo il costruttore del nostro oggetto.</p>
+    <p>Occhio a non confondere __proto__ e prototype: il primo è il puntatore al proprio oggetto prototipo (prototype),
+        il secondo è l'oggetto 'template' che ci permette di creare il nostro oggetto.</p>
+    <script>
+        let myfunction = function () { }
+        console.log(myfunction.prototype);
+        let someObject = {};
+        console.log(someObject.prototype); // undefined;
+        console.log(myfunction.__proto__ === Function.prototype); // puntatore al prototype di Function
+        console.log(someObject.__proto__ === Object.prototype); // puntatore al prototype Object
+    </script>
+    <h3>Inheritance</h3>
+
+    <img src="../images/prototype_chain.png"
+         alt="Proto chain">
+
+    <p>L'eredità in JS non funziona con i normali costrutti <code>extends</code>, ma tramite una 'catena di prototipi':
+        ogni oggetto ha una proprietà __proto__ che punta al suo prototipo specifico, questo prototipo ha a sua volta un
+        puntatore ad un altro prototipo, fino a che non si arriva a Object.prototype.__proto__ (null).</p>
+    <p>Fisicamente succede che all'invocazione di un metodo il motore javascript prova ad eseguirlo sull'oggetto in
+        discussione e se non 'trova' il metodo, incomincia a percorrere questa catena fino a non trovare null.</p>
+
+    <p>Da ES6 in avanti ci sono le classi, che rendono il discorso più chiaro, ma questo non cambia:
+    <ol>
+        <li>in natura i prototipi sono molto utilizzati</li>
+        <li>le classi nel motore js vengono 'compilate' nel metodo di cui sopra (prototipi)</li>
+    </ol>
+    </p>
+    <p><i>Look at developer tools for script</i></p>
+    <script>
+        function Point3D(x, y, z) {
+            this.x = x;
+            this.y = y;
+            this.z = z;
+        }
+
+        // l'eredità si fa settando l'istanza dell'oggetto padre nel prototipo del figlio
+        Point3D.prototype = new Point();
+        // ?? avevamo già definito il costruttore... ma dobbiamo settarlo
+        Point3D.prototype.constructor = Point3D;
+
+        Point3D.prototype.z = null;
+
+        var p3d = new Point3D(1, 2, 0);
+
+        // The resulting prototype chain
+        // p3d[instance of Point3D]
+        //     Point3D.prototype[instance of Point]
+        //     { z: null }
+        //          Point.prototype
+        //          { label: null, x: null, y: null, whereAmI: f(){}, whoAmI: f(){}}
+        //              Object.prototype
+        //              { toString: ... /* etc. */ }
+
+        p3d.whereAmI();
+        // (1, 2)
+
+        // override
+        Point3D.prototype.whereAmI = function () {
+            console.log(`(${this.x}, ${this.y}, ${this.z})`);
+        }
+        p3d.whereAmI();
+        // (1, 2, 0)
+    </script>
+
+    <p>Quindi sì all'override, ma non esiste l'overload (può essere utilizzato una sorta di hashmap con un oggetto o i
+        parametri di default, ma occhio alla compatibilità)</p>
+
+    <p>Post ES6 sono state introdotte le classi che semplificano il concetto di prototype inheritance (credo solo
+        sintatticamente).</p>
+    <pre><code class="language-javascript">
+    class Point {
+        label = '';
+
+        constructor(x, y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        get dimension() {
+            return 2;
+        }
+
+        move(x, y) {
+            this.x += x;
+            this.y += y;
+        }
+
+        whereAmI() {
+            console.log(`(${this.x}, ${this.y})`);
+        }
+    }
+
+    class Point3D extends Point {
+
+        constructor(x, y, z) {
+            super(x, y);
+            this.z = z;
+        }
+
+        get dimension() {
+            return super.dimension + 1;
+        }
+
+        whereAmI() {
+            console.log(`(${this.x}, ${this.y}, ${this.z})`);
+        }
+    }
+
+</code></pre>
+
+</body>
+
+</html>

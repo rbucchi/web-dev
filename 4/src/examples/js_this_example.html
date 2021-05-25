@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link href="../common/css/prism.css"
+          rel="stylesheet" />
+    <script src="../common/js/prism.js"></script>
+</head>
+
+<body>
+
+    <h1>Javascript cheatsheet ed esempi</h1>
+
+    <h2>this</h2>
+
+    <p>
+        Nella maggior parte dei linguaggi <code>this</code> si riferisce all'istanza della classe. In Javascript, oltre
+        a non essere così, cambia dipendentemente dal contesto.
+    </p>
+    <p>
+        Per primissima cosa bisogna ricordarsi che <code>this</code> è un <u>oggetto</u>, come tutti gli altri. È
+        possibile settare <code>this</code>.
+    </p>
+    <p>
+        Contesti possibili:
+    <ul>
+        <li>Globale, script: <code>this</code> corrisponde al global object (per noi <code>window</code>).</li>
+        <li>Class: qui è come ci aspettiamo, ovvero l'istanza della classe.</li>
+        <li>DOM Event: <code>this</code> può essere usato anche nell'HTML e corrisponde al nodo in cui è invocato.</li>
+        <li>Funzioni
+            <ul>
+                <li>Metodo (definizione in obj literal): <code>this</code> è l'oggetto a cui appartiene il metodo</li>
+                <li>Costruttore*: come il metodo, ma vedremo che dipende da <code>new</code> </li>
+                <li>Arrow function: non ha un suo <code>this</code>, dipende dal contesto lessicale.</li>
+                <li>Funzione: è il contesto in cui viene invocata. Dipende da <i>come</i> invocata, come metodo,
+                    costruttore oppure attraverso le
+                    invocazioni indirette (vedi casi speciali) o in strict mode. Con invocazione 'normale' si intende il
+                    global object.</li>
+            </ul>
+        </li>
+        <li>
+            Casi speciali:
+            <ul>
+                <li>strict mode: è undefined</li>
+                <li>Invocazioni indirette (<code>call, bind, apply</code>): sono dei metodi 'alternativi' per chiamare o
+                    definire delle funzioni. In questi casi la definizione di <code>this</code> è esplicita (vedi
+                    esempi).</li>
+            </ul>
+        </li>
+    </ul>
+    </p>
+
+    <code>Look at Developer tools for examples</code>
+
+    <h3>Class</h3>
+    <code>Look at Developer tools for examples</code>
+    <script>
+        class Book {
+            title;
+
+            constructor(title) {
+                this.title = title;
+            }
+
+            toString() {
+                return this.title;
+            }
+        }
+
+    </script>
+
+    <h3>DOM Event</h3>
+    <script>
+        let colors = ['#000000', '#FF0000', '#00FF00', '#FFFF00',];
+    </script>
+    <div><button onclick="this.style.color = colors.pop(); console.log(this.__proto__); console.log(this)">
+            Change color</button></div>
+
+    <img style="margin: 5px;"
+         width="250px"
+         src="../images/html_el_obj_dom.jpg"
+         alt="HTML element === object DOM">
+
+    <h3>Funzioni</h3>
+    <code>Look at Developer tools for examples</code>
+    <script>
+
+        // FUNCTION 
+        // La funzione dipende da come viene invocata, ad esempio dentro lo script o il metodo cambia:
+        function printThis(ctx) {
+            console.log(ctx + ": " + this);
+        }
+        printThis("Function from window"); // window
+
+        // METHOD
+        let myObj = {
+            printThis: printThis,
+        };
+        myObj.printThis("Function from obj (method)"); // myObj
+
+        function MyObj() { }
+        MyObj.prototype.printThis = printThis;
+        const myObj2 = new MyObj();
+        myObj2.printThis("Function from obj (method), created by new"); // myObj
+
+        // ARROW FUNCTION
+        // L'arrow function invece 'non ha un suo this', per cui 'il valore di this' dipende dal lexical scope:
+        // 
+
+        let arrowPrintThis = (ctx) => console.log(ctx + ": " + this);
+        arrowPrintThis("Arrow from window"); // window
+
+        myObj = {
+            printThis: arrowPrintThis,
+        };
+        myObj.printThis("Arrow from obj (method)"); // window
+
+        myObj = {
+            printThis: function () {
+                arrowPrintThis("Arrow from function, invoked by method");
+                (() => console.log("Arrow from function, declared by method: " + this))();
+            },
+        };
+        myObj.printThis(); // myObj
+
+    </script>
+    <p>
+        In generale comprendere <code>this</code> senza diventare matti è abbastanza complicato. Di conseguenza
+        utilizzarlo in tutte le sue forme in un team di sviluppo a mio parere è sconsigliato.
+    </p>
+    <p>
+        Tuttavia:
+    <ol>
+        <li>Comprendere che c'è differenza tra i vari casi elencati è il primo passo per individuare eventuali
+            comportamenti inaspettati.</li>
+        <li>Esistono casi chiari (e anche necessari) in cui è utilizzabile:
+            <ul>
+                <li>Metodi (via <u>function</u> e non via arrow)</li>
+                <li>Classi</li>
+            </ul>
+        </li>
+    </ol>
+    </p>
+
+    <h3>Casi speciali</h3>
+    <p>
+    <ul>
+        <li>call, apply: sono metodi per invocare una funzione, esplicitando <code>this</code>. La differenza tra i due
+            è semplicemente nella sintassi</li>
+        <li>bind: è una funzionalità >= ES6 che permette di esplicitare <code>this</code> prima dell'invocazione</li>
+    </ul>
+    </p>
+    <p>
+        Metodi pratici sinceramente conosco pochi, l'utilità nella mia esperienza è esclusivamente per capire le
+        librerie js.
+    </p>
+    <p>
+        Si vedono in natura (soprattutto prima di <code>bind</code>) dei pre assegnamenti di <code>this</code>
+        (<code>_this, self</code> o in casi surreali that), dovuto a necessità implementative e a influenze di librerie
+        (tipo jQuery, Airbnb, ...?)
+    </p>
+
+    <div style="width: 100px; height: 100px; background-color: honeydew;"
+         id="div-id-example"></div>
+
+    <code>Look at Developer tools for examples</code>
+    <script>
+        const obj = { name: 'Gianni' };
+        function printMyName(context) {
+            console.log(`(context, name): (${context}, ${this.name})`);
+        }
+
+        printMyName('Window'); // undefined
+        printMyName.call(obj, 'obj by call'); // Gianni
+        printMyName.apply(obj, ['obj by apply']); // Gianni
+        const boundedPrintMyName = printMyName.bind(obj);
+        boundedPrintMyName('obj by bind'); // Gianni
+
+        const divEl = document.getElementById('div-id-example');
+        // Sintassi
+        let _this = obj;
+        divEl.onclick = function () {
+            // cosa stampa this? cosa stampa _this?
+            console.log(this);
+            console.log(_this);
+        }
+
+        divEl.addEventListener("mouseenter", function () {
+            console.log(this);
+        });
+
+        divEl.addEventListener("mouseout", () => console.log(this));
+    </script>
+
+    <h3>Nota su <code>new</code></h3>
+
+    <p>La keyword new funziona in questo modo:</p>
+    <ol>
+        <li>Crea un object literal {}</li>
+        <li>Gli setta il prototype della funzione</li>
+        <li>Invoco il costruttore (con this bounded all'oggetto di cui sopra)</li>
+    </ol>
+
+    <pre><code class="language-javascript"></code>
+        function Type() { this.init = 'initialized'; }
+        Type.prototype.printThis = function () { console.log(this); };
+        
+        function mynew(myType, ...myArgs) {
+            // 1. creazione obj literal {}
+            const _this = {};
+            // 2. associazione prototipo
+            Object.setPrototypeOf(_this, myType.prototype);
+            // 3. chiamo il costruttore, con this come il mio nuovo oggetto
+            myType.apply(_this, myArgs);
+            return _this;
+        }
+        
+        // implementazione new
+        const myNewObj = mynew(Type, []);
+
+    </pre>
+</body>
+
+</html>

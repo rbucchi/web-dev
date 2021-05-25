@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link href="../common/css/prism.css"
+          rel="stylesheet" />
+    <script src="../common/js/prism.js"></script>
+    <script>
+        // WRITE YOUR SCRIPTS HERE
+        function counter() {
+        }
+
+        class Counter {
+        }
+
+        // counter object literal
+        let c1 = counter();
+        // counter instance of class Counter
+        let c2 = new Counter();
+
+    </script>
+</head>
+
+<body>
+
+    <h1>Javascript handson1</h1>
+
+    <h3>Esercizio 1</h3>
+
+    <p>Scrivi una <b>funzione</b> che ritorni un oggetto con i metodi <code>add</code> e <code>print</code> i quali
+        rispettivamente devono incrementare un contatore e stamparlo a console. Il contatore non dev'essere visibile da
+        <code>window</code> (deve vivere all'interno della chiusura).
+    </p>
+
+    <button onclick="c1.add()">Increment c1</button>
+    <button onclick="c1.print()"
+            type="button">Print c1</button>
+
+    <h3>Esercizio 2</h3>
+
+    <p>Scrivi una <b>classe</b> con i metodi <code>add</code> e <code>print</code> i quali
+        rispettivamente
+        devono incrementare un contatore e stamparlo a console.
+    </p>
+
+    <button onclick="c2.add()">Increment c2</button>
+    <button onclick="c2.print()"
+            type="button">Print c2</button>
+</body>
+
+</html>
