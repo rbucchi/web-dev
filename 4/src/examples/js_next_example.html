@@ -108,6 +108,12 @@
         <code>closure</code> (e il pattern
         <code><abbr title="Immediately Invoked Function Expression">IIFE</abbr></code>):
     </p>
+    <p>
+    <ol>
+        <li>La chiusura è uno scope creato dall'invocazione della funzione</li>
+        <li>Utile a creare uno scope privato</li>
+    </ol>
+    </p>
     <code>Look at Developer tools for variable examples</code>
     <script>
         function generateLocalScope(name) {
@@ -123,6 +129,27 @@
         (function () {
             /* statements */
         })();
+
+
+        // Non private 'incapsulation'
+        let bankAccountPublic = {
+            name: 'Mario',
+            balance: 100,
+            withdraw: function withdraw(amount) {
+                if (this.balance < amount) return "Insufficient money";
+                if (this.balance >= amount) {
+                    this.balance -= amount;
+                    return this.balance;
+                }
+                throw new Error('smth ain\'t go as expected');
+            },
+            greets: function greets() {
+                return `Hello ${this.name}, you own ${this.balance} fanta money!`;
+            },
+        }
+
+        bankAccountPublic.greets();
+
 
         // IIFE Examples
         // 1. analizziamo la funzione
@@ -173,6 +200,35 @@
             }
         })(name, balance);
 
+
+        // 2. IIFE
+        const createBankAccount3 = (function (initName, initBalance) {
+            // private things
+            let name = initName;
+            let balance = initBalance;
+
+            function withdraw(amount) {
+                if (balance < amount) return "Insufficient money";
+                if (balance >= amount) {
+                    balance -= amount;
+                    return balance;
+                }
+                throw new Error('smth ain\'t go as expected');
+            }
+
+            function greets() {
+                return `Hello ${name}, you own ${balance} fanta money!`;
+            }
+            return {
+                withdraw: withdraw,
+                greets: greets,
+            }
+        })('Mario', 100);
+
+        const library = (function(){
+
+            return {}
+        })();
         let owner = createBankAccount1('owner', 100);
     </script>
     <hr>
@@ -227,6 +283,10 @@
         let myJson = {
             foo: 'bar',
             foo2: 'bar2',
+            array: [],
+            innerObject: {
+                myAge: 18,
+            }
         }
         myJson['foo3'] = 'bar3';
         let myJsonString = JSON.stringify(myJson);

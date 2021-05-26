@@ -14,9 +14,27 @@
     <script>
         // WRITE YOUR SCRIPTS HERE
         function counter() {
+            let _counter = 0;
+            return {
+                add: function () {
+                    _counter++;
+                },
+                print: function () {
+                    console.log(_counter);
+                }
+            }
         }
 
         class Counter {
+            counter = 0;
+
+            add() {
+                this.counter++;
+            }
+
+            print() {
+                console.log(this.counter);
+            }
         }
 
         // counter object literal
