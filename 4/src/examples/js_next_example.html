@@ -200,35 +200,11 @@
             }
         })(name, balance);
 
-
-        // 2. IIFE
-        const createBankAccount3 = (function (initName, initBalance) {
-            // private things
-            let name = initName;
-            let balance = initBalance;
-
-            function withdraw(amount) {
-                if (balance < amount) return "Insufficient money";
-                if (balance >= amount) {
-                    balance -= amount;
-                    return balance;
-                }
-                throw new Error('smth ain\'t go as expected');
-            }
-
-            function greets() {
-                return `Hello ${name}, you own ${balance} fanta money!`;
-            }
-            return {
-                withdraw: withdraw,
-                greets: greets,
-            }
-        })('Mario', 100);
-
         const library = (function(){
 
             return {}
         })();
+        
         let owner = createBankAccount1('owner', 100);
     </script>
     <hr>
