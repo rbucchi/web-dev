@@ -46,6 +46,7 @@ Main thread: Task A                      Task B
         <li>Promises</li>
         <li>async/await</li>
     </ol>
+    <hr>
     <h2>Callback</h2>
 
     <p>Il primissimo metodo, e compatibile con l'alba dei tempi, è quello dell'utilizzo delle cosiddette 'callback' che
@@ -179,7 +180,7 @@ Main thread: Task A                      Task B
 
     </script>
     </p>
-
+    <hr>
     <h3>Promise (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">link</a>)</h3>
 
     <p>Le Promise sono una feature JS >= ES6 che rappresentano l'eventuale completamento di un task asincrono.</p>
@@ -233,8 +234,10 @@ var promise = new Promise(function(resolve, reject) {
         });
 
     </script>
-    <p><code>then e catch</code>: per invocare l'esecuzione della promise bisogna chiamare <code>then</code>. Dipendentemente se la Promise entrerà nello stato di resolved o rejected, verrà eseguito il codice all'interno di <code>then</code> oppure <code>catch</code>.</p>
-    
+    <p><code>then e catch</code>: per invocare l'esecuzione della promise bisogna chiamare <code>then</code>.
+        Dipendentemente se la Promise entrerà nello stato di resolved o rejected, verrà eseguito il codice all'interno
+        di <code>then</code> oppure <code>catch</code>.</p>
+
     <p>(A partire da questo esempio utilizzerò un altro strumento JS >= ES6 che è <code>fetch</code>. <code>fetch</code>
         è l'implementazione più moderna di <code>XMLHttpRequest</code>, che ritorna nativamente una Promise.)</p>
     <div><button id="http-button-promise">click me (concatenate)</button></div>
@@ -297,7 +300,7 @@ Promise.any(iterable)
 Promise.race(iterable)
 
 </pre>
-
+    <hr>
     <h2>Async/await</h2>
     <p>È un ulteriore aiuto sintattico che vuole aumentare la leggibilità delle Promise.</p>
     <pre><code class="language-javascript">
