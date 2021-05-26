@@ -50,10 +50,11 @@ Parte il 5 maggio, per 6 mezze giornate da 4h.
 ### 4. Web Code Advanced (2/2) (Riccardo)
 
 * Javascript Avanzato [JS](https://eloquentjavascript.net/)
-    - Object-oriented and Object-based (and functions)
+    - Oggetti, inheritance (prototipi) e chiusure
     - async programming 
-    - prototipi (opzionale)
-    - this e closures (opzionale)
+    - prototipi
+    - this
+    - JS stato dell'arte
 
 ### 5. Web Frameworks (1/2) (?)
 

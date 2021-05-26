@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link href="../common/css/prism.css"
+          rel="stylesheet" />
+    <script src="../common/js/prism.js"></script>
+    <script>
+        // DOCS
+        // https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout
+        // The setTimeout() method sets a timer which executes a function or specified piece of code once the timer expires.
+        // setTimeout(function[, delay]);
+        // 
+        // https://developer.mozilla.org/en-US/docs/Web/API/Window/alert
+        // alert() instructs the browser to display a dialog with an optional message, and to wait until the user dismisses the dialog.
+        // alert(message);
+
+        function delayCallback(msg) {
+            // WRITE YOUR SCRIPTS HERE
+        }
+
+        function delayPromise(ms) {
+            // WRITE YOUR SCRIPTS HERE
+        }
+
+        let delay1 = (x) => setTimeout(delayCallback(`runs after ${x / 1000} seconds`), x)
+        let delay2 = (x) => delayPromise(x).then(() => alert(`runs after ${x / 1000} seconds`));
+
+    </script>
+</head>
+
+<body>
+
+    <h1>Javascript handson2</h1>
+
+    <h3>Esercizio 1</h3>
+
+    <p>Completa la <b>funzione</b> <code>delayCallback</code> in modo tale che apra un <code>alert</code> dopo 3
+        secondi. 
+    </p>
+
+    <button onclick="delay1(3000)">alert con delay</button>
+
+    <h3>Esercizio 2</h3>
+
+    <p>Completa la <b>funzione</b> <code>delayPromise</code> che restituisca una Promise che si risolva correttamente dopo un periodo <code>ms</code>.
+    </p>
+
+    <button onclick="delay2(3000)">alert con delay</button>
+</body>
+
+</html>

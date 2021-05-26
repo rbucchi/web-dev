@@ -55,6 +55,7 @@ Main thread: Task A                      Task B
 
     <p>Esempio 1: appendersi ad un evento</p>
     <button id="onclick-button">click me</button>
+    <p><i>Inspect script with developer tools</i></p>
     <script>
         // 3 esempi per legarsi all'evento click del bottone
         // non ci sono differenze
@@ -76,6 +77,7 @@ Main thread: Task A                      Task B
 
     <p>Esempio 2: setTimeout</p>
     <button id="settimeout-button">click me</button>
+    <p><i>Inspect script with developer tools</i></p>
     <script>
         const settimeoutButton = document.getElementById('settimeout-button');
         settimeoutButton.onclick = () => setTimeout(function () { alert('Sono passati 3 secondi') }, 3000);
@@ -83,6 +85,7 @@ Main thread: Task A                      Task B
 
     <p>Esempio 3: chiamata http, callback in risposta</p>
     <button id="http-button">click me</button>
+    <p><i>Inspect script with developer tools</i></p>
     <script>
         const httpButton = document.getElementById('http-button');
 
@@ -117,6 +120,7 @@ Main thread: Task A                      Task B
         <button id="http-button-concatenate">click me (concatenate)</button>
 
     </div>
+    <p><i>Inspect script with developer tools</i></p>
     <script>
         const httpButtonOk = document.getElementById('http-button-ok');
         const httpButtonError = document.getElementById('http-button-error');
@@ -179,23 +183,66 @@ Main thread: Task A                      Task B
     <h3>Promise (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">link</a>)</h3>
 
     <p>Le Promise sono una feature JS >= ES6 che rappresentano l'eventuale completamento di un task asincrono.</p>
-    <p>Terminologia:
+    <pre>
+        <code class="language-javascript">
+// resolve e reject sono delle callback
+var promise = new Promise(function(resolve, reject) {
+    // do thing, then…
+    if (/* everything worked */) {
+        resolve("See, it worked!");
+    }
+    else {
+        reject("nope");
+    }
+});
+        </code>
+    </pre>
+    <p>Le promise possono essere in tre stati:
     <ul>
         <li><b>pending</b>, stato iniziale, né rifiutato, né completato</li>
         <li><b>resolved</b>, completato </li>
         <li><b>rejected</b>, rifiutato </li>
     </ul>
-    Dipendentemente dallo stato, vengono chiamati gli handler (che poi sono callback) relativi, definiti all'interno dei
-    metodi <code>then</code> (ovvero resolve in caso di completamento 'corretto') o <code>catch</code> (reject in caso
-    di 'errore'). I metodi then e catch restituiscono a loro volta una Promise, e per questo motivo possono esser
-    concatenate.
-    </p>
-    <p>A partire da questo esempio utilizzerò un altro strumento JS >= ES6 che è <code>fetch</code>. <code>fetch</code>
-        è l'implementazione più moderna di <code>XMLHttpRequest</code>, che ritorna nativamente una Promise.</p>
+    <p><i>Inspect script with developer tools</i></p>
+    <script>
+        const examplePromise = new Promise(function (resolve, reject) {
+            if (true) resolve('done!');
+            reject('noooo');
+        });
+
+        // then scatena la richiesta asincrona, posso concatenarla con altri then, catch o finally
+        examplePromise.then(res => {
+            console.log(res);
+        });
+
+        const examplefetchHttp = new Promise(function (resolve, reject) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/');
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    resolve(xhr.status)
+                } else {
+                    reject(null, xhr.status)
+                }
+            };
+            xhr.send();
+        });
+
+        examplefetchHttp.then(res => {
+            console.log(res);
+        });
+
+    </script>
+    <p><code>then e catch</code>: per invocare l'esecuzione della promise bisogna chiamare <code>then</code>. Dipendentemente se la Promise entrerà nello stato di resolved o rejected, verrà eseguito il codice all'interno di <code>then</code> oppure <code>catch</code>.</p>
+    
+    <p>(A partire da questo esempio utilizzerò un altro strumento JS >= ES6 che è <code>fetch</code>. <code>fetch</code>
+        è l'implementazione più moderna di <code>XMLHttpRequest</code>, che ritorna nativamente una Promise.)</p>
     <div><button id="http-button-promise">click me (concatenate)</button></div>
+    <p><i>Inspect script with developer tools</i></p>
     <script>
         const httpButtonPromise = document.getElementById('http-button-promise');
 
+        // fetch è una XMLHttpRequest che ritorna una Promise
         httpButtonPromise.onclick = () => fetch('/').then(function (response) {
             console.log(response)
             // tecnicamente dovrei mettere l'altra chiamata, ma dal momento
@@ -210,20 +257,6 @@ Main thread: Task A                      Task B
             console.error(err);
         });
 
-
-
-
-        // esempio per capire internals
-        // cosa fa internamente fetch (semplificato)
-        const examplePromise = new Promise(function (resolve, reject) {
-            if (true) resolve('done!');
-            reject('noooo');
-        });
-
-        // then scatena la richiesta asincrona, posso concatenarla con altri then, catch o finally
-        examplePromise.then(res => {
-            console.log(res);
-        });
     </script>
     <p>Le Promise sono un oggetto js (tanto per cambiare), che permettono di astrarre meglio l'esecuzione asincrona
         tramite il <b>chaining</b>: la sintassi che permette di definire un flusso tramite i metodi
@@ -261,7 +294,7 @@ Promise.all([fetch('/first-url'), fetch('/second-url'), fetch('/third-url')]).th
 Promise.any(iterable)
 
 // Aspetta tutte le promise e ritorna la prima (risolta o rifiutata)
-Promise.rase(iterable)
+Promise.race(iterable)
 
 </pre>
 
