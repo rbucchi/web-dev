@@ -95,7 +95,7 @@
     obj2.name // throw ReferenceError
 </code>
 </pre>
-
+<hr>
     <h3>Closures</h3>
 
     <p> La <b>chiusura</b> è la capacità di accedere ad uno scope locale da quello che lo racchiude.</p>
@@ -125,7 +125,7 @@
         })();
 
         // IIFE Examples
-        // 1. semplice
+        // 1. analizziamo la funzione
         function createBankAccount1(initName, initBalance) {
             // private things
             let name = initName;
@@ -149,7 +149,7 @@
             }
         }
 
-        // 2. alternativo, forse più utilizzato: l'arrow function ritorna una funzione anonima
+        // 2. l'arrow function ritorna una funzione anonima
         const createBankAccount2 = (name, balance) => (function (initName, initBalance) {
             // private things
             let name = initName;
