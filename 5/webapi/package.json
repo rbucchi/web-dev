@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "./node_modules/.bin/tsc-watch --onSuccess \"node dist\\main.js\""
+  },
+  "dependencies": {
+    "fastify": "^3.16.2"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.0",
+    "tsc-watch": "^4.4.0",
+    "typescript": "^4.3.2"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "start": "npm i && node server.js"
-  },
-  "dependencies": {
-    "fastify": "^3.16.2"
-  }
-}
