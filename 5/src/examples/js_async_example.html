@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link href="../common/css/prism.css"
+          rel="stylesheet" />
+    <script src="../common/js/prism.js"></script>
+</head>
+
+<body>
+
+    <h1>Javascript asynchronous programming</h1>
+
+    <p>In generale possiamo dire che Javascript è single-thread.</p>
+
+    <p>Asincronicità e single-thread possono sembrare in contrasto, ma di fatto è così: l'engine JS è single thread, ma
+        lavorando sul browser (e analogamente esiste il concetto anche back dipendentemente dall'env) abbiamo a
+        disposizione altri 'strumenti' che ci permettono concettualmente di <b>avviare</b> l'esecuzione e
+        <b>aspettare</b> il risultato.
+    </p>
+
+    <p>Gli strumenti che utilizziamo per simulare la concorrenza non sono per ora importanti, ma se siete curiosi esiste
+        un sito che spiega bene e in modo semplice come avviene: <a target="_blank"
+           href="http://latentflip.com/loupe/">link</a>. </p>
+    <figure>
+        <img width="600px"
+             src="../images/event_loop.png"
+             alt="Event loop">
+        <figcaption>A sinistra il runtime single-thread JS, a destra i meccanismi implementati dal browser (o nodejs o
+            altro) che ci permettono di utilizzare l'asincronismo.</figcaption>
+    </figure>
+
+    <p>A noi interessa sapere che ci sono 3 modi per implementare un modello asincrono del tipo:</p>
+    <pre>
+Main thread: Task A                      Task B
+    async-api:      |__async operation__|
+    </pre>
+    <ol>
+        <li>callbacks</li>
+        <li>Promises</li>
+        <li>async/await</li>
+    </ol>
+    <hr>
+    <h2>Callback</h2>
+
+    <p>Il primissimo metodo, e compatibile con l'alba dei tempi, è quello dell'utilizzo delle cosiddette 'callback' che
+        non sono altro che delle funzioni passate come variabili.</p>
+
+    <p>Il concetto è molto simile agli event C# o al patter observer (più o meno).</p>
+
+    <p>Esempio 1: appendersi ad un evento</p>
+    <button id="onclick-button">click me</button>
+    <p><i>Inspect script with developer tools</i></p>
+    <script>
+        // 3 esempi per legarsi all'evento click del bottone
+        // non ci sono differenze
+        const onclickButton = document.getElementById('onclick-button');
+        // 1)
+        onclickButton.addEventListener('click', function callback(...args) {
+            console.log('first callback: ');
+            console.log(args);
+        });
+        // 2)
+        onclickButton.addEventListener('click', (mouseEvent) => {
+            console.log('second callback: ');
+            console.log(mouseEvent);
+
+        });
+        // 3)
+        onclickButton.onclick = () => console.log('third callback');
+    </script>
+
+    <p>Esempio 2: setTimeout</p>
+    <button id="settimeout-button">click me</button>
+    <p><i>Inspect script with developer tools</i></p>
+    <script>
+        const settimeoutButton = document.getElementById('settimeout-button');
+        settimeoutButton.onclick = () => setTimeout(function () { alert('Sono passati 3 secondi') }, 3000);
+    </script>
+
+    <p>Esempio 3: chiamata http, callback in risposta</p>
+    <button id="http-button">click me</button>
+    <p><i>Inspect script with developer tools</i></p>
+    <script>
+        const httpButton = document.getElementById('http-button');
+
+        function callUrl(url, callback) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+
+            xhr.onload = function () {
+                callback(xhr.status);
+            };
+
+            xhr.send();
+        }
+
+        httpButton.onclick = () => callUrl('/', function (p) { console.log(p); })
+        // httpButton.onclick = () => callUrl('/', (x) => console.log(x))
+        // httpButton.onclick = () => callUrl('/', console.log)
+        // function log(msg){
+        //      console.log(msg)    
+        // }
+        // httpButton.onclick = () => callUrl('/', log)
+    </script>
+    <p>Problemi (<a href="http://callbackhell.com/">callbackhell</a>):
+    <ol>
+        <li>Difficile gestione di callback innestate (e molto comuni nella programmazione, ad esempio chiamate http
+            concatenate, parallele o qualsiasi flusso leggermente complicato).</li>
+        <li>Difficile gestione degli errori (soprattutto in chiamate remote, dove l'errore è meno preventivabile).</li>
+    </ol>
+    <div>
+        <button id="http-button-ok">click me (ok)</button>
+        <button id="http-button-error">click me (error)</button>
+        <button id="http-button-concatenate">click me (concatenate)</button>
+
+    </div>
+    <p><i>Inspect script with developer tools</i></p>
+    <script>
+        const httpButtonOk = document.getElementById('http-button-ok');
+        const httpButtonError = document.getElementById('http-button-error');
+        const httpButtonConcatenate = document.getElementById('http-button-concatenate');
+
+        function callUrl2(url, callback) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    callback(xhr.status)
+                } else {
+                    callback(null, xhr.status)
+                }
+            };
+
+            xhr.send();
+        }
+
+        function callback(ok, error) {
+            if (error) {
+                console.error(error);
+                throw new Error(error);
+            }
+            if (ok) {
+                console.log(ok);
+            }
+        }
+
+        httpButtonOk.onclick = () => callUrl2('/', callback)
+        httpButtonError.onclick = () => callUrl2('/asdasd', callback)
+
+        // Concatenato
+        httpButtonConcatenate.onclick =
+            () => callUrl2('/', function (ok, error) {
+                console.log('I\'m in first call');
+                if (error) {
+                    console.error(error);
+                    throw new Error(error);
+                }
+                if (ok) {
+                    console.log(ok)
+                    console.log('Attempt for second');
+                    callUrl2('/asdasd', function (ok, error) {
+                        console.log('I\'m in second call');
+                        if (error) {
+                            console.error(error);
+                            throw new Error(error);
+                        }
+                        if (ok) {
+                            console.log(ok)
+                        }
+                    });
+                }
+            });
+
+    </script>
+    </p>
+    <hr>
+    <h3>Promise (<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises">link</a>)</h3>
+
+    <p>Le Promise sono una feature JS >= ES6 che rappresentano l'eventuale completamento di un task asincrono.</p>
+    <pre>
+        <code class="language-javascript">
+// resolve e reject sono delle callback
+var promise = new Promise(function(resolve, reject) {
+    // do thing, then…
+    if (/* everything worked */) {
+        resolve("See, it worked!");
+    }
+    else {
+        reject("nope");
+    }
+});
+        </code>
+    </pre>
+    <p>Le promise possono essere in tre stati:
+    <ul>
+        <li><b>pending</b>, stato iniziale, né rifiutato, né completato</li>
+        <li><b>resolved</b>, completato </li>
+        <li><b>rejected</b>, rifiutato </li>
+    </ul>
+    <p><i>Inspect script with developer tools</i></p>
+    <script>
+        const examplePromise = new Promise(function (resolve, reject) {
+            if (true) resolve('done!');
+            reject('noooo');
+        });
+
+        // then scatena la richiesta asincrona, posso concatenarla con altri then, catch o finally
+        examplePromise.then(res => {
+            console.log(res);
+        });
+
+        const examplefetchHttp = new Promise(function (resolve, reject) {
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', '/');
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    resolve(xhr.status)
+                } else {
+                    reject(null, xhr.status)
+                }
+            };
+            xhr.send();
+        });
+
+        examplefetchHttp.then(res => {
+            console.log(res);
+        });
+        console.log('test');
+
+    </script>
+    <p><code>then e catch</code> sono metodi che ci permettono di 'consumare' il risultato della Promise dipendentemente dallo stato.</p>
+    <p><code>then e catch</code>: per invocare l'esecuzione della promise bisogna chiamare <code>then</code>.
+        Dipendentemente se la Promise entrerà nello stato di resolved o rejected, verrà eseguito il codice all'interno
+        di <code>then</code> oppure <code>catch</code>.</p>
+
+    <p>(A partire da questo esempio utilizzerò un altro strumento JS >= ES6 che è <code>fetch</code>. <code>fetch</code>
+        è l'implementazione più moderna di <code>XMLHttpRequest</code>, che ritorna nativamente una Promise.)</p>
+    <div><button id="http-button-promise">click me (concatenate)</button></div>
+    <p><i>Inspect script with developer tools</i></p>
+    <script>
+        const httpButtonPromise = document.getElementById('http-button-promise');
+
+        // fetch è una XMLHttpRequest che ritorna una Promise
+        httpButtonPromise.onclick = () => fetch('/').then(function (response) {
+            console.log(response)
+            // tecnicamente dovrei mettere l'altra chiamata, ma dal momento
+            // che la GET in questo caso risponde 'corretto', con stato 404
+            // return fetch('/asas')
+
+            // per semplicità dell'esempio ora forzo un fallimento
+            return Promise.reject('unavailable')
+        }).then((response) => {
+            console.log(response);
+        }).catch(function (err) {
+            console.error(err);
+        });
+
+    </script>
+    <p>Le Promise sono un oggetto js (tanto per cambiare), che permettono di astrarre meglio l'esecuzione asincrona
+        tramite il <b>chaining</b>: la sintassi che permette di definire un flusso tramite i metodi
+        <code>then, catch e finally</code>
+    </p>.
+    <pre>
+promise1
+.then(value => { return value + ' and bar'; })
+.then(value => { return value + ' and bar again'; })
+.then(value => { return value + ' and again'; })
+.then(value => { return value + ' and again'; })
+.then(value => { console.log(value) })
+.catch(err => { console.log(err) });
+
+Promise.resolve('Ciao').then(value => value + ' Alberto').then( value => value + ' e Maria').then((value) =>
+console.log(value))
+</pre>
+
+    <p>Come metodi statici le Promise mettono a disposizione altri metodi utili:</p>
+    <pre>
+// risoluzione 'statica'
+Promise.resolve(res);
+Promise.reject(res);
+
+// Aspetta per tutte le promise che siano risolte, o una che fallisce
+Promise.all([fetch('/first-url'), fetch('/second-url'), fetch('/third-url')]).then((res) => {
+    // do smth;
+    console.log(res);
+})
+.catch((err => {
+    // do smth;
+}));
+
+// Aspetta per la prima risolta
+Promise.any(iterable)
+
+// Aspetta tutte le promise e ritorna la prima (risolta o rifiutata)
+Promise.race(iterable)
+
+</pre>
+    <hr>
+    <h2>Async/await</h2>
+    <p>È un ulteriore aiuto sintattico che vuole aumentare la leggibilità delle Promise.</p>
+    <pre><code class="language-javascript">
+async function f() {
+    return 1;
+    // oppure possiamo anche esplicitare
+    return Promise.resolve(1);
+}
+
+f().then((res) => console.log(res)); // 1
+
+async function f2() {
+    let promise = new Promise((resolve, reject) => {
+        setTimeout(() => resolve("done!"), 1000)
+    });
+
+    // await può essere dichiarato solamente all'interno di async
+    let result = await promise; // wait until the promise resolves (*)
+
+    alert(result); // "done!"
+}
+
+f2();
+</code></pre>
+</body>
+
+</html>
