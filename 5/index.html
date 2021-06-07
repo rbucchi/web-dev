@@ -60,7 +60,8 @@
           content="yes">
     <meta name="theme-color"
           content="#333333">
-    <link rel="stylesheet" href="src/css/default.css">
+    <link rel="stylesheet"
+          href="src/css/default.css">
 </head>
 
 <body>
@@ -115,10 +116,30 @@
                                 <a href="#slide=3">Typescript</a>
                                 <ol>
                                     <li>
-                                        <a href="#slide=7">Esercizio su metodi asincroni</a>
+                                        <a href="#slide=7">Introduzione</a>
                                     </li>
                                     <li>
-                                        <a href="#slide=8"> <code>this</code> </a>
+                                        <a href="#slide=8"> <code>tsconfig.json</code> </a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=9">I Tipi</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=10">Le funzioni</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=11">Setup di Typescript</a>
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>
+                                <a href="#slide=12">Angular</a>
+                                <ol>
+                                    <li>
+                                        <a href="#slide=12">Introduzione</a>
+                                    </li>
+                                    <li>
+                                        <a href="#slide=13">Build an app</a>
                                     </li>
                                 </ol>
                             </li>
@@ -255,15 +276,12 @@
                                 <code>Typescript</code> è nato nel 2012 come <i>superset</i> di Javascript il cui scopo
                                 è quello di rendere JS più familiare a chi viene da linguaggi OOP e tipizzati.
                             </p>
-                            <p> <b>Non</b> modifica in alcun modo il runtime di JS, in nessun envirnoment. È sempre
-                                'compilato' in JS.</p>
-                            <p>
-                                Alcune delle feature introdotte:
+                            <p> <b>Non</b> modifica in alcun modo il runtime di JS, in nessun envirnoment, è sempre
+                                'compilato' in JS. Le feature introdotte sono 'statiche':</p>
                             <ul class="ul-list-style">
-                                <li>Static Typing (errori compile time, refences)</li>
+                                <li>Static Typing</li>
                                 <li>Classi</li>
-                                <li>Interfacce (structural typing e non nominal typing)
-                                </li>
+                                <li>Interfacce (structural typing e non nominal typing)</li>
                                 <li>moduli</li>
                                 <li>arrow functions</li>
                                 <li>Enumerativi</li>
@@ -272,11 +290,11 @@
                                 <li>async/await</li>
                                 <li>optional/default parameters</li>
                             </ul>
-                            </p>
 
                         </div>
                         <div class="column">
-                            <img src="src/images/venn-ts-js.PNG"
+                            <img class="size-70"
+                                 src="src/images/venn-ts-js.PNG"
                                  alt="JS superset (venn diagram)">
                         </div>
                     </div>
@@ -287,8 +305,290 @@
                         <hr>
                         <p>
                             <span class="alignleft">
-                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>TYPESCRIPT<span class="text-intro alignright">A JAVASCRIPT SUPERSET</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap grid">
+
+                    <div class="column">
+                        <h5>Cosa aggiunge rispetto alle lezioni scorse? (ES6) </h5>
+                        <ul class="ul-list-style">
+                            <li>Static Typing
+                                <ul>
+                                    <li>Errori compile time (<a
+                                           href="https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html">link
+                                            esempi</a>)</li>
+                                    <li>"Referencing" (goto definition, ctrl spazio, ecc...)</li>
+                                    <li>Refactoring più sicuri</li>
+                                </ul>
+                            </li>
+                            <li>
+                                ~Classi
+                                <ul>
+                                    <li><code>private, public e protected</code></li>
+                                    <li><code>abstract</code></li>
+                                    <li><code>static</code></li>
+                                </ul>
+                            </li>
+                            <li>
+                                Interfacce (structural typing e non nominal typing): composizione di tipi e duck-typing
+                            </li>
+                            <li><span class="strike">moduli</span></li>
+                            <li>arrow functions</li>
+                            <li>Enumerativi</li>
+                            <li>Generici</li>
+                            <li>...</li>
+                            <li><span class="strike">async/await</span></li>
+                            <li><span class="strike">optional/default parameters</span></li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h5>Cosa complica </h5>
+                        <p> Complica il setup del progetto, perché bisogna:</p>
+                        <ol>
+                            <li>Aggiungere la dipendenza in fase di sviluppo</li>
+                            <li>Aggiungere la compilazione tsc -> js (dev e prod)</li>
+                            <li>Per poter debuggare
+                                <ul class="ul-list-style">
+                                    <li>Necessità file che mappino js -> ts</li>
+                                    <li>Setup con l'IDE</li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>TYPESCRIPT<span class="text-intro alignright">A JAVASCRIPT SUPERSET</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+
+                    <h4><code>tsconfing.json</code></h4>
+                    <p style="display: inline; margin: 0px">Specifica le opzioni del compilatore Typescript (<a
+                           target="_blank"
+                           href="https://www.typescriptlang.org/tsconfig">ref</a>).</p>
+                    <pre style="padding: 0px; ">
+<code>
+    {
+        "compilerOptions": {
+            <span class="comment">// output transpiled</span>
+            "target": "ES5",
+            "module": "commonjs",
+            "sourceMap": true,
+            "outDir": "dist",
+            <span class="comment">// vincoli statici</span>         
+            "strict": true,
+            "allowJs": false,
+            "noImplicitAny": false,
+            "strictPropertyInitialization": false,
+            "strictNullChecks": false
+        },
+        <span class="comment">// quali file</span>
+        "include": [
+            "src/**/*"
+        ],
+        "exclude": [
+            "**/node_modules",
+            "**/build",
+            "**/dist",
+            "**/*.md",
+        ]
+    }
+</code>
+                    </pre>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>TYPESCRIPT<span class="text-intro alignright">A JAVASCRIPT SUPERSET</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+
+                    <h4>Set of types</h4>
+                    <p>Typescript è basato sullo <i>structural typing</i> che devia leggermente dai concetti più
+                        classici, anche se è presente in altri linguaggi come Python e GO.</p>
+                    <p>Da questo concetto ne discende:
+                    <ul>
+                        <li><i>IsA</i> relationship via appartenenza di metodi/attributi
+                            <ul>
+                                <li>interfaccia/tipo implicita</li>
+                                <li>esempio nei metodi: è sempre static typing sull'appartene</li>
+                            </ul>
+                        </li>
+                        <li>componibilità di tipi
+                            <ol>
+                                <li><code>type MyType = string | null</code></li>
+                                <li><code>type Methods = "GET" | "POST" | "POST"</code></li>
+                            </ol>
+                        </li>
+                    </ul>
+                    <p>Esiste il tipo <code>any</code> che corrisponde a 'tutti i tipi' come evasione dal compilatore
+                        (argh). Anche l'accesso agli object literal via stringa permette l'evasione.</p>
+                    </p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
                                         </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>TYPESCRIPT<span class="text-intro alignright">A JAVASCRIPT SUPERSET</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h4>Functions</h4>
+                    <p>Typescript aggiunge alcune feature anche sulle funzioni, alcune implementate/previste con ESNext
+                        come i rest, default e optional parameters, altre avulse da js come l'<i>overloading</i> e, più
+                        importante, la tipizzazione delle funzioni. <a target="_blank"
+                           href="src/examples/ts_function_example.html">esempi</a>.
+                    </p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>TYPESCRIPT<span class="text-intro alignright">A JAVASCRIPT SUPERSET</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h4>Come utilizzarlo</h4>
+                    <ol>
+                        <li>Package manager (<code>npm</code> è il default per nodejs)
+                            <ul>
+                                <li>All'interno del progetto c'è un <code>package.json</code> che indica le dipendenze e
+                                    gli script</li>
+                                <li><code>npm install</code> per installare le dipendenze (finiscono dentro la cartella
+                                    <code>node_modules</code>
+                                </li>
+                                <li><code>package-lock.json</code> è un file per fissare le dipendenze in modo più
+                                    stretto rispetto a <code>package.json</code></li>
+                            </ul>
+                        </li>
+                        <li>Build via <code>tsc</code> (per comodità utilizzeremo gli script <code>npm</code>)</li>
+                        <li>Inclusione/run del file <code>.js</code></li>
+                        <li>Debug
+                            <ul>
+                                <li><b>Caso server-side</b> esempio typescript a backend con debugger nativo vscode
+                                    (selezionare il file
+                                    <code>corso_web\5\webapi\src\main.ts</code>, Run -> start debug)
+                                </li>
+                                <li><b>Caso client-side</b> browser o vscode (<a target="_blank"
+                                       href="src/examples/ts_example.html">link</a>)</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>ANGULAR<span class="text-intro alignright">A FRONTEND FRAMEWORK</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h4>Intro</h4>
+
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                                    </span>
                         </p>
                     </div>
                 </footer>

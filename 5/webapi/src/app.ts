@@ -4,7 +4,7 @@ import { OrderedChat } from "./model/chats/ordered-chat";
 
 export interface IApp {
     GetChat(id: string): IChat | null;
-    GetGUIDs(): string[]
+    GetChatGUIDs(): string[]
 }
 
 class App implements IApp {
@@ -15,7 +15,7 @@ class App implements IApp {
         return null;
     }
 
-    public GetGUIDs(): string[] {
+    public GetChatGUIDs(): string[] {
         return [this.chat.id];
     }
 }

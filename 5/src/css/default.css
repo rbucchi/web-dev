@@ -1,3 +1,17 @@
 ul.ul-list-style li {
     list-style: circle;
+    padding-left: 25px;
+}
+
+ul.ul-list-style {
+    padding: 0 25px;
+}
+
+.strike {
+    text-decoration: line-through;
+}
+
+span.comment {
+    color: green;
+    font-weight: bold;
 }

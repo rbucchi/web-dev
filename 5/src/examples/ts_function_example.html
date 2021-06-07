@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link href="../common/css/prism.css"
+          rel="stylesheet" />
+    <script src="../common/js/prism.js"></script>
+</head>
+
+<body>
+
+    <h1>Typescript functions</h1>
+
+    <pre><code class="language-javascript">
+            // 'overload'
+            function fn(x: string): void;
+            function fn(): void;
+            function fn() {
+            // ...
+            }
+            fn();
+            
+            // Function as argoment
+            function fn2(fnParameter: Function): void {
+                fnParameter();
+            }
+            
+            function fn3(callback: (req: any, method: string) => Promise<any>): void {
+                let res = callback({}, "GET");
+                res.then();
+            }
+            
+            // default, optional e rest parameters
+            function fn4(defaultParameter: number = 10, optionalParameter?: boolean, ...restParameter) {
+        
+            }
+        </code>
+        </pre>
+</body>
+
+</html>

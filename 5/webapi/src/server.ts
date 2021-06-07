@@ -18,7 +18,7 @@ const webServer = (() => {
     // Require the framework and instantiate it
     const fastify = require('fastify')({ logger: true });
 
-    const chat = app.GetChat(app.GetGUIDs()[0]);
+    const chat = app.GetChat(app.GetChatGUIDs()[0]);
 
 
     // get the list of messages

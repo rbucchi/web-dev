@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>HTML test page</title>
+    <meta name="author"
+          content="Riccardo">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <link href="../common/css/prism.css"
+          rel="stylesheet" />
+    <script src="../common/js/prism.js"></script>
+    <script src="../js/ts-example.js"></script>
+    <!-- cannot do it: -->
+    <!-- <script src="../js/ts-example.ts"></script> -->
+</head>
+
+<body>
+    <h1>Typescript example (client)</h1>
+
+    <p>Il browser non è in grado di interpretare Typescript, per cui bisogna prima compilarlo:</p>
+    <pre><code>
+workspace/corso_web (master)$ ./5/webapi/node_modules/.bin/tsc --sourceMap 5/src/js/ts-example.ts
+    </code></pre>
+
+    <p><code>tsc</code> è il compilatore di Typescript ed è installabile tramite package manager (NuGet o npm ad esempio)</p>
+
+<pre><code>
+    # -g serve per salvarlo 'globalmente', nella propria macchina di sviluppo
+    npm install -g typescript
+    # --save-dev serve per salvare da le dipendenze di <u>sviluppo</u> all'interno del package manager
+    # verrà salvato nel path locale sotto node_modules
+    npm install typescript --save-dev
+</code></pre>
+</body>
+
+</html>
