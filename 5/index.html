@@ -579,7 +579,22 @@
 
                 <div class="wrap">
                     <h4>Intro</h4>
-
+                    <p>
+                        Angular è un web framework, ossia un'insieme di tecnologie, librerie, strumenti e astrazioni
+                        messe a
+                        disposizione degli sviluppatori.
+                    <ol>
+                        <li>Composizione automatica e generalistica di tecnologie (npm, typescript, rxjs)</li>
+                        <li>Librerie comunemente utilizzate nel web (HTTPClient, routing, modularizzazione, form, ...)
+                        </li>
+                        <li>Build, aggiornamenti e test preconfigurati e facilitati</li>
+                        <li>Gli elementi del framework astraggono i pattern del software più adatti (Component &
+                            Template come MVC, Module, Dependency injection)</li>
+                    </ol>
+                    </p>
+                    <p><b>Vantaggi:</b> manutenzione facilitata (soprattutto per team estesi), tempi di sviluppo più
+                        rapidi e focus sul business model.</p>
+                    <p><b>Svantaggi:</b> vendor lock-in, configurazione meno flessibile.</p>
                 </div>
 
                 <footer>
@@ -587,8 +602,107 @@
                         <hr>
                         <p>
                             <span class="alignleft">
-                                                        <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
-                                                    </span>
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>ANGULAR<span class="text-intro alignright">A FRONTEND FRAMEWORK</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap grid">
+                    <div class="column">
+                        <h4>Architettura</h4>
+                        <h5>Modulo</h5>
+                        <p>
+                            Contenitore di elementi (Components, Services, ...). Concettualmente simile ai namespaces,
+                            ma non è semplicemente un insieme di blocchi di codice: al suo interno gli elementi hanno un
+                            loro ciclo di vita.
+                        </p>
+                        <h5>Components</h5>
+                        <p>
+                            Implementazione logica di una porzione della pagina web. Ha un template (HTML) collegato.
+                        </p>
+                        <h5>Services</h5>
+                        <p>Singleton il cui ciclo di vita (tendenzialmente) è quello dell'applicazione. Vengono
+                            utilizzati per incapsulare logiche, mantenere dati in memoria accessibile e per comunicare
+                            tra componenti. I servizi sono iniettati nei componenti tramite la <abbr
+                                  title="Dependency Injection">DI</abbr>.</p>
+                    </div>
+                    <div class="column">
+                        <img src="src/images/angular_architecture.png"
+                             alt="Angular architecture">
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>ANGULAR<span class="text-intro alignright">A FRONTEND FRAMEWORK</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap grid">
+                    <div class="column">
+                        <h4>Data Binding</h4>
+                        <p>
+                            Per data binding si intende la comunicazione tra la logica e il DOM (Component e Template).
+                        </p>
+                        <pre><code>
+    import { Component } from '@angular/core';
+    
+    @Component({
+        selector: 'app-counter-component',
+        template: `
+        &lt;button (click)="incrementCounter()"&gt;Increment&lt;/button&gt;
+        &lt;span&gt;{{ counter }}&lt;/span&gt;
+        `
+    })
+    export class CounterComponent {
+        counter = 0;
+        
+        incrementCounter() {
+            this.counter++;
+        }
+    }
+</code></pre>
+                    </div>
+                    <div class="column">
+                        <img class="size-70"
+                             src="src/images/data-binding.png"
+                             alt="Data binding">
+                    </div>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
                         </p>
                     </div>
                 </footer>
