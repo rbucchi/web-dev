@@ -56,17 +56,15 @@ Parte il 5 maggio, per 6 mezze giornate da 4h.
     - this
     - JS stato dell'arte
 
-### 5. Web Frameworks (1/2) (?)
+### 5. Web Frameworks (1/2) (Riccardo)
 
+* recap ultimi concetti JS (async, this e modules)
 * Typescript
-* Server Side vs Client Side
-* SACMI case study: Angular
+* Angular
 
-### 6. Web Frameworks (2/2) (?)
+### 6. Web Frameworks (2/2) (Riccardo)
 
 * Hands-on Angular
-* Hands-on .NET API
-* Possibili differenze e confronti tra framework
 
 ## Cheatsheet
 

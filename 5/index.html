@@ -171,7 +171,7 @@
                     <h2>Handson javascript</h2>
 
                     <p>Esercizio sui metodi asincroni: <a target="_blank"
-                           href="src/examples/js_handson2.html">link</a> (esempi della lezione 4 <a
+                           href="src/examples/js_handson2.html">link</a> (esempi della lezione 4 <a target="_blank"
                            href="src/examples/js_async_example.html">link</a>)</p>
                 </div>
 
@@ -234,7 +234,8 @@
                     </p>
                     <h3>Riassunto</h3>
                     <p>I moduli intesi come <code>import/export</code> sono tra le ultime feature implementate di ES6
-                        (<a href="https://caniuse.com/?search=javascript%20export">caniuse</a>).</p>
+                        (<a href="https://caniuse.com/?search=javascript%20export"
+                           target="_blank">caniuse</a>).</p>
                     <p>Purtroppo dipende tanto dall'env: non esistendo costrutti a tal proposito, ma solamente i
                         'mezzi'*, ognuno si è implementato il suo metodo e/o filosofia. È probabile che sentiate parlare
                         di <code>CommonJs</code>, <code><abbr title="Asynchronous Module Definition">AMD</abbr></code>,
@@ -461,7 +462,6 @@
                         <li><i>IsA</i> relationship via appartenenza di metodi/attributi
                             <ul>
                                 <li>interfaccia/tipo implicita</li>
-                                <li>esempio nei metodi: è sempre static typing sull'appartene</li>
                             </ul>
                         </li>
                         <li>componibilità di tipi
@@ -487,7 +487,41 @@
                     </div>
                 </footer>
             </section>
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>TYPESCRIPT<span class="text-intro alignright">A JAVASCRIPT SUPERSET</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
 
+                <div class="wrap">
+
+                    <h4>Test su Typescript</h4>
+                    <p>Typescript non è utilizzabile su browser (e direttamente neanche su altri ambienti) per cui per
+                        fare dei test abbiamo scritto una mini applicazione backend (tipo reqres.in) che espone delle
+                        API CRUD.</p>
+                    <p>
+                        Per fare delle prove potete andare in <code>5\webapi</code> ed eseguire nel terminale:
+                    <pre>
+<code>npm install # installa le dipendenze, tra cui typescript</code>
+<code>npm start # avvia il compilatore tsc ed esegue il il server</code>
+</pre>
+                    </p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                                        </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
             <section>
                 <header>
                     <div class="wrap">
@@ -535,7 +569,7 @@
                                 <li>All'interno del progetto c'è un <code>package.json</code> che indica le dipendenze e
                                     gli script</li>
                                 <li><code>npm install</code> per installare le dipendenze (finiscono dentro la cartella
-                                    <code>node_modules</code>
+                                    <code>node_modules</code>)
                                 </li>
                                 <li><code>package-lock.json</code> è un file per fissare le dipendenze in modo più
                                     stretto rispetto a <code>package.json</code></li>
@@ -593,8 +627,9 @@
                     </ol>
                     </p>
                     <p><b>Vantaggi:</b> manutenzione facilitata (soprattutto per team estesi), tempi di sviluppo più
-                        rapidi e focus sul business model.</p>
-                    <p><b>Svantaggi:</b> vendor lock-in, configurazione meno flessibile.</p>
+                        rapidi e focus sul business model. Astrae e rende più facile lo sviluppo web (<a
+                           href="https://roadmap.sh/frontend">roadmap</a>).</p>
+                    <p><b>Svantaggi:</b> vendor lock-in, configurazione meno flessibile, pesantezza.</p>
                 </div>
 
                 <footer>
@@ -701,8 +736,37 @@
                         <hr>
                         <p>
                             <span class="alignleft">
-                                            <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
-                                        </span>
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
+                        </p>
+                    </div>
+                </footer>
+            </section>
+
+            <section>
+                <header>
+                    <div class="wrap">
+                        <h3>ANGULAR<span class="text-intro alignright">A FRONTEND FRAMEWORK</span>
+                        </h3>
+                        <hr>
+                    </div>
+                </header>
+
+                <div class="wrap">
+                    <h4>Handson Angular</h4>
+                    <p>
+                        Proveremo a prendere confidenza con Angular attraverso la pratica. Il software che andremo a
+                        scrivere sarà una semplice chat. (<a href="src/examples/angular_guide.html">link</a> )
+                    </p>
+                </div>
+
+                <footer>
+                    <div class="wrap">
+                        <hr>
+                        <p>
+                            <span class="alignleft">
+                                <img src="src/common/images/iprel/iprel.png" alt="Iprel Progetti">
+                            </span>
                         </p>
                     </div>
                 </footer>
