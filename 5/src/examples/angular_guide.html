@@ -15,7 +15,38 @@
 
 <body>
     <h1>Angular Chat</h1>
-
+    <p>Angular ha la propria <abbr title="Command Line Interface">CLI</abbr> per utilizzare gli strumenti che mette a
+        disposizione e/o eseguire i task che normalmente sono necessari nel corso dello sviluppo web:</p>
+    <ul>
+        <li>build</li>
+        <li>run</li>
+        <li>test</li>
+        <li>schematics (generazione codice automatica)
+            <ul>
+                <li>progetto</li>
+                <li>componenti</li>
+            </ul>
+        <li>...</li>
+        </li>
+    </ul>
+    <p>
+        Installare l'angular cli e inizializzare il progetto:
+    <pre><code>
+corso_web\projects> npm install -g @angular/cli
+corso_web\projects> ng new --defaults frontend
+corso_web\projects> cd frontend
+corso_web\projects/frontend> ng serve
+        </code></pre>
+    </p>
+    <p>
+        Potete avviare lo sviluppo da qualsiasi linea di comando e utilizzare qualsiasi istanza di <code>vscode</code>,
+        ma per ordine vi consiglio di aprire un'istanza separata di <code>vscode</code> e utilizzare il terminale
+        integrato. Per avviare il webserver di sviluppo:
+    <pre><code>
+Users\bucchric>cd workspace\corso_web\projects\frontend
+corso_web\projects\frontend> ng serve
+        </code></pre>
+    </p>
 </body>
 
 </html>
