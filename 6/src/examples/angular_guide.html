@@ -11,6 +11,7 @@
     <link href="../common/css/prism.css"
           rel="stylesheet" />
     <script src="../common/js/prism.js"></script>
+    <link rel="stylesheet" href="../css/default.css">
 </head>
 
 <body>
@@ -45,6 +46,57 @@ corso_web\projects/frontend> ng serve
     <pre><code>
 Users\bucchric>cd workspace\corso_web\projects\frontend
 corso_web\projects\frontend> ng serve
+        </code></pre>
+    </p>
+    <hr>
+    <h2>Composizione progetto</h2>
+    <p>Il progetto è così composto:
+    <pre class="bash"><code>
+C:\Users\bucchric\workspace\corso_web\projects\frontend>tree -L 1
+.
+├── e2e                 # progetto end-to-end testing
+├── node_modules        # librerie javascript
+├── src                 # applicazione (sorgenti)
+├── .browserslistrc     # lista compatibilità browser (metadati)
+├── .editorconfig       # regole di formattazione
+├── .gitignore          # inizializzazione con git, .gitignore preimpostato
+├── <b>angular.json        # impostazioni di progetto, come compilazioni, riferimenti a file (.sln)</b>
+├── karma.conf.js       # configurazione unit test
+├── package-lock.json   # dipendenze specifiche alle build. Ogni installazione è uguale alle altre
+├── <b>package.json        # dipendenze del progetto. Ogni installazione può variare di qualche versione (dipendentemente da quanto specificato)</b>
+├── README.md           
+├── tsconfig.app.json   # impostazioni TypeScript (più estensioni)
+├── tsconfig.json
+├── tsconfig.spec.json
+└── tslint.json         # regole di formattazione (come .editorconfig), specifiche di Typescript
+
+3 directories, 9 files
+        </code></pre>
+
+    </p>
+    <p>
+        Mentre l'applicazione:
+    <pre class="bash"><code>
+C:\Users\bucchric\workspace\corso_web\projects\frontend\src>tree -L 2
+.
+├── app
+│   ├── app.component.ts        # 1) Componente
+│   ├── app.component.html      # 2) Template
+│   ├── app.component.css       # 3) regole css del componente
+│   ├── app.component.spec.ts   # 4) Unit Test componente
+│   └── app.module.ts
+├── assets                      # file statici, tipicamente immagini
+├── environments                # file di configurazione di environment, iniettati durante la compilazione (prod/dev o altro)
+│   ├── environment.prod.ts
+│   └── environment.ts
+├── favicon.ico
+├── index.html                  # entry point html del sito, difficilmente modificato se non nelle impostazioni inziali (metadati, titolo)
+├── main.ts                     # entry point ts, anche questo difficilmente da modificare. Serve per fare il bootstrap del modulo "Root"
+├── polyfills.ts                # compatibilità tra browser. È possibile inserire implementazioni al volo (ad esempio: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/entries)
+├── styles.css                  # css globale
+└── test.ts
+
+3 directories, 13 files
         </code></pre>
     </p>
 </body>

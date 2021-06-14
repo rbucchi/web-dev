@@ -15,3 +15,9 @@ span.comment {
     color: green;
     font-weight: bold;
 }
+
+pre.bash {
+    border-style: solid;
+    background-color: lightgoldenrodyellow;
+    border-width: 1px;
+}
