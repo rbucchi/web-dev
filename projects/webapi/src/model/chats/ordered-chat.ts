@@ -18,7 +18,7 @@ export class OrderedChat implements IChat {
     constructor() {
         this._createdOn = new Date();
         this.id = GUID.GetGUID();
-        this.messages = [];
+        this.messages = [{id: 0, timeStamp: new Date(), content: 'Test message'}];
     }
 
     public CreatedOn(): Date {

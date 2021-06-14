@@ -20,6 +20,17 @@ const webServer = (() => {
 
     const chat = app.GetChat(app.GetChatGUIDs()[0]);
 
+    fastify.register(require('fastify-cors'), {
+        origin: (origin, cb) => {
+            if (/localhost/.test(origin)) {
+                //  Request from localhost will pass
+                cb(null, true)
+                return
+            }
+            // Generate an error on other origins, disabling access
+            cb(new Error("Not allowed"))
+        }
+    })
 
     // get the list of messages
     fastify.get('/api/messages', (request, reply): IMessage<any>[] => {
