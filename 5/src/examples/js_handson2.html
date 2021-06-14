@@ -22,11 +22,12 @@
         // alert(message);
 
         function delayCallback(msg) {
-            // WRITE YOUR SCRIPTS HERE
+            return () => alert(msg);
         }
 
         function delayPromise(ms) {
             // WRITE YOUR SCRIPTS HERE
+            return new Promise((resolve, reject) => setTimeout(resolve, ms));
         }
 
         let delay1 = (x) => setTimeout(delayCallback(`runs after ${x / 1000} seconds`), x)
