@@ -11,7 +11,8 @@
     <link href="../common/css/prism.css"
           rel="stylesheet" />
     <script src="../common/js/prism.js"></script>
-    <link rel="stylesheet" href="../css/default.css">
+    <link rel="stylesheet"
+          href="../css/default.css">
 </head>
 
 <body>
@@ -100,5 +101,30 @@ C:\Users\bucchric\workspace\corso_web\projects\frontend\src>tree -L 2
         </code></pre>
     </p>
 </body>
+<hr>
+<h2>Componenti</h2>
+
+<p>
+    Creazione del componente <code>chat</code>:
+</p>
+<pre><code>
+BucchRic@IPR-SUP39 projects/frontend (master)$ ng generate component components/chat
+CREATE src/app/components/chat/chat.component.html (19 bytes)
+CREATE src/app/components/chat/chat.component.spec.ts (612 bytes)
+CREATE src/app/components/chat/chat.component.ts (267 bytes)
+CREATE src/app/components/chat/chat.component.css (0 bytes)
+UPDATE src/app/app.module.ts (399 bytes)
+</code></pre>
+<p>
+    Utilizzare la CLI non è assolutamente obbligatorio, però permette di utilizzare gli <code>schematics</code> che
+    vanno a precompilare il codice. In questo caso non solo ha creato Component, Template, test e css, ma <i>ha
+        associato il componente al Modulo</i>.
+</p>
+<p> Per <b>utilizzare</b> il componente ci sono due modi:
+<ol>
+    <li>via selector (<code>app-chat</code>)</li>
+    <li>via routing (vedremo), ovvero esiste un tag <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> 'placeholder', nel quale si gestisce l'istanziazione del componente dipendentemente dall'URL</li>
+</ol>
+</p>
 
 </html>
