@@ -13,51 +13,164 @@
     <script src="../common/js/prism.js"></script>
     <link rel="stylesheet"
           href="../css/default.css">
+    <style>
+        div.content {
+            width: calc(100vw - 300px);
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: calc(100vw - 300px);
+        }
+
+        pre {
+            overflow-x: auto;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Angular Chat</h1>
-    <p>Angular ha la propria <abbr title="Command Line Interface">CLI</abbr> per utilizzare gli strumenti che mette a
-        disposizione e/o eseguire i task che normalmente sono necessari nel corso dello sviluppo web:</p>
-    <ul>
-        <li>build</li>
-        <li>run</li>
-        <li>test</li>
-        <li>schematics (generazione codice automatica)
-            <ul>
-                <li>progetto</li>
-                <li>componenti</li>
-            </ul>
-        <li>...</li>
-        </li>
-    </ul>
-    <p>
-        Installare l'angular cli e inizializzare il progetto:
-    <pre><code>
+    <nav>
+        <ol>
+            <li><a href="#intro">Introduzione, back API</a></li>
+            <li><a href="#init">Inizializzazione progetto</a></li>
+            <li><a href="#architecture">Composizione progetto</a></li>
+            <li><a href="#components">Components</a></li>
+            <li><a href="#services">Servizi</a></li>
+            <li><a href="#routing">Routing</a></li>
+            <li><a href="#observable">Observable</a></li>
+            <li><a href="#angular-material">Angular Material UI</a></li>
+            <li><a href="#pipe">Pipe</a></li>
+            <li><a href="#modules">Modules</a></li>
+        </ol>
+    </nav>
+    <div class="content">
+        <h1 id="intro">Angular Chat</h1>
+        <p>
+            Il seguente tutorial vuole ripercorrere i concetti fondamentali di Angular, provandoli nella pratica. Per
+            rendere
+            l'esperimento più realistico, utilizzeremo le API viste nella giornata 5 del corso, una CRUD di messaggi.
+        </p>
+        <p>
+            <code>projects\webapi\src\server.ts (<abbr title="Create Read Update Delete">CRUD</abbr>):</code>
+        <pre class="bash"><code>
+1) List messages (READ)
+
+Request:
+URL: http://localhost:3000/api/messages
+Method: GET
+
+Example Response:
+[
+{"id":0,"timeStamp":"2021-06-14T13:26:24.242Z","content":"Test message 1"},
+{"id":0,"timeStamp":"2021-06-14T13:26:24.242Z","content":"Test message 1"},
+]
+
+2) Get message (READ)
+
+Request:
+URL: http://localhost:3000/api/messages/:id
+Method: GET
+
+Example Response:
+{"id":0,"timeStamp":"2021-06-14T13:26:24.242Z","content":"Test message 1"}
+
+2) Create message (CREATE)
+
+Request:
+URL: http://localhost:3000/api/messages
+Method: POST
+Payload: {text: "Test message 1"}
+
+Example Response:
+{"id":0,"timeStamp":"2021-06-14T13:26:24.242Z","content":"Test message 1"}
+
+3) Delete message (DELETE)
+
+Request:
+URL: http://localhost:3000/api/messages/:id
+Method: DELETE
+
+Example Response:
+{"msg":"message with ID 0 is deleted"}
+
+4) Modify message (UPDATE)
+
+Request:
+URL: http://localhost:3000/api/messages/:id
+Method: PUT
+Payload: {text: "Test message 2"}
+
+Example Response:
+{"id":0,"timeStamp":"2021-06-14T13:26:24.242Z","content":"Test message 2"}
+
+<b>Nota:</b> è stato aggiunto il parametro 'chat'. Se non specificato l'API utilizza i messaggi della chat di 'default', 
+altrimenti permette di utilizzare altre chat.
+
+e.g.:
+// recupera i messaggi dalla chat 0
+URL: http://localhost:3000/api/messages?chat=0
+Method: GET
+
+// recupera i messaggi dalla chat 1
+URL: http://localhost:3000/api/messages?chat=1
+Method: GET
+
+// crea un messaggio nella chat 1
+URL: http://localhost:3000/api/messages?chat=1
+Method: POST
+Payload: {text: "Test message 1"}
+        </code></pre>
+        </p>
+        <p>Un'altro strumento molto valido per imparare a programmare in Angular è il tutorial ufficiale <a
+               href="https://angular.io/tutorial">Tour of heroes</a>.</p>
+        <hr>
+        <h2>Inizializzazione progetto</h2>
+        <p>Angular ha la propria <abbr title="Command Line Interface">CLI</abbr> per utilizzare gli strumenti che mette
+            a
+            disposizione e/o eseguire i task che normalmente sono necessari nel corso dello sviluppo web:</p>
+        <ul>
+            <li>build</li>
+            <li>run</li>
+            <li>test</li>
+            <li>schematics (generazione codice automatica)
+                <ul>
+                    <li>progetto</li>
+                    <li>componenti</li>
+                    <li>servizi</li>
+                </ul>
+            <li> update </li>
+            <li> ... </li>
+        </ul>
+        <p>
+            Installare l'angular cli e inizializzare il progetto:
+        <pre><code>
 corso_web\projects> npm install -g @angular/cli
 corso_web\projects> ng new --defaults frontend
 corso_web\projects> cd frontend
 corso_web\projects/frontend> ng serve
-        </code></pre>
-    </p>
-    <p>
-        Potete avviare lo sviluppo da qualsiasi linea di comando e utilizzare qualsiasi istanza di <code>vscode</code>,
-        ma per ordine vi consiglio di aprire un'istanza separata di <code>vscode</code> e utilizzare il terminale
-        integrato. Per avviare il webserver di sviluppo:
-    <pre><code>
+            </code></pre>
+        </p>
+        <p>
+            Potete avviare lo sviluppo da qualsiasi linea di comando e utilizzare qualsiasi istanza di
+            <code>vscode</code>,
+            ma vi consiglio di aprire un'istanza separata di <code>vscode</code> e utilizzare il terminale
+            integrato per un'organizzazione più pulita. Per avviare il webserver di sviluppo:
+        <pre><code>
 Users\bucchric>cd workspace\corso_web\projects\frontend
 corso_web\projects\frontend> ng serve
-        </code></pre>
-    </p>
-    <hr>
-    <h2>Composizione progetto</h2>
-    <p>Il progetto è così composto:
-    <pre class="bash"><code>
+            </code></pre>
+        </p>
+        <hr>
+        <h2 id="architecture">Composizione progetto</h2>
+        <p>Il progetto è così composto:
+        <pre class="bash"><code>
 C:\Users\bucchric\workspace\corso_web\projects\frontend>tree -L 1
 .
 ├── e2e                 # progetto end-to-end testing
 ├── node_modules        # librerie javascript
-├── src                 # applicazione (sorgenti)
+├── <b>src                 # applicazione (sorgenti)</b>
 ├── .browserslistrc     # lista compatibilità browser (metadati)
 ├── .editorconfig       # regole di formattazione
 ├── .gitignore          # inizializzazione con git, .gitignore preimpostato
@@ -72,12 +185,11 @@ C:\Users\bucchric\workspace\corso_web\projects\frontend>tree -L 1
 └── tslint.json         # regole di formattazione (come .editorconfig), specifiche di Typescript
 
 3 directories, 9 files
-        </code></pre>
-
-    </p>
-    <p>
-        Mentre l'applicazione:
-    <pre class="bash"><code>
+            </code></pre>
+        </p>
+        <p>
+            Mentre l'applicazione:
+        <pre class="bash"><code>
 C:\Users\bucchric\workspace\corso_web\projects\frontend\src>tree -L 2
 .
 ├── app
@@ -98,33 +210,526 @@ C:\Users\bucchric\workspace\corso_web\projects\frontend\src>tree -L 2
 └── test.ts
 
 3 directories, 13 files
-        </code></pre>
-    </p>
-</body>
-<hr>
-<h2>Componenti</h2>
+            </code></pre>
+        </p>
+        <hr>
+        <h3>Architettura applicazione</h2>
+            <img src="../images/chat-architecture.png"
+                 alt="Chat architecture">
+            <hr>
+            <h2>Componenti (<a href="https://angular.io/guide/component-overview"
+                   target="_blank">doc</a>)</h2>
 
-<p>
-    Creazione del componente <code>chat</code>:
-</p>
-<pre><code>
+            <p>
+                I componenti sono uno dei principali elementi di angular, hanno un loro ciclo di vita dalla creazione
+                alla
+                costruzione (tipicamente quando 'vengono visualizzati'). Sono composti dalla <b>logica</b> (ts) e dalla
+                <b>view</b>
+                (html).
+            </p>
+            <p>
+                Creazione del componente <code>chat</code> e <code>chat-input</code>:
+            </p>
+            <pre><code>
 BucchRic@IPR-SUP39 projects/frontend (master)$ ng generate component components/chat
 CREATE src/app/components/chat/chat.component.html (19 bytes)
 CREATE src/app/components/chat/chat.component.spec.ts (612 bytes)
 CREATE src/app/components/chat/chat.component.ts (267 bytes)
 CREATE src/app/components/chat/chat.component.css (0 bytes)
 UPDATE src/app/app.module.ts (399 bytes)
-</code></pre>
-<p>
-    Utilizzare la CLI non è assolutamente obbligatorio, però permette di utilizzare gli <code>schematics</code> che
-    vanno a precompilare il codice. In questo caso non solo ha creato Component, Template, test e css, ma <i>ha
-        associato il componente al Modulo</i>.
-</p>
-<p> Per <b>utilizzare</b> il componente ci sono due modi:
-<ol>
-    <li>via selector (<code>app-chat</code>)</li>
-    <li>via routing (vedremo), ovvero esiste un tag <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code> 'placeholder', nel quale si gestisce l'istanziazione del componente dipendentemente dall'URL</li>
-</ol>
-</p>
+
+BucchRic@IPR-SUP39 projects/frontend (master)$ ng generate component components/chat-input
+CREATE src/app/components/chat/chat-input.component.html (19 bytes)
+CREATE src/app/components/chat/chat-input.component.spec.ts (612 bytes)
+CREATE src/app/components/chat/chat-input.component.ts (267 bytes)
+CREATE src/app/components/chat/chat-input.component.css (0 bytes)
+UPDATE src/app/app.module.ts (399 bytes)
+        </code></pre>
+            <p>
+                Utilizzare la CLI non è assolutamente obbligatorio, però permette di utilizzare gli
+                <code>schematics</code>
+                che
+                vanno a precompilare il codice. In questo caso non solo ha creato Component, Template, test e css, ma
+                <i>ha
+                    associato il componente al Modulo</i>.
+            </p>
+            <p> Per <b>utilizzare</b> il componente ci sono due modi:
+            <ol>
+                <li>via selector (<code>app-chat</code>)</li>
+                <li>via routing (vedremo), ovvero esiste un tag <code>&lt;router-outlet&gt;&lt;/router-outlet&gt;</code>
+                    'placeholder', nel quale si gestisce l'istanziazione del componente dipendentemente dall'URL</li>
+            </ol>
+            </p>
+
+            <p>Elementi da creare:</p>
+            <ol>
+                <li> Componente Chat, responsabile di mostrare la lista di messaggi.
+                    <ul>
+                        <li>Il generatore mette tra i componenti dichiarati <code>ChatComponent</code>. Tutti i
+                            componenti
+                            utilizzati
+                            devono essere <i>dichiarati</i> in un <code>Module</code>.</li>
+                        <li>Il componente può essere 'istanziato' tramite 1) routing (ma non è il nostro caso
+                            attualmente)
+                            oppure
+                            via 2) tag html <code>app-chat</code></li>
+                        <li>Un componente può avere parametri di ingresso e/o uscita. In questo esempio metteremo un
+                            parametro di
+                            input "chat-name" ad indicare il titolo della Chat:
+                            <code>@Input('chat-name') public name: string;</code>. Questi parametri possono essere
+                            utilizzati sia
+                            per la comunicazione tra Component (padre-figlio), che per parametrizzare il Component.
+                        </li>
+                        <li>Nel template, per visualizzare le variabili si usa la sintassi <code>{{ variable }}</code>
+                        </li>
+                        <li>In questo Component mostreremo la lista di <code>messages</code> che viene dal backend, per
+                            cui
+                            nel
+                            template utilizzeremo la <code>direttiva *ngFor</code> utile a simulare sul template un
+                            ciclo
+                            for</li>
+                    </ul>
+                </li>
+                <li> Componente ChatInput, responsabile dell'inserimento di messaggi.
+                    <ul>
+                        <li>Qui avremo la variabile <code>inputText</code>, possiamo utilizzare <code>[(ngModel)]</code>
+                            per
+                            legare
+                            la variable dal template alla logica (e viceversa). <code>[(ngModel)]</code> è una direttiva
+                            Angular che
+                            risiede nel modulo <code>FormsModule</code>, per cui bisogna includerla nel nostro Modulo
+                            contenitore.
+                        </li>
+                        <li>Utilizzeremo un bottone per inviare l'input text. Angular permette di legare (bind) i metodi
+                            del
+                            Component tramite la sintassi <code>()</code>:
+                            <code>&lt;button (click)="SendMessage(inputText)"&gt;Send!&lt;/button&gt;</code>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    Modello <code>IMessage&lt;string&gt;</code>. Questo non è un 'elemento' Angular, ma una semplice
+                    classe
+                    typescript.
+                </li>
+            </ol>
+
+            <p>Container (<code>app.component.html</code>):</p>
+            <pre><code class="language-html">
+        &lt;h1&gt; {{ title }} &lt;/h1&gt;
+        &lt;app-chat chat-name="First chat"&gt;&lt;/app-chat&gt;
+        &lt;app-chat-input class="bottom"&gt;&lt;/app-chat-input&gt; <!-- se lo spostiamo dentro app-chat diventa figlio di ChatComponent-->
+        </code></pre>
+
+            <p>Le <b>Direttive</b> (<a href="https://angular.io/guide/built-in-directives">doc</a>) sono degli attributi
+                nell'html
+                che servono a comunicare con la logica e a modificare il DOM. Esistono diverse direttive built-in, ma è
+                possibile
+                anche scrivere le proprie custom.</p>
+            <ul>
+                <li><code>&lt;div *ngFor="let item of items; let i=index"&gt;{{i + 1}} - {{item.name}}&lt;/div&gt;
+        </code></li>
+                <li><code>&lt;div *ngIf="IsDataVisible"&gt; {{someData}}&lt;/div&gt;
+        </code></li>
+                <li><code>&lt;div [ngClass]="isSpecial ? 'special' : ''"&gt;&lt;/div&gt;</code></li>
+                <li>...</li>
+            </ul>
+
+            <p>I tipi di direttive esistenti possono essere classificate in due categorie:
+            <ol>
+                <li>Strutturali (con l'*) che servono ad appendere/modificare i nodi DOM (*ngIf, *ngFor, *NgSwitchCase)
+                </li>
+                <li>Attributo, che modificano il comportamento del tag. In generale:
+                    <ul>
+                        <li><code>[]</code> valuta typescript, dati in ingresso</li>
+                        <li><code>()</code> lega un metodo ad un evento</li>
+                        <li>sono direttive anche gli attributi non nativi html senza sintassi particolari</li>
+                    </ul>
+                </li>
+            </ol>
+            </p>
+
+            <h3>Wrap up (files):</h3>
+            <p>Chat:</p>
+            <pre><code class="language-javascript">
+import { Component, Input, OnInit } from '@angular/core';
+import { IMessage } from '../../models/message';
+
+@Component({
+    selector: 'app-chat',
+    template: `
+    &lt;h2&gt; {{ name }} &lt;/h2&gt;
+    &lt;div&gt;
+        &lt;p *ngFor="let m of messages;"&gt; {{ m.content }} &lt;/p&gt;
+    &lt;/div&gt;
+    `,
+    styleUrls: ['./chat.component.css']
+})
+export class ChatComponent implements OnInit {
+
+    @Input('chat-name') public name: string;
+    public messages: IMessage<string>[] = [
+        { id: 1, timeStamp: new Date(), content: 'test message 1'},
+        { id: 2, timeStamp: new Date(), content: 'test message 2'},
+        ];
+
+    constructor() { }
+
+    ngOnInit(): void { }
+}
+        </code></pre>
+
+            <p>ChatInput:</p>
+            <pre><code class="language-javascript">
+import { Component, OnInit } from '@angular/core';
+
+@Component({
+    selector: 'app-chat-input',
+    template: `
+    &lt;input type="text"
+        placeholder="Inserisci il tuo messaggio"
+        [(ngModel)]="inputText"&gt;
+    &lt;button (click)="SendMessage(inputText)"&gt;Send!&lt;/button&gt;
+    `,
+    styleUrls: ['./chat-input.component.css']
+})
+export class ChatInputComponent implements OnInit {
+
+    public inputText: string;
+    constructor() { }
+
+    ngOnInit(): void { }
+
+    public SendMessage(inputText: string): void {
+        console.log(inputText);
+    }
+}
+        </code></pre>
+            <hr>
+            <h2 id="services">Servizi (<a href="https://angular.io/guide/architecture-services"
+                   target="_blank">doc</a>)</h2>
+
+            <p>I servizi sono singleton che vivono tipicamente lungo tutto il corso della vita dell'applicazione.
+                Vengono
+                usati per
+                incapsulare in modo circoscritto una logica e comunicare tra elementi software. I Component hanno
+                funzioni
+                relative
+                al template, mentre i Services sono agnostici dalla vista.</p>
+            <p>Sfruttano la <abbr title="Dependency Injection">DI</abbr>, ovvero possono essere iniettati all'interno di
+                altri
+                elementi software dichiarandoli all'interno del loro costruttore. Questo ci da i seguenti vantaggi:
+            <ol>
+                <li>Separare le logiche in Servizi autonomi</li>
+                <li>Comunicare facilmente tra gli elementi Angular (che riferiscono allo stesso servizio)</li>
+                <li>Facile implementazione del Single Responsability Principle</li>
+                <li>Testare sia i Servizi che gli altri elementi: la DI ci permette di sostituire le istanze dei
+                    Services
+                </li>
+            </ol>
+            </p>
+            <p>
+                I Services <b>non</b> necessitano di essere dichiarati all'interno di un Modulo, il loro ciclo di vita è
+                definito
+                staticamente (<code>@Injectable({ providedIn: 'root',})</code> è il più tipico decorator definito prima
+                del
+                Servizio
+                il quale indica che vivrà dal momento in cui nasce l'applicazione.)
+            </p>
+            <p>Come esempio genereremo un servizio <code>MessagesService</code> che sarà responsabile di comunicare con
+                le
+                API CRUD
+                dei messaggi:</p>
+            <pre><code class="bash">
+BucchRic@IPR-SUP39 projects/frontend (master)$ ng generate service services/messages
+CREATE src/app/services/messages.service.spec.ts (367 bytes)
+CREATE src/app/services/messages.service.ts (137 bytes)
+        </code></pre>
+
+            <p>Per comunicare via HTTP utilizziamo <code>HttpClient</code> che è una classe Angular che richiede il
+                <code>HttpClientModule</code> (da importare dove viene utilizzato, nel nostro caso AppModule)
+            </p>
+            <pre><code class="language-javascript">
+import { HttpClient, } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { IMessage } from '../models/message';
+
+@Injectable({
+providedIn: 'root'
+})
+export class MessagesService {
+    private readonly ENDPOINT = 'http://localhost:3000/api/messages';
+
+    constructor(private http: HttpClient) { }
+
+    // public GetMessages(): Promise&lt;any&gt; {
+    // return this.http.get('http://localhost:3000/api/messages')
+    // .toPromise&lt;any&gt;();
+    // }
+    public GetMessages(): Promise&lt;IMessage&lt;string&gt;[]&gt; {
+        return this.http.get&lt;IMessage&lt;string&gt;[]&gt;(this.ENDPOINT)
+        .toPromise&lt;IMessage&lt;string&gt;[]&gt;();
+    }
+
+    public DeleteMessage(message: IMessage&lt;string&gt;): Promise&lt;boolean&gt; {
+        return this.http.delete(this.ENDPOINT + '/' + message.id)
+        .toPromise&lt;any&gt;()
+        .then(() => {
+            return true;
+        })
+        .catch(() => {
+            return false;
+        });
+    }
+
+    public CreateMessage(content: string): Promise&lt;IMessage&lt;string&gt;&gt; {
+        return this.http.post&lt;IMessage&lt;string&gt;&gt;(this.ENDPOINT, { text: content }).toPromise();
+    }
+}
+        </code></pre>
+            <hr>
+            <h2 id="routing">Routing (<a href="https://angular.io/guide/routing-overview"
+                   target="_blank">doc</a>)</h2>
+            <p>
+                Come abbiamo visto nelle prime lezioni la navigazione e la gestione dell'URL ha
+                una sua logica, supportata dalle API del browser (ad esempio dopo l'# non viene fatta la chiamata al
+                web-server).
+            </p>
+            <p> Angular da uno strumento molto comodo per gestire la navigazione (routing):
+            <ol>
+                <li>gestione dei parametri/querystring</li>
+                <li>riduce le chiamate a backend</li>
+                <li>gestione del ciclo di vita dei component</li>
+                <li>logica di navigazione (Resolver e Guard in entrata al Component)</li>
+                <li>caricamento dinamico dell'applicazione</li>
+            </ol>
+            </p>
+
+            <p>Per generare il routing: </p>
+            <pre><code class="bash">
+        BucchRic@IPR-SUP39 projects/frontend (master)$ ng generate module app-routing --flat --module=app
+        </code></pre>
+            <pre style="width: 50vw; display: inline-block;"><code class="language-javascript">
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { ChatComponent } from './components/chat/chat.component';
+
+const routes: Routes = [
+{
+    path: '',
+    redirectTo: '/chat',
+    pathMatch: 'full'
+},
+{ path: 'chat', component: ChatComponent },
+{ path: 'chat/:chatNumber', component: ChatComponent },
+];
+
+@NgModule({
+declarations: [],
+imports: [
+    RouterModule.forRoot(routes),
+],
+exports: [RouterModule]
+})
+export class AppRoutingModule { }
+        </code></pre><img style="max-width: 45vw; max-height: 585px;"
+                 src="../images/routed.png"
+                 alt="Chat Routed">
+
+            <p>In una pagina della nostra applicazione dobbiamo aggiungere il tag <code>router-outlet</code> dove verrà
+                gestita la
+                navigazione</p>
+            <pre><code>
+&lt;!-- app.component.html --&gt;
+&lt;h1&gt; {{ title }}&lt;/h1&gt;
+&lt;nav&gt;
+    &lt;ul&gt;
+        &lt;li&gt;&lt;a routerLink="/chat/0"&gt;0&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a routerLink="/chat/1"&gt;1&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+&lt;/nav&gt;
+&lt;router-outlet&gt;&lt;/router-outlet&gt;
+        </code></pre>
+
+            <p>Utilizzando il routing in questo use-case, abbiamo la possibilità di utilizzare la funzionalità di
+                recupero
+                parametri
+                ad esempio. Ipotizzando che la nostra API messages possa gestire più di una chat alla volta:</p>
+            <pre><code>
+constructor(
+    private messageService: MessagesService,
+    private route: ActivatedRoute,
+) {
+    // 1) recupero statico dallo snapshot alla creazione del Component
+    this.chatNumber = Number(this.route.snapshot.paramMap.get('chatNumber'));
+}
+
+ngOnInit(): void {
+    // 2) recupero dinamico, ogni qualvolta il parametro cambi
+    this.route.paramMap.subscribe(
+        (value: ParamMap) => {
+            this.chatNumber = Number(value.get('chatNumber'));
+            this.reloadMessages();
+        }
+    );
+}
+        </code></pre>
+
+            <p>Nei due differenti casi di recupero parametri:
+            <ol>
+                <li>Recupero 'statico' alla creazione del Component. Ricordatevi che (più o meno) un component vive
+                    quando
+                    viene
+                    visualizzato. (Component lifecycle <a href="https://angular.io/guide/lifecycle-hooks">doc</a>)</li>
+                <li>Recupero 'dinamico', tramite un <code>Observable</code>* che scatena un evento alla modifica del
+                    parametro</li>
+            </ol>
+            </p>
+
+            <hr>
+            <h2 id="observable">Observable</h2>
+
+            <p>Angular utilizza una libreria js esterna per l'implementazione del pattern Observable: rxjs (<a
+                   href="https://rxjs.dev/">doc</a>).</p>
+            <img src="../images/rxjs.png"
+                 alt="Pattern Observable - rxjs">
+            <pre><code class="language-javascript">
+// l'Observer (creato con la sottoscrizione) ha tre metodi:
+// 1) next (esegui la funzione quando cambia il valore)
+// 2) error (esegui la funzione quando l'Observable emette un'eccezione)
+// 3) complete (esegui la funzione quando l'Observable si dichiara 'concluso')
+(method) Observable&lt;T&gt;.subscribe(
+    next?: (value: T) => void,
+    error?: (error: any) => void,
+    complete?: () => void
+): Subscription
+        </code></pre>
+            <p>
+                Rxjs è una libreria complessa, che richiederebbe una lezione a sé, per questo motivo mi limito a dare
+                alcuni
+                consigli.
+            <ul>
+                <li>Tante API Angular restituiscono un <code>Observable</code>, prendete confidenza come abbiamo fatto
+                    per i
+                    param,
+                    costruendo l'Observer (all'interno di <code>subscription</code>). Questo soddisfa già un utilizzo
+                    basico.</li>
+                <li>È un design pattern e come tale va utilizzato <u>se</u> vi semplifica la vita (e una volta capito lo
+                    fa). Se
+                    vedete dove può essere comodo, potete implementare e utilizzare i vostri <code>Subject</code> e
+                    <code>Observable</code>, e sfruttare la libreria rxjs
+                </li>
+                <li>la Promise è un Observable che ha un solo valore (vedi <code>HttpClient</code> che restituisce un
+                    <code>Observable</code>)
+                </li>
+            </ul>
+            </p>
+
+            <hr>
+            <h2 id="angular-material">Angular Material (libreria Component <a
+                   href="https://material.angular.io/">doc</a>)</h2>
+
+            <p>
+                Una libreria <abbr title="User Interface">UI</abbr> che aggiunge valore sia ai componenti grafici,
+                uniformando gli
+                elementi e predisponendo css di base, sia estendendo le funzionalità degli elementi.
+            </p>
+            <p>
+                Esistono tanti altri esempi (come Bootstrap che abbiamo visto), questa ha le seguenti caratteristiche:
+            <ul>
+                <li>integrata con Angular (sia per la CLI, che per le update)</li>
+                <li>si basa su dei concetti di UX agnostici di Google (<a href="https://material.io/design">link</a>)
+                </li>
+                <li>stabile</li>
+                <li
+                    style="list-style: url('data:image/gif;base64,R0lGODlhBQAKAIABAAAAAP///yH5BAEAAAEALAAAAAAFAAoAAAIIjI+ZwKwPUQEAOw==');">
+                    non particolarmente folta</li>
+            </ul>
+            </p>
+            <p>Per installarlo: </p>
+            <pre><code class="bash">BucchRic@IPR-SUP39 projects/frontend (master)$ ng add @angular/material</code></pre>
+            <p>Esempi:</p>
+            <pre><code class="language-javascript">
+// app.module.ts 
+@NgModule({
+declarations: [
+...
+],
+imports: [
+...
+// Material
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatDialogModule,
+],
+providers: [],
+bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+// chat.component.ts
+public Action(message: IMessage&lt;string&gt;): void {
+    this.dialog.open(DialogChatComponent, {
+        data: message
+    });
+}
+
+// dialog-chat.component.ts
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IMessage } from 'src/app/models/message';
+
+@Component({
+selector: 'app-dialog-chat',
+template: `
+&lt;h1 mat-dialog-title&gt;Chat details&lt;/h1&gt;
+&lt;div mat-dialog-content&gt;{{message.id}}, {{ message.timeStamp | date }}, {{message.content}}&lt;/div&gt;
+&lt;div mat-dialog-actions&gt;
+&lt;button mat-button
+        mat-dialog-close&gt;Close&lt;/button&gt;
+&lt;/div>
+`,
+styleUrls: ['./dialog-chat.component.css']
+})
+export class DialogChatComponent implements OnInit {
+    public message: IMessage&lt;string&gt;
+    constructor(
+        public dialogRef: MatDialogRef&lt;string&gt;,
+        @Inject(MAT_DIALOG_DATA) public data: IMessage&lt;DialogChatComponent&gt;,
+    ) {
+        this.message = data;
+    }
+}
+
+        </code></pre>
+
+            <h3 id="pipe">Pipe (<a href="https://angular.io/guide/pipes">doc</a>)</h3>
+            <p>Le Pipe sono un ulteriore strumento Angular che si ispira alla <code>|</code> unix e proprio come essa
+                permette di trasformare un input qualsiasi.</p>
+            <p>Nell'accezione Angular ha spesso compiti molto semplici come tradurre date, stringhe, numeri, ecc....</p>
+            <p>
+                <code>&lt;div mat-dialog-content&gt;{{message.id}}, <span style="font-weight: bolder; color: red;">{{ message.timeStamp | date:"dd/MM/yy" }}</span>, {{message.content}}&lt;/div&gt;
+        </code>
+            </p>
+            <p>
+                Anche qui esistono sia le pipe <b>default</b>, ma è possibile implementare anche le proprie
+                <b>custom</b>.
+            </p>
+            <h2 id="modules">Modules (<a href="https://angular.io/guide/architecture-modules">doc</a>)</h2>
+            <p>
+                I moduli sono contenitori di elementi angular (Component, Services, Directives, Guards, ecc...). 
+            </p>
+            <p>Permettono di modularizzare l'applicazione:
+                <ol>
+                    <li>Separazione logica e organizzativa</li>
+                    <li>Riuso</li>
+                    <li>Ottimizzazione nella compilazione</li>
+                    <li>Ottimizzazione nel caricamento runtime (lazy loading)</li>
+                </ol>
+            </p>
+            <img src="../images/example-module.png" alt="Esempio modulo">
+    </div>
+</body>
 
 </html>

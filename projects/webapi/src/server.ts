@@ -9,7 +9,7 @@ Made with Fastify
 
 */
 
-import { app } from "./app";
+import { app as Application } from "./app";
 import { IMessage } from "./model/messages/imessage";
 
 const webServer = (() => {
@@ -17,9 +17,7 @@ const webServer = (() => {
 
     // Require the framework and instantiate it
     const fastify = require('fastify')({ logger: true });
-
-    const chat = app.GetChat(app.GetChatGUIDs()[0]);
-
+    const app = Application;
     fastify.register(require('fastify-cors'), {
         origin: (origin, cb) => {
             if (/localhost/.test(origin)) {
@@ -28,39 +26,53 @@ const webServer = (() => {
                 return
             }
             // Generate an error on other origins, disabling access
-            cb(new Error("Not allowed"))
+            // cb(new Error("Not allowed"))
+            // for testing purpose:
+            cb(null, true)
         }
     })
 
     // get the list of messages
     fastify.get('/api/messages', (request, reply): IMessage<any>[] => {
-        return chat.GetTop(TOP);
+        const chatId = request.query.chat ? Number(request.query.chat) : 0;
+        const selectedChat = app.GetChat(app.GetChatGUIDs()[chatId]);
+        return selectedChat.GetTop(TOP);
     });
 
     // get a single message
     fastify.get('/api/messages/:id', (request, reply): IMessage<any> | undefined => {
-        return chat.Get(Number(request.params.id));
+        const chatId = request?.query?.chat ? Number(request.query.chat) : 0;
+        const selectedChat = app.GetChat(app.GetChatGUIDs()[chatId]);
+        return selectedChat.Get(Number(request.params.id));
     });
 
     // create a message
     fastify.post('/api/messages', (request, reply): IMessage<any> => {
-        return chat.Push(request.body.text);
+        const chatId = request?.query?.chat ? Number(request.query.chat) : 0;
+        const selectedChat = app.GetChat(app.GetChatGUIDs()[chatId]);
+        return selectedChat.Push(request.body.text);
     });
 
     // update a message
     fastify.put('/api/messages/:id', (request, reply): IMessage<any> | undefined => {
-        const message = chat.Edit(Number(request.params.id), request.body.text);
+        const chatId = request?.query?.chat ? Number(request.query.chat) : 0;
+        const message = app.GetChat(app.GetChatGUIDs()[chatId]).Edit(Number(request.params.id), request.body.text);
         return message;
     });
 
     // delete a message
     fastify.delete('/api/messages/:id', (request, reply): { msg: string } => {
+        const chatId = request?.query?.chat ? Number(request.query.chat) : 0;
+        const selectedChat = app.GetChat(app.GetChatGUIDs()[chatId]);
         const id = Number(request.params.id);
-        if (chat.Get(id)) {
-            chat.Delete(id);
+        if (selectedChat.Get(id)) {
+            selectedChat.Delete(id);
             return { msg: `message with ID ${id} is deleted` };
         }
-        return { msg: `message with ID ${id} doesn't exists` }
+        reply
+            .code(404)
+            .header('Content-Type', 'application/json; charset=utf-8')
+            .send({ msg: `message with ID ${id} doesn't exists` })
     });
     return fastify;
 })();
