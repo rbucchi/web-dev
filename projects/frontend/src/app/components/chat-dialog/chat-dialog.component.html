@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Message {{data.id}}</h1>
+<div mat-dialog-content>
+  {{ data.timeStamp | date }} {{ data.content }}
+</div>
+<div mat-dialog-actions>
+  <button mat-button
+          cdkFocusInitial>Ok</button>
+</div>
